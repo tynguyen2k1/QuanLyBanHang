@@ -1,0 +1,13 @@
+D:\C#\DataAccess\bin\Debug\DataAccess.dll
+D:\C#\DataAccess\bin\Debug\DataAccess.pdb
+D:\C#\DataAccess\obj\Debug\DataAccess.csprojAssemblyReference.cache
+D:\C#\DataAccess\obj\Debug\DataAccess.csproj.CoreCompileInputs.cache
+D:\C#\DataAccess\obj\Debug\DataAccess.dll
+D:\C#\DataAccess\obj\Debug\DataAccess.pdb
+D:\C#\DataAccess\bin\Debug\DataAccess.dll.config
+D:\C#\DataAccess\bin\Debug\Entity.dll
+D:\C#\DataAccess\bin\Debug\EntityFramework.dll
+D:\C#\DataAccess\bin\Debug\Entity.pdb
+D:\C#\DataAccess\bin\Debug\Entity.dll.config
+D:\C#\DataAccess\bin\Debug\EntityFramework.xml
+D:\C#\DataAccess\obj\Debug\DataAccess.csproj.CopyComplete
