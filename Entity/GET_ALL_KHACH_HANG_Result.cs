@@ -10,24 +10,14 @@
 namespace Entity
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class KHACH_HANG
+    public partial class GET_ALL_KHACH_HANG_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public KHACH_HANG()
-        {
-            this.HOA_DON = new HashSet<HOA_DON>();
-        }
-    
         public int MA_KH { get; set; }
         public string TEN_KH { get; set; }
         public string SDT { get; set; }
-        public string DIA_CHI { get; set; }
         public Nullable<bool> GIOI_TINH { get; set; }
+        public string DIA_CHI { get; set; }
         public System.DateTime NGAY_SINH { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HOA_DON> HOA_DON { get; set; }
     }
 }

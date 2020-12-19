@@ -31,24 +31,6 @@ namespace QuanLyBanHang
             btnXoaDM.Enabled = false;
 
         }
-        private void btnThemDM_Click(object sender, EventArgs e)
-        {
-            qldm.InsertData(txtMaDM.Text,txtTenDM.Text,txtMoTa.Text);
-            Load_Data();
-        }
-
-        private void btnSuaDM_Click(object sender, EventArgs e)
-        {
-            if (qldm.EditData(txtMaDM.Text , txtTenDM.Text ,txtMoTa.Text))
-            {
-                MessageBox.Show("Sửa Thành Công !!!");
-            }
-            else
-            {
-                MessageBox.Show("Error !!! ");
-            }
-            Load_Data();
-        }
 
         private void dgvDanhMuc_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -67,31 +49,6 @@ namespace QuanLyBanHang
             }
         }
 
-        private void btnHuyDM_Click(object sender, EventArgs e)
-        {
-            txtMaDM.Text = "";
-            txtMaDM.Enabled = true;
-            txtTenDM.Text = "";
-            txtMoTa.Text = "";
-            btnHuyDM.Text = "Huỷ";
-            btnSuaDM.Enabled = false;
-            btnThemDM.Enabled = true;
-            btnXoaDM.Enabled = false;
-        }
-
-        private void btnXoaDM_Click(object sender, EventArgs e)
-        {
-            if (qldm.DeleteData(txtMaDM.Text))
-            {
-                MessageBox.Show("Delete Thành Công !!!");
-            }
-            else
-            {
-                MessageBox.Show("Error !!! ");
-            }
-            Load_Data();
-        }
-
         private void dgvDanhMuc_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete) {
@@ -104,9 +61,80 @@ namespace QuanLyBanHang
             }
         }
 
-        private void btnTimKiemDM_Click(object sender, EventArgs e)
-        {
 
+        private void btnThemDM_Click_1(object sender, EventArgs e)
+        {
+            string str = qldm.InsertData(txtMaDM.Text, txtTenDM.Text, txtMoTa.Text);
+            if (str == "")
+            {
+                MessageBox.Show("Chèn Thành Công");
+                Load_Data();
+            }
+            else
+            {
+                MessageBox.Show(str);
+            }
+        }
+
+        private void btnSuaDM_Click_1(object sender, EventArgs e)
+        {
+            if (qldm.EditData(txtMaDM.Text, txtTenDM.Text, txtMoTa.Text))
+            {
+                MessageBox.Show("Sửa Thành Công !!!");
+            }
+            else
+            {
+                MessageBox.Show("Error !!! ");
+            }
+            Load_Data();
+        }
+
+        private void btnXoaDM_Click_1(object sender, EventArgs e)
+        {
+            if (qldm.DeleteData(txtMaDM.Text))
+            {
+                MessageBox.Show("Delete Thành Công !!!");
+            }
+            else
+            {
+                MessageBox.Show("Error !!! ");
+            }
+            Load_Data();
+        }
+
+        private void btnHuyDM_Click_1(object sender, EventArgs e)
+        {
+            txtMaDM.Text = "";
+            txtMaDM.Enabled = true;
+            txtMoTa.Enabled = true;
+            txtTenDM.Enabled = true;
+            txtTenDM.Text = "";
+            txtMoTa.Text = "";
+            btnHuyDM.Text = "Huỷ";
+            btnSuaDM.Enabled = false;
+            btnThemDM.Enabled = true;
+            btnXoaDM.Enabled = false;
+            Load_Data();
+        }
+
+        private void btnTimKiemMaSP_Click(object sender, EventArgs e)
+        {
+            txtTenDM.Text = "";
+            txtMoTa.Text = "";
+            btnSuaDM.Enabled = false;
+            btnThemDM.Enabled = false;
+            qldm.TimKiemMaDM(txtMaDM.Text , dgvDanhMuc);
+            btnHuyDM.Text = "Huỷ Tìm KIếm";
+        }
+
+        private void btnTimKiemTenSP_Click(object sender, EventArgs e)
+        {
+            txtMaDM.Text = "";
+            txtMoTa.Text = "";
+            btnSuaDM.Enabled = false;
+            btnThemDM.Enabled = false;
+            qldm.TimKiemTenDM(txtTenDM.Text, dgvDanhMuc);
+            btnHuyDM.Text = "Huỷ Tìm KIếm";
         }
     }
 }

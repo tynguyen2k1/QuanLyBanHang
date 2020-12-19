@@ -19,15 +19,16 @@ namespace Entity
         {
             this.SAN_PHAM = new HashSet<SAN_PHAM>();
         }
-        public DANH_MUC(string ma , string ten , string mota)
+        public DANH_MUC(string a, string b ,string c)
         {
-            this.Ma_DM = ma;
-            this.TEN_DM = ten;
-            this.MO_TA = mota;
+            this.Ma_DM = a;
+            this.TEN_DM = b;
+            this.MO_TA = c;
         }
         public string Ma_DM { get; set; }
         public string TEN_DM { get; set; }
         public string MO_TA { get; set; }
+        public Nullable<byte> TRANG_THAI { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SAN_PHAM> SAN_PHAM { get; set; }

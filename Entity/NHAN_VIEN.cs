@@ -20,14 +20,17 @@ namespace Entity
             this.HOA_DON = new HashSet<HOA_DON>();
         }
     
-        public string MA_NV { get; set; }
+        public int MA_NV { get; set; }
         public string TEN_NV { get; set; }
         public string SDT { get; set; }
         public string DIA_CHI { get; set; }
         public Nullable<bool> GIOI_TINH { get; set; }
         public Nullable<System.DateTime> NGAY_VL { get; set; }
         public string EMAIL { get; set; }
+        public string TAI_KHOAN { get; set; }
+        public string MAT_KHAU { get; set; }
         public Nullable<byte> CHUC_VU { get; set; }
+        public Nullable<byte> TRANG_THAI { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HOA_DON> HOA_DON { get; set; }

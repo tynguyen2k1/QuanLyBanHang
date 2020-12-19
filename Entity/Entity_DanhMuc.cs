@@ -12,7 +12,7 @@ namespace Entity
         public List<DANH_MUC> GetListDanhMuc()
         {
             List<DANH_MUC> list_dm = new List<DANH_MUC>();
-            QL_BAN_HANGEntities db = new QL_BAN_HANGEntities();
+            QL_BAN_HANG db = new QL_BAN_HANG();
             var dt = from a in db.DANH_MUC select new { Ma_DM = a.Ma_DM , Ten_DM = a.TEN_DM , Mo_Ta = a.MO_TA };
             foreach (var i in dt)
             {
@@ -24,11 +24,23 @@ namespace Entity
             }
             return list_dm;
         }
-        public bool checkID(DANH_MUC danhmuc)
+        public bool checkIssetMaDM(string danhmuc)
         {
-            using (var db = new QL_BAN_HANGEntities())
+            using (var db = new QL_BAN_HANG())
             {
-                DANH_MUC dm = db.DANH_MUC.FirstOrDefault(c => c.Ma_DM == danhmuc.Ma_DM);
+                DANH_MUC dm = db.DANH_MUC.FirstOrDefault(c => c.Ma_DM == danhmuc);
+                if (dm != null)
+                {
+                    return true;
+                }
+                else return false;
+            }
+        }
+        public bool checkIssetTenDM(string danhmuc)
+        {
+            using (var db = new QL_BAN_HANG())
+            {
+                DANH_MUC dm = db.DANH_MUC.FirstOrDefault(c => c.TEN_DM == danhmuc);
                 if (dm != null)
                 {
                     return true;
@@ -40,19 +52,11 @@ namespace Entity
         {
             try
             {
-                using (var db = new QL_BAN_HANGEntities())
+                using (var db = new QL_BAN_HANG())
                 {
-                    if (!this.checkID(danhmuc))
-                    {
-
-                        db.DANH_MUC.Add(danhmuc);
-                        db.SaveChanges();
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    db.DANH_MUC.Add(danhmuc);
+                    db.SaveChanges();
+                    return true;
                 }
                 
             }
@@ -61,12 +65,42 @@ namespace Entity
                 return false;
             }
         }
+        public List<DANH_MUC> SearchMaDM(string str)
+        {
+            List<DANH_MUC> list_dm = new List<DANH_MUC>();
+            QL_BAN_HANG db = new QL_BAN_HANG();
+            var dt = from a in db.DANH_MUC where a.Ma_DM==str select new { Ma_DM = a.Ma_DM, Ten_DM = a.TEN_DM, Mo_Ta = a.MO_TA };
+            foreach (var i in dt)
+            {
+                DANH_MUC dm = new DANH_MUC();
+                dm.Ma_DM = i.Ma_DM;
+                dm.TEN_DM = i.Ten_DM;
+                dm.MO_TA = i.Mo_Ta;
+                list_dm.Add(dm);
+            }
+            return list_dm;
+        }
+        public List<DANH_MUC> SearchTen(string str)
+        {
+            List<DANH_MUC> list_dm = new List<DANH_MUC>();
+            QL_BAN_HANG db = new QL_BAN_HANG();
+            var dt = db.DANH_MUC.Where(c=>c.TEN_DM.Contains(str));
+            foreach (var i in dt)
+            {
+                DANH_MUC dm = new DANH_MUC();
+                dm.Ma_DM = i.Ma_DM;
+                dm.TEN_DM = i.TEN_DM;
+                dm.MO_TA = i.MO_TA;
+                list_dm.Add(dm);
+            }
+            return list_dm;
+        }
         public bool EditDanhMuc(DANH_MUC danhmuc)
         {
 
             try
             {
-                using (var db = new QL_BAN_HANGEntities())
+                using (var db = new QL_BAN_HANG())
                 {
                     DANH_MUC dm = db.DANH_MUC.FirstOrDefault(c => c.Ma_DM == danhmuc.Ma_DM);
                     dm.TEN_DM = danhmuc.TEN_DM;
@@ -83,7 +117,7 @@ namespace Entity
         {
             try
             {
-                using (var db = new QL_BAN_HANGEntities())
+                using (var db = new QL_BAN_HANG())
                 {
                     DANH_MUC dm = db.DANH_MUC.FirstOrDefault(c => c.Ma_DM == DM);
                     db.DANH_MUC.Remove(dm);

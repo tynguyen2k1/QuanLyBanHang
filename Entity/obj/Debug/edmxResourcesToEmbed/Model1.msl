@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="QL_BAN_HANGModelStoreContainer" CdmEntityContainer="QL_BAN_HANGEntities">
+  <EntityContainerMapping StorageEntityContainer="QL_BAN_HANGModelStoreContainer" CdmEntityContainer="QL_BAN_HANG">
     <EntitySetMapping Name="CT_HOA_DON">
       <EntityTypeMapping TypeName="QL_BAN_HANGModel.CT_HOA_DON">
         <MappingFragment StoreEntitySet="CT_HOA_DON">
@@ -20,6 +20,7 @@
           <ScalarProperty Name="Ma_DM" ColumnName="Ma_DM" />
           <ScalarProperty Name="TEN_DM" ColumnName="TEN_DM" />
           <ScalarProperty Name="MO_TA" ColumnName="MO_TA" />
+          <ScalarProperty Name="TRANG_THAI" ColumnName="TRANG_THAI" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -56,7 +57,10 @@
           <ScalarProperty Name="GIOI_TINH" ColumnName="GIOI_TINH" />
           <ScalarProperty Name="NGAY_VL" ColumnName="NGAY_VL" />
           <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="TAI_KHOAN" ColumnName="TAI_KHOAN" />
+          <ScalarProperty Name="MAT_KHAU" ColumnName="MAT_KHAU" />
           <ScalarProperty Name="CHUC_VU" ColumnName="CHUC_VU" />
+          <ScalarProperty Name="TRANG_THAI" ColumnName="TRANG_THAI" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -69,11 +73,62 @@
           <ScalarProperty Name="GIA_BAN" ColumnName="GIA_BAN" />
           <ScalarProperty Name="SO_LUONG" ColumnName="SO_LUONG" />
           <ScalarProperty Name="GIAM_GIA" ColumnName="GIAM_GIA" />
-          <ScalarProperty Name="ANH" ColumnName="ANH" />
           <ScalarProperty Name="GHI_CHU" ColumnName="GHI_CHU" />
           <ScalarProperty Name="MA_DM" ColumnName="MA_DM" />
+          <ScalarProperty Name="TRANG_THAI" ColumnName="TRANG_THAI" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GET_ALL_DANH_MUC" FunctionName="QL_BAN_HANGModel.Store.GET_ALL_DANH_MUC">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QL_BAN_HANGModel.GET_ALL_DANH_MUC_Result">
+          <ScalarProperty Name="Ma_DM" ColumnName="Ma_DM" />
+          <ScalarProperty Name="TEN_DM" ColumnName="TEN_DM" />
+          <ScalarProperty Name="MO_TA" ColumnName="MO_TA" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GET_ALL_KHACH_HANG" FunctionName="QL_BAN_HANGModel.Store.GET_ALL_KHACH_HANG">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QL_BAN_HANGModel.GET_ALL_KHACH_HANG_Result">
+          <ScalarProperty Name="MA_KH" ColumnName="MA_KH" />
+          <ScalarProperty Name="TEN_KH" ColumnName="TEN_KH" />
+          <ScalarProperty Name="SDT" ColumnName="SDT" />
+          <ScalarProperty Name="GIOI_TINH" ColumnName="GIOI_TINH" />
+          <ScalarProperty Name="DIA_CHI" ColumnName="DIA_CHI" />
+          <ScalarProperty Name="NGAY_SINH" ColumnName="NGAY_SINH" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GET_ALL_SAN_PHAM" FunctionName="QL_BAN_HANGModel.Store.GET_ALL_SAN_PHAM">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QL_BAN_HANGModel.GET_ALL_SAN_PHAM_Result">
+          <ScalarProperty Name="MA_SP" ColumnName="MA_SP" />
+          <ScalarProperty Name="TEN_SP" ColumnName="TEN_SP" />
+          <ScalarProperty Name="SO_LUONG" ColumnName="SO_LUONG" />
+          <ScalarProperty Name="GIA_NHAP" ColumnName="GIA_NHAP" />
+          <ScalarProperty Name="GIA_BAN" ColumnName="GIA_BAN" />
+          <ScalarProperty Name="GIAM_GIA" ColumnName="GIAM_GIA" />
+          <ScalarProperty Name="GHI_CHU" ColumnName="GHI_CHU" />
+          <ScalarProperty Name="MA_DM" ColumnName="MA_DM" />
+          <ScalarProperty Name="TEN_DM" ColumnName="TEN_DM" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GET_ALL_USER" FunctionName="QL_BAN_HANGModel.Store.GET_ALL_USER">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QL_BAN_HANGModel.GET_ALL_USER_Result">
+          <ScalarProperty Name="MA_NV" ColumnName="MA_NV" />
+          <ScalarProperty Name="TEN_NV" ColumnName="TEN_NV" />
+          <ScalarProperty Name="GIOI_TINH" ColumnName="GIOI_TINH" />
+          <ScalarProperty Name="DIA_CHI" ColumnName="DIA_CHI" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="NGAY_VL" ColumnName="NGAY_VL" />
+          <ScalarProperty Name="TAI_KHOAN" ColumnName="TAI_KHOAN" />
+          <ScalarProperty Name="MAT_KHAU" ColumnName="MAT_KHAU" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UPDATE_DANH_MUC" FunctionName="QL_BAN_HANGModel.Store.UPDATE_DANH_MUC" />
   </EntityContainerMapping>
 </Mapping>

@@ -12,11 +12,13 @@ namespace Entity
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
-    public partial class QL_BAN_HANGEntities : DbContext
+    public partial class QL_BAN_HANG : DbContext
     {
-        public QL_BAN_HANGEntities()
-            : base("name=QL_BAN_HANGEntities")
+        public QL_BAN_HANG()
+            : base("name=QL_BAN_HANG")
         {
         }
     
@@ -31,5 +33,66 @@ namespace Entity
         public virtual DbSet<KHACH_HANG> KHACH_HANG { get; set; }
         public virtual DbSet<NHAN_VIEN> NHAN_VIEN { get; set; }
         public virtual DbSet<SAN_PHAM> SAN_PHAM { get; set; }
+    
+        public virtual ObjectResult<GET_ALL_DANH_MUC_Result> GET_ALL_DANH_MUC()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_ALL_DANH_MUC_Result>("GET_ALL_DANH_MUC");
+        }
+    
+        public virtual ObjectResult<GET_ALL_KHACH_HANG_Result> GET_ALL_KHACH_HANG()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_ALL_KHACH_HANG_Result>("GET_ALL_KHACH_HANG");
+        }
+    
+        public virtual ObjectResult<GET_ALL_SAN_PHAM_Result> GET_ALL_SAN_PHAM()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_ALL_SAN_PHAM_Result>("GET_ALL_SAN_PHAM");
+        }
+    
+        public virtual ObjectResult<GET_ALL_USER_Result> GET_ALL_USER()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_ALL_USER_Result>("GET_ALL_USER");
+        }
+    
+        public virtual int UPDATE_DANH_MUC(Nullable<int> mA_NV, string tEN_NV, string sDT, string dIA_CHI, Nullable<bool> gIOI_TINH, string eMAIL, string mAT_KHAU, Nullable<byte> cHUC_VU, Nullable<byte> tRANG_THAI)
+        {
+            var mA_NVParameter = mA_NV.HasValue ?
+                new ObjectParameter("MA_NV", mA_NV) :
+                new ObjectParameter("MA_NV", typeof(int));
+    
+            var tEN_NVParameter = tEN_NV != null ?
+                new ObjectParameter("TEN_NV", tEN_NV) :
+                new ObjectParameter("TEN_NV", typeof(string));
+    
+            var sDTParameter = sDT != null ?
+                new ObjectParameter("SDT", sDT) :
+                new ObjectParameter("SDT", typeof(string));
+    
+            var dIA_CHIParameter = dIA_CHI != null ?
+                new ObjectParameter("DIA_CHI", dIA_CHI) :
+                new ObjectParameter("DIA_CHI", typeof(string));
+    
+            var gIOI_TINHParameter = gIOI_TINH.HasValue ?
+                new ObjectParameter("GIOI_TINH", gIOI_TINH) :
+                new ObjectParameter("GIOI_TINH", typeof(bool));
+    
+            var eMAILParameter = eMAIL != null ?
+                new ObjectParameter("EMAIL", eMAIL) :
+                new ObjectParameter("EMAIL", typeof(string));
+    
+            var mAT_KHAUParameter = mAT_KHAU != null ?
+                new ObjectParameter("MAT_KHAU", mAT_KHAU) :
+                new ObjectParameter("MAT_KHAU", typeof(string));
+    
+            var cHUC_VUParameter = cHUC_VU.HasValue ?
+                new ObjectParameter("CHUC_VU", cHUC_VU) :
+                new ObjectParameter("CHUC_VU", typeof(byte));
+    
+            var tRANG_THAIParameter = tRANG_THAI.HasValue ?
+                new ObjectParameter("TRANG_THAI", tRANG_THAI) :
+                new ObjectParameter("TRANG_THAI", typeof(byte));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UPDATE_DANH_MUC", mA_NVParameter, tEN_NVParameter, sDTParameter, dIA_CHIParameter, gIOI_TINHParameter, eMAILParameter, mAT_KHAUParameter, cHUC_VUParameter, tRANG_THAIParameter);
+        }
     }
 }

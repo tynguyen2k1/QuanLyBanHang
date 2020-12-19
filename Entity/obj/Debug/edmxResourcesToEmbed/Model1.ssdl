@@ -19,22 +19,23 @@
     <Property Name="Ma_DM" Type="char" MaxLength="10" Nullable="false" />
     <Property Name="TEN_DM" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="MO_TA" Type="nvarchar" MaxLength="200" />
+    <Property Name="TRANG_THAI" Type="tinyint" />
   </EntityType>
   <EntityType Name="HOA_DON">
     <Key>
       <PropertyRef Name="MA_HD" />
     </Key>
     <Property Name="MA_HD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MA_NV" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="MA_NV" Type="int" Nullable="false" />
     <Property Name="NGAY_BAN" Type="datetime" Nullable="false" />
-    <Property Name="MA_KH" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="MA_KH" Type="int" Nullable="false" />
     <Property Name="TONG_TIEN" Type="float" Nullable="false" />
   </EntityType>
   <EntityType Name="KHACH_HANG">
     <Key>
       <PropertyRef Name="MA_KH" />
     </Key>
-    <Property Name="MA_KH" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="MA_KH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TEN_KH" Type="nvarchar" MaxLength="55" Nullable="false" />
     <Property Name="SDT" Type="char" MaxLength="12" Nullable="false" />
     <Property Name="DIA_CHI" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -45,14 +46,17 @@
     <Key>
       <PropertyRef Name="MA_NV" />
     </Key>
-    <Property Name="MA_NV" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="MA_NV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TEN_NV" Type="nvarchar" MaxLength="55" Nullable="false" />
     <Property Name="SDT" Type="char" MaxLength="12" Nullable="false" />
     <Property Name="DIA_CHI" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="GIOI_TINH" Type="bit" />
     <Property Name="NGAY_VL" Type="datetime" />
     <Property Name="EMAIL" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="TAI_KHOAN" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MAT_KHAU" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="CHUC_VU" Type="tinyint" />
+    <Property Name="TRANG_THAI" Type="tinyint" />
   </EntityType>
   <EntityType Name="SAN_PHAM">
     <Key>
@@ -64,9 +68,9 @@
     <Property Name="GIA_BAN" Type="float" Nullable="false" />
     <Property Name="SO_LUONG" Type="int" />
     <Property Name="GIAM_GIA" Type="int" />
-    <Property Name="ANH" Type="nvarchar" MaxLength="200" />
     <Property Name="GHI_CHU" Type="nvarchar" MaxLength="255" />
     <Property Name="MA_DM" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="TRANG_THAI" Type="tinyint" />
   </EntityType>
   <Association Name="FK_CTHD_SP">
     <End Role="SAN_PHAM" Type="Self.SAN_PHAM" Multiplicity="1" />
@@ -128,6 +132,21 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="GET_ALL_DANH_MUC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GET_ALL_KHACH_HANG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GET_ALL_SAN_PHAM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GET_ALL_USER" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="UPDATE_DANH_MUC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MA_NV" Type="int" Mode="In" />
+    <Parameter Name="TEN_NV" Type="nvarchar" Mode="In" />
+    <Parameter Name="SDT" Type="char" Mode="In" />
+    <Parameter Name="DIA_CHI" Type="nvarchar" Mode="In" />
+    <Parameter Name="GIOI_TINH" Type="bit" Mode="In" />
+    <Parameter Name="EMAIL" Type="char" Mode="In" />
+    <Parameter Name="MAT_KHAU" Type="nvarchar" Mode="In" />
+    <Parameter Name="CHUC_VU" Type="tinyint" Mode="In" />
+    <Parameter Name="TRANG_THAI" Type="tinyint" Mode="In" />
+  </Function>
   <EntityContainer Name="QL_BAN_HANGModelStoreContainer">
     <EntitySet Name="CT_HOA_DON" EntityType="Self.CT_HOA_DON" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DANH_MUC" EntityType="Self.DANH_MUC" Schema="dbo" store:Type="Tables" />
