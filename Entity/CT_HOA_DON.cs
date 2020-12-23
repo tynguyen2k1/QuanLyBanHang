@@ -14,6 +14,15 @@ namespace Entity
     
     public partial class CT_HOA_DON
     {
+        public CT_HOA_DON(string MA_SP , int sl , double gia , double Tong , double giam_gia , int MaHD)
+        {
+            this.MA_SP = MA_SP;
+            this.SO_LUONG = sl;
+            this.GIA_BAN = gia;
+            this.GIAM_GIA = giam_gia;
+            this.THANH_TIEN = Tong;
+            this.MA_HD = MaHD;
+        }
         public int MA_CTHD { get; set; }
         public string MA_SP { get; set; }
         public int SO_LUONG { get; set; }

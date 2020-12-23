@@ -95,6 +95,18 @@ namespace Entity
             }
             return false;
         }
+        public SAN_PHAM ReturnSP_MaSP(string str)
+        {
+            using (var db = new QL_BAN_HANG())
+            {
+                SAN_PHAM dm = db.SAN_PHAM.FirstOrDefault(c => c.MA_SP == str);
+                if (dm != null)
+                {
+                    return dm;
+                }
+            }
+            return null;
+        }
         public bool AddSanPham(SAN_PHAM sp)
         {
             try

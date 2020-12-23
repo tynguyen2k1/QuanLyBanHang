@@ -19,7 +19,14 @@ namespace Entity
         {
             this.HOA_DON = new HashSet<HOA_DON>();
         }
-    
+        public KHACH_HANG(string ten , string sdt, string dia_chi , bool gt , DateTime ngaysinh)
+        {
+            this.TEN_KH = ten;
+            this.DIA_CHI = dia_chi;
+            this.GIOI_TINH = gt;
+            this.NGAY_SINH = ngaysinh;
+            this.SDT = sdt;
+        }
         public int MA_KH { get; set; }
         public string TEN_KH { get; set; }
         public string SDT { get; set; }

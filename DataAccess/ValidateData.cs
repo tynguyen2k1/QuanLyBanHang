@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entity;
 namespace DataAccess
 {
-    class ValidateData
+    public class ValidateData
     {
         QL_BAN_HANG validate_data = new QL_BAN_HANG();
         public string validate_danh_muc_ma_sp(string str)
@@ -111,6 +112,39 @@ namespace DataAccess
                 return "Mô tả sản phẩm độ dài không được lớn hơn 250 ký tự !!!";
             }
             return "";
+        }
+
+        
+
+
+        /*KHACH_HANG*/
+        public string validate_ten_kh(string str)
+        {
+            if (str.Length < 1 || str.Length > 55)
+            {
+                return "Tên khách hàng phải có độ dài ( 1 => 55 ) ký tự !!!";
+            }
+            return "";
+        }
+        public string validate_dia_chi_kh(string str)
+        {
+            if (str.Length < 1 || str.Length > 100)
+            {
+                return "Địa khách hàng phải có độ dài ( 1 => 100 ) ký tự  !!!";
+            }
+            return "";
+        }
+        public string validate_ngay_sinh(DateTime dt)
+        {
+            if (dt.CompareTo(DateTime.Now) > 0)
+            {
+                return "Ngày sinh lỗi !!!";
+            }
+            return "";
+        }
+        public bool IsPhoneNbr(string number)
+        {
+            return Regex.IsMatch(number, @"^(0|\+84)\d{3}[-. ]?\d{3}[-. ]?\d{3}$");
         }
     }
 }

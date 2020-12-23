@@ -24,3 +24,4 @@ D:\C#\QuanLyBanHang\bin\Debug\DataAccess.dll.config
 D:\C#\QuanLyBanHang\bin\Debug\Entity.dll
 D:\C#\QuanLyBanHang\bin\Debug\Entity.pdb
 D:\C#\QuanLyBanHang\bin\Debug\Entity.dll.config
+D:\C#\QuanLyBanHang\obj\Debug\QuanLyBanHang.Login.resources

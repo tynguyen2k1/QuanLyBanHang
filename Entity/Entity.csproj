@@ -60,6 +60,8 @@
     <Compile Include="DANH_MUC.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityCTHD.cs" />
+    <Compile Include="EntityKhachHang.cs" />
     <Compile Include="EntitySanPham.cs" />
     <Compile Include="GET_ALL_DANH_MUC_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -73,6 +75,7 @@
     <Compile Include="GET_ALL_USER_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityHoaDon.cs" />
     <Compile Include="HOA_DON.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -94,6 +97,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="EntityNhanVien.cs" />
     <Compile Include="NHAN_VIEN.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
