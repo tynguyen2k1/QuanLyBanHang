@@ -10,19 +10,14 @@
 namespace Entity
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class CT_HOA_DON
+    public partial class LOC_HOA_DON_Result
     {
-        public int MA_CTHD { get; set; }
-        public string MA_SP { get; set; }
-        public int SO_LUONG { get; set; }
-        public double GIA_BAN { get; set; }
-        public double THANH_TIEN { get; set; }
-        public double GIAM_GIA { get; set; }
         public int MA_HD { get; set; }
-    
-        public virtual SAN_PHAM SAN_PHAM { get; set; }
-        public virtual HOA_DON HOA_DON { get; set; }
+        public int MA_KH { get; set; }
+        public string TEN_KH { get; set; }
+        public System.DateTime NGAY_BAN { get; set; }
+        public double TONG_TIEN { get; set; }
+        public int MA_NV { get; set; }
     }
 }

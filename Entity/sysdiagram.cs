@@ -12,17 +12,12 @@ namespace Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class CT_HOA_DON
+    public partial class sysdiagram
     {
-        public int MA_CTHD { get; set; }
-        public string MA_SP { get; set; }
-        public int SO_LUONG { get; set; }
-        public double GIA_BAN { get; set; }
-        public double THANH_TIEN { get; set; }
-        public double GIAM_GIA { get; set; }
-        public int MA_HD { get; set; }
-    
-        public virtual SAN_PHAM SAN_PHAM { get; set; }
-        public virtual HOA_DON HOA_DON { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

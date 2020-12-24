@@ -19,12 +19,7 @@ namespace Entity
         {
             this.SAN_PHAM = new HashSet<SAN_PHAM>();
         }
-        public DANH_MUC(string a, string b ,string c)
-        {
-            this.Ma_DM = a;
-            this.TEN_DM = b;
-            this.MO_TA = c;
-        }
+    
         public string Ma_DM { get; set; }
         public string TEN_DM { get; set; }
         public string MO_TA { get; set; }

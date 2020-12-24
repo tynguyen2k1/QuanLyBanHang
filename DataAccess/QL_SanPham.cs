@@ -64,7 +64,15 @@ namespace DataAccess
             {
                 return Err;
             }
-            SAN_PHAM sp = new SAN_PHAM(masp,tensp,double.Parse(gianhap), double.Parse(giaban),int.Parse(giamgia),int.Parse(sl),mo_ta,ma_dm);
+            SAN_PHAM sp = new SAN_PHAM();
+            sp.MA_SP = masp;
+            sp.TEN_SP = tensp;
+            sp.GIA_NHAP = double.Parse(gianhap);
+            sp.GIA_BAN = double.Parse(giaban);
+            sp.GIAM_GIA = int.Parse(giamgia);
+            sp.SO_LUONG = int.Parse(sl);
+            sp.GHI_CHU = mo_ta;
+            sp.MA_DM = ma_dm;
             if (QL_SP.AddSanPham(sp))
             {
                 return "";
@@ -105,7 +113,15 @@ namespace DataAccess
             {
                 return Err;
             }
-            SAN_PHAM sp = new SAN_PHAM(masp, tensp, double.Parse(gianhap), double.Parse(giaban), int.Parse(giamgia), int.Parse(sl), mo_ta, ma_dm);
+            SAN_PHAM sp = new SAN_PHAM();
+            sp.MA_SP = masp;
+            sp.TEN_SP = tensp;
+            sp.GIA_NHAP = double.Parse(gianhap);
+            sp.GIA_BAN = double.Parse(giaban);
+            sp.GIAM_GIA = int.Parse(giamgia);
+            sp.SO_LUONG = int.Parse(sl);
+            sp.GHI_CHU = mo_ta;
+            sp.MA_DM = ma_dm;
             if (QL_SP.EditSanPham(sp))
             {
                 return "";

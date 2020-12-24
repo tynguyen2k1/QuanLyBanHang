@@ -12,22 +12,21 @@ namespace Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class KHACH_HANG
+    public partial class HOA_DON_NHAP
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public KHACH_HANG()
+        public HOA_DON_NHAP()
         {
-            this.HOA_DON = new HashSet<HOA_DON>();
+            this.CT_HOA_DON_NHAP = new HashSet<CT_HOA_DON_NHAP>();
         }
     
-        public int MA_KH { get; set; }
-        public string TEN_KH { get; set; }
-        public string SDT { get; set; }
-        public string DIA_CHI { get; set; }
-        public Nullable<bool> GIOI_TINH { get; set; }
-        public System.DateTime NGAY_SINH { get; set; }
+        public int MA_HD_NHAP { get; set; }
+        public int MA_NV { get; set; }
+        public System.DateTime NGAY_NHAP { get; set; }
+        public double TONG_TIEN { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HOA_DON> HOA_DON { get; set; }
+        public virtual ICollection<CT_HOA_DON_NHAP> CT_HOA_DON_NHAP { get; set; }
+        public virtual NHAN_VIEN NHAN_VIEN { get; set; }
     }
 }

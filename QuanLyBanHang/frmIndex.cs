@@ -440,15 +440,37 @@ namespace QuanLyBanHang
             else
             {
                 bool kiemtra = (rd_Nam.Checked==true) ? true: false;
-                KHACH_HANG kh = new KHACH_HANG(txt_ten_kh.Text , txt_sdt_kh.Text,txt_dia_chi.Text,kiemtra , dtpk_ngay_sinh.Value);
-                QL_HoaDon qL_Khach = new QL_HoaDon();
-                bool check = qL_Khach.TaoHoaDon(dataTable,kh,double.Parse(txt_tong_tien_cart.Text));
+                KHACH_HANG kh = new KHACH_HANG();
+                kh.TEN_KH = txt_ten_kh.Text;
+                kh.SDT = txt_sdt_kh.Text;
+                kh.DIA_CHI = txt_dia_chi.Text;
+                kh.GIOI_TINH = kiemtra;
+                kh.NGAY_SINH = dtpk_ngay_sinh.Value;
+                QL_HoaDon qL_HoaDon = new QL_HoaDon();
+                bool check = qL_HoaDon.TaoHoaDon(dataTable,kh,double.Parse(txt_tong_tien_cart.Text));
                 if (check)
                 {
                     MessageBox.Show("Tạo Thành Công !!!");
 
                     clear_dataTable();
                     LoadData();
+
+                    string message = "Tạo Thành Công Hoá Đơn";
+                    string title = "Hoá Đơn";
+                    MessageBoxButtons buttons = MessageBoxButtons.YesNoCancel;
+                    DialogResult result = MessageBox.Show(message, title, buttons, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
+                    if (result == DialogResult.Abort)
+                    {
+                        this.Close();
+                    }
+                    else if(result == DialogResult.Retry) {
+                        // Do nothing  
+                        
+                    }
+                    else
+                    {
+                        // Do something  
+                    }
                 }
                 else
                 {
@@ -486,5 +508,7 @@ namespace QuanLyBanHang
             }
             return "";
         }
+
+        
     }
 }

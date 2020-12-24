@@ -31,7 +31,10 @@ namespace DataAccess
             {
                 return error_3;
             }
-            DANH_MUC danhmuc = new DANH_MUC(a, b, c);
+            DANH_MUC danhmuc = new DANH_MUC();
+            danhmuc.Ma_DM = a;
+            danhmuc.TEN_DM = b;
+            danhmuc.MO_TA = c;
             if (dm.InsertDanhMuc(danhmuc))
             {
                 return "";
@@ -43,7 +46,10 @@ namespace DataAccess
         }
         public bool EditData(string Ma_Dm ,string Ten , string mota)
         {
-            DANH_MUC danhmuc = new DANH_MUC(Ma_Dm , Ten , mota);
+            DANH_MUC danhmuc = new DANH_MUC();
+            danhmuc.Ma_DM = Ma_Dm;
+            danhmuc.TEN_DM = Ten;
+            danhmuc.MO_TA = mota;
             return dm.EditDanhMuc(danhmuc);
         }
 

@@ -19,13 +19,7 @@ namespace Entity
         {
             this.CT_HOA_DON = new HashSet<CT_HOA_DON>();
         }
-        public HOA_DON(int manv , DateTime dt , int MA_KH , double tong)
-        {
-            this.MA_NV = manv;
-            this.NGAY_BAN = dt;
-            this.MA_KH = MA_KH;
-            this.TONG_TIEN = tong;
-        }
+    
         public int MA_HD { get; set; }
         public int MA_NV { get; set; }
         public System.DateTime NGAY_BAN { get; set; }

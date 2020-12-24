@@ -18,6 +18,7 @@ namespace Entity
         public NHAN_VIEN()
         {
             this.HOA_DON = new HashSet<HOA_DON>();
+            this.HOA_DON_NHAP = new HashSet<HOA_DON_NHAP>();
         }
     
         public int MA_NV { get; set; }
@@ -34,5 +35,7 @@ namespace Entity
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HOA_DON> HOA_DON { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HOA_DON_NHAP> HOA_DON_NHAP { get; set; }
     }
 }

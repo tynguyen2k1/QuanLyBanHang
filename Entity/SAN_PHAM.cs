@@ -18,19 +18,9 @@ namespace Entity
         public SAN_PHAM()
         {
             this.CT_HOA_DON = new HashSet<CT_HOA_DON>();
+            this.CT_HOA_DON_NHAP = new HashSet<CT_HOA_DON_NHAP>();
         }
-        public SAN_PHAM(string masp, string tensp, double gianhap, double giaban, int giamgia, int sl,string mota, string ma_dm)
-        {
-            this.MA_SP = masp;
-            this.TEN_SP = tensp;
-            this.GIA_NHAP = gianhap;
-            this.GIA_BAN = giaban;
-            this.SO_LUONG = sl;
-            this.GIAM_GIA = giamgia;
-            this.MA_DM = ma_dm;
-            this.GHI_CHU = mota;
-            this.TRANG_THAI = 0;
-        }
+    
         public string MA_SP { get; set; }
         public string TEN_SP { get; set; }
         public double GIA_NHAP { get; set; }
@@ -44,5 +34,7 @@ namespace Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_HOA_DON> CT_HOA_DON { get; set; }
         public virtual DANH_MUC DANH_MUC { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CT_HOA_DON_NHAP> CT_HOA_DON_NHAP { get; set; }
     }
 }

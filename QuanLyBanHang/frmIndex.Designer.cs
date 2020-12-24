@@ -671,7 +671,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(24, 439);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1144, 176);
+            this.groupBox2.Size = new System.Drawing.Size(1144, 166);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thông tin khách hàng";
@@ -800,7 +800,7 @@
             // btn_thanh_toan
             // 
             this.btn_thanh_toan.Font = new System.Drawing.Font("Palatino Linotype", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_thanh_toan.Location = new System.Drawing.Point(24, 622);
+            this.btn_thanh_toan.Location = new System.Drawing.Point(24, 636);
             this.btn_thanh_toan.Name = "btn_thanh_toan";
             this.btn_thanh_toan.Size = new System.Drawing.Size(174, 50);
             this.btn_thanh_toan.TabIndex = 10;
@@ -811,7 +811,7 @@
             // btn_huy_hoa_don
             // 
             this.btn_huy_hoa_don.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_huy_hoa_don.Location = new System.Drawing.Point(217, 622);
+            this.btn_huy_hoa_don.Location = new System.Drawing.Point(221, 636);
             this.btn_huy_hoa_don.Name = "btn_huy_hoa_don";
             this.btn_huy_hoa_don.Size = new System.Drawing.Size(174, 50);
             this.btn_huy_hoa_don.TabIndex = 11;
@@ -822,7 +822,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1194, 684);
+            this.ClientSize = new System.Drawing.Size(1194, 698);
             this.Controls.Add(this.btn_huy_hoa_don);
             this.Controls.Add(this.btn_thanh_toan);
             this.Controls.Add(this.groupBox2);

@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="80e990e4e3a146c984e951acc843052b" Name="Diagram1" ZoomLevel="10">
-        <EntityTypeShape EntityType="QL_BAN_HANGModel.CT_HOA_DON" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BAN_HANGModel.CT_HOA_DON" Width="1.5" PointX="26.125" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_BAN_HANGModel.DANH_MUC" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_BAN_HANGModel.HOA_DON" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_BAN_HANGModel.KHACH_HANG" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
@@ -16,6 +16,12 @@
         <AssociationConnector Association="QL_BAN_HANGModel.FK_SP_DM" ManuallyRouted="false" />
         <AssociationConnector Association="QL_BAN_HANGModel.FK_HD_KH" ManuallyRouted="false" />
         <AssociationConnector Association="QL_BAN_HANGModel.FK_HD_NV" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QL_BAN_HANGModel.CT_HOA_DON_NHAP" Width="1.5" PointX="33.75" PointY="7.5" />
+        <EntityTypeShape EntityType="QL_BAN_HANGModel.HOA_DON_NHAP" Width="1.5" PointX="31.5" PointY="5.375" />
+        <EntityTypeShape EntityType="QL_BAN_HANGModel.sysdiagram" Width="1.5" PointX="33.875" PointY="3.125" />
+        <AssociationConnector Association="QL_BAN_HANGModel.FK_CTHD_N_SP" />
+        <AssociationConnector Association="QL_BAN_HANGModel.FK_HDN_CTHD" />
+        <AssociationConnector Association="QL_BAN_HANGModel.FK_HDN_NV" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
