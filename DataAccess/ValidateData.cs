@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -130,7 +131,7 @@ namespace DataAccess
         {
             if (str.Length < 1 || str.Length > 100)
             {
-                return "Địa khách hàng phải có độ dài ( 1 => 100 ) ký tự  !!!";
+                return "Địa chỉ khách hàng phải có độ dài ( 1 => 100 ) ký tự  !!!";
             }
             return "";
         }
@@ -146,5 +147,130 @@ namespace DataAccess
         {
             return Regex.IsMatch(number, @"^(0|\+84)\d{3}[-. ]?\d{3}[-. ]?\d{3}$");
         }
+        public bool IsValidEmail(string emailaddress)
+        {
+            try
+            {
+                MailAddress m = new MailAddress(emailaddress);
+
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
+
+        public bool Check_Ky_Tu_Dac_Biet(string str)
+        {
+            return str.Any(ch => Char.IsLetterOrDigit(ch));
+        }
+
+        /*Nhân Viên :*/
+        public bool check_Ma_NV(string str)
+        {
+            EntityNhanVien entity = new EntityNhanVien();
+            if (str.Length < 1 || str.Length > 20)
+            {
+                MessageBox.Show("Mã nhân viên phải có độ dài từ 1=>20 ký tự !!!");
+                return false;
+            }
+            if(!this.Check_Ky_Tu_Dac_Biet(str))
+            {
+                MessageBox.Show("Mã nhân viên không được chứa ký tự đặc biệt !!!");
+                return false;
+            }
+            if (entity.Check_Ma_NV(str))
+            {
+                MessageBox.Show("Mã nhân viên đã tồn tại !!!");
+                return false;
+            }
+            return true;
+        }
+        public bool validate_ten_nv(string str)
+        {
+            if (str.Length < 1 || str.Length > 55)
+            {
+                MessageBox.Show( "Tên nhân viên phải có độ dài ( 1 => 55 ) ký tự !!!");
+                return false;
+            }
+            return true;
+        }
+        public bool validate_dia_chi_nv(string str)
+        {
+            if (str.Length < 1 || str.Length > 100)
+            {
+                MessageBox.Show("Địa chỉ nhân viên phải có độ dài ( 1 => 100 ) ký tự  !!!");
+                return false;
+            }
+            return true;
+        }
+        public bool check_Email_NV(string str)
+        {
+            EntityNhanVien entity = new EntityNhanVien();
+            if (str.Length < 1 || str.Length > 100)
+            {
+                MessageBox.Show("Email phải có độ dài từ 1=>100 ký tự !!!");
+                return false;
+            }
+            if(!this.IsValidEmail(str))
+            {
+                MessageBox.Show("Email không đúng định dạng !!!");
+                return false;
+            }
+            if (entity.Check_Email_NV(str))
+            {
+                MessageBox.Show("Email nhân viên đã tồn tại !!!");
+                return false;
+            }
+            return true;
+        }
+        public bool check_Tai_Khoan_NV(string str)
+        {
+            EntityNhanVien entity = new EntityNhanVien();
+            if (str.Length < 1 || str.Length > 20)
+            {
+                MessageBox.Show("Tài khoản nhân viên phải có độ dài từ 1=>50 ký tự !!!");
+                return false;
+            }
+            if (entity.Check_Tai_Khoan_NV(str))
+            {
+                MessageBox.Show("Tài khoản nhân viên đã tồn tại !!!");
+                return false;
+            }
+            if (!this.Check_Ky_Tu_Dac_Biet(str))
+            {
+                MessageBox.Show("Tài khoản nhân viên không được chứa ký tự đặc biệt !!!");
+                return false;
+            }
+            return true;
+        }
+        public bool check_Mk_NV(string str)
+        {
+            if(str.Length<6 || str.Length > 50)
+            {
+                MessageBox.Show("Mật khẩu phải có độ dài từ 6 => 50 ký tự");
+                return false;
+            }
+
+            return true;
+        }
+       
+        public bool check_SDT_NV(string str)
+        {
+            EntityNhanVien entity = new EntityNhanVien();
+            if (!this.IsPhoneNbr(str))
+            {
+                MessageBox.Show("Số Điện Thoại Sai Định Dạng : \n   [84|0]123 456 789  ; \n   [84|0]123-456-789 ; \n   [84|0] 123.456.789 ; \n   [84|0]123456789");
+                return false;
+            }
+            if (entity.Check_SDT_NV(str))
+            {
+                MessageBox.Show("Số điện thoại đã tồn tại !!!");
+                return false;
+            }
+            return true;
+        }
+        
     }
 }

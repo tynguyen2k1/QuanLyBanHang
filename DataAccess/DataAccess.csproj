@@ -50,6 +50,7 @@
     <Compile Include="QL_DanhMuc.cs" />
     <Compile Include="QL_HoaDon.cs" />
     <Compile Include="QL_KhachHang.cs" />
+    <Compile Include="QL_NhanVien.cs" />
     <Compile Include="QL_SanPham.cs" />
     <Compile Include="ValidateData.cs" />
   </ItemGroup>

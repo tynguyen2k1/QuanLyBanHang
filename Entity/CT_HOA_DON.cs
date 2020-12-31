@@ -16,10 +16,10 @@ namespace Entity
     {
         public int MA_CTHD { get; set; }
         public string MA_SP { get; set; }
-        public int SO_LUONG { get; set; }
         public double GIA_BAN { get; set; }
-        public double THANH_TIEN { get; set; }
         public double GIAM_GIA { get; set; }
+        public int SO_LUONG { get; set; }
+        public double THANH_TIEN { get; set; }
         public int MA_HD { get; set; }
     
         public virtual SAN_PHAM SAN_PHAM { get; set; }

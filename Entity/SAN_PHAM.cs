@@ -33,8 +33,8 @@ namespace Entity
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_HOA_DON> CT_HOA_DON { get; set; }
-        public virtual DANH_MUC DANH_MUC { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_HOA_DON_NHAP> CT_HOA_DON_NHAP { get; set; }
+        public virtual DANH_MUC DANH_MUC { get; set; }
     }
 }

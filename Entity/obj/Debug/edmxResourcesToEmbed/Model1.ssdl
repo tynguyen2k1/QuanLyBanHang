@@ -199,13 +199,38 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="DELETE_HOA_DON" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MA_HD" Type="int" Mode="In" />
+  </Function>
   <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
   <Function Name="GET_ALL_DANH_MUC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="GET_ALL_KHACH_HANG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GET_ALL_NHAN_VIEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="GET_ALL_SAN_PHAM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="GET_ALL_USER" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="GETALLHOADON" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GET_TONG_SL_NHAP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MA_SP" Type="char" Mode="In" />
+    <Parameter Name="START" Type="datetime" Mode="In" />
+    <Parameter Name="END" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="GETALLCTHD_BAN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ma_hd" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GETALLCTHD_NHAP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ma_hd" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GETALLHOADON" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nv" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GETALLHOADONNHAP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="manv" Type="int" Mode="In" />
+  </Function>
   <Function Name="LOC_HOA_DON" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="manv" Type="int" Mode="In" />
+    <Parameter Name="START" Type="date" Mode="In" />
+    <Parameter Name="END" Type="date" Mode="In" />
+  </Function>
+  <Function Name="LOC_HOA_DON_NHAP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MANV" Type="int" Mode="In" />
     <Parameter Name="START" Type="date" Mode="In" />
     <Parameter Name="END" Type="date" Mode="In" />
   </Function>
@@ -239,6 +264,22 @@
     <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="TIM_KIEM_KHACH_HANG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MA_KH" Type="int" Mode="In" />
+    <Parameter Name="TEN_KH" Type="nvarchar" Mode="In" />
+    <Parameter Name="SDT" Type="char" Mode="In" />
+    <Parameter Name="DIA_CHI" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="TIM_KIEM_NHAN_VIEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MA_NV" Type="int" Mode="In" />
+    <Parameter Name="TEN_NV" Type="nvarchar" Mode="In" />
+    <Parameter Name="SDT" Type="char" Mode="In" />
+    <Parameter Name="DIA_CHI" Type="nvarchar" Mode="In" />
+    <Parameter Name="GIOI_TINH" Type="bit" Mode="In" />
+    <Parameter Name="EMAIL" Type="char" Mode="In" />
+    <Parameter Name="TAI_KHOAN" Type="nvarchar" Mode="In" />
+    <Parameter Name="CHUC_VU" Type="tinyint" Mode="In" />
+  </Function>
   <Function Name="UPDATE_DANH_MUC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MA_NV" Type="int" Mode="In" />
     <Parameter Name="TEN_NV" Type="nvarchar" Mode="In" />

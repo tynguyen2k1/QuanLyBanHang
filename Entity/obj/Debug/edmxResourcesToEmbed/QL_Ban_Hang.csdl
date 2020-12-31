@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QL_BAN_HANGModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CT_HOA_DON">
+    <Key>
+      <PropertyRef Name="MA_CTHD" />
+    </Key>
+    <Property Name="MA_CTHD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MA_SP" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="GIA_BAN" Type="Double" Nullable="false" />
+    <Property Name="GIAM_GIA" Type="Double" Nullable="false" />
+    <Property Name="SO_LUONG" Type="Int32" Nullable="false" />
+    <Property Name="THANH_TIEN" Type="Double" Nullable="false" />
+    <Property Name="MA_HD" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SAN_PHAM" Relationship="Self.FK_CTHD_SP" FromRole="CT_HOA_DON" ToRole="SAN_PHAM" />
+    <NavigationProperty Name="HOA_DON" Relationship="Self.FK_HD_CTHD" FromRole="CT_HOA_DON" ToRole="HOA_DON" />
+  </EntityType>
+  <EntityType Name="CT_HOA_DON_NHAP">
+    <Key>
+      <PropertyRef Name="MA_CTHD_NHAP" />
+    </Key>
+    <Property Name="MA_CTHD_NHAP" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MA_SP" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="GIA_NHAP" Type="Double" Nullable="false" />
+    <Property Name="GIAM_GIA" Type="Double" Nullable="false" />
+    <Property Name="SO_LUONG" Type="Int32" Nullable="false" />
+    <Property Name="THANH_TIEN" Type="Double" Nullable="false" />
+    <Property Name="MA_HD_NHAP" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SAN_PHAM" Relationship="Self.FK_CTHD_N_SP" FromRole="CT_HOA_DON_NHAP" ToRole="SAN_PHAM" />
+    <NavigationProperty Name="HOA_DON_NHAP" Relationship="Self.FK_HDN_CTHD" FromRole="CT_HOA_DON_NHAP" ToRole="HOA_DON_NHAP" />
+  </EntityType>
+  <EntityType Name="DANH_MUC">
+    <Key>
+      <PropertyRef Name="Ma_DM" />
+    </Key>
+    <Property Name="Ma_DM" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="TEN_DM" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MO_TA" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="TRANG_THAI" Type="Byte" />
+    <NavigationProperty Name="SAN_PHAM" Relationship="Self.FK_SP_DM" FromRole="DANH_MUC" ToRole="SAN_PHAM" />
+  </EntityType>
+  <EntityType Name="HOA_DON">
+    <Key>
+      <PropertyRef Name="MA_HD" />
+    </Key>
+    <Property Name="MA_HD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MA_NV" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="NGAY_BAN" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MA_KH" Type="Int32" />
+    <Property Name="TONG_TIEN" Type="Double" Nullable="false" />
+    <NavigationProperty Name="CT_HOA_DON" Relationship="Self.FK_HD_CTHD" FromRole="HOA_DON" ToRole="CT_HOA_DON" />
+    <NavigationProperty Name="KHACH_HANG" Relationship="Self.FK_HD_KH" FromRole="HOA_DON" ToRole="KHACH_HANG" />
+    <NavigationProperty Name="NHAN_VIEN" Relationship="Self.FK_HD_NV" FromRole="HOA_DON" ToRole="NHAN_VIEN" />
+  </EntityType>
+  <EntityType Name="HOA_DON_NHAP">
+    <Key>
+      <PropertyRef Name="MA_HD_NHAP" />
+    </Key>
+    <Property Name="MA_HD_NHAP" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MA_NV" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="NGAY_NHAP" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TONG_TIEN" Type="Double" Nullable="false" />
+    <NavigationProperty Name="CT_HOA_DON_NHAP" Relationship="Self.FK_HDN_CTHD" FromRole="HOA_DON_NHAP" ToRole="CT_HOA_DON_NHAP" />
+    <NavigationProperty Name="NHAN_VIEN" Relationship="Self.FK_HDN_NV" FromRole="HOA_DON_NHAP" ToRole="NHAN_VIEN" />
+  </EntityType>
+  <EntityType Name="KHACH_HANG">
+    <Key>
+      <PropertyRef Name="MA_KH" />
+    </Key>
+    <Property Name="MA_KH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TEN_KH" Type="String" MaxLength="55" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SDT" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="DIA_CHI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GIOI_TINH" Type="Boolean" />
+    <Property Name="NGAY_SINH" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="HOA_DON" Relationship="Self.FK_HD_KH" FromRole="KHACH_HANG" ToRole="HOA_DON" />
+  </EntityType>
+  <EntityType Name="NHAN_VIEN">
+    <Key>
+      <PropertyRef Name="MA_NV" />
+    </Key>
+    <Property Name="MA_NV" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="TEN_NV" Type="String" MaxLength="55" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SDT" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="DIA_CHI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GIOI_TINH" Type="Boolean" />
+    <Property Name="NGAY_VL" Type="DateTime" Precision="3" />
+    <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="TAI_KHOAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MAT_KHAU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CHUC_VU" Type="Byte" />
+    <Property Name="TRANG_THAI" Type="Byte" />
+    <NavigationProperty Name="HOA_DON" Relationship="Self.FK_HD_NV" FromRole="NHAN_VIEN" ToRole="HOA_DON" />
+    <NavigationProperty Name="HOA_DON_NHAP" Relationship="Self.FK_HDN_NV" FromRole="NHAN_VIEN" ToRole="HOA_DON_NHAP" />
+  </EntityType>
+  <EntityType Name="SAN_PHAM">
+    <Key>
+      <PropertyRef Name="MA_SP" />
+    </Key>
+    <Property Name="MA_SP" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="TEN_SP" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GIA_NHAP" Type="Double" Nullable="false" />
+    <Property Name="GIA_BAN" Type="Double" Nullable="false" />
+    <Property Name="SO_LUONG" Type="Int32" />
+    <Property Name="GIAM_GIA" Type="Int32" />
+    <Property Name="GHI_CHU" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="MA_DM" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="TRANG_THAI" Type="Byte" />
+    <NavigationProperty Name="CT_HOA_DON" Relationship="Self.FK_CTHD_SP" FromRole="SAN_PHAM" ToRole="CT_HOA_DON" />
+    <NavigationProperty Name="CT_HOA_DON_NHAP" Relationship="Self.FK_CTHD_N_SP" FromRole="SAN_PHAM" ToRole="CT_HOA_DON_NHAP" />
+    <NavigationProperty Name="DANH_MUC" Relationship="Self.FK_SP_DM" FromRole="SAN_PHAM" ToRole="DANH_MUC" />
+  </EntityType>
+  <Association Name="FK_CTHD_SP">
+    <End Role="SAN_PHAM" Type="Self.SAN_PHAM" Multiplicity="1" />
+    <End Role="CT_HOA_DON" Type="Self.CT_HOA_DON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SAN_PHAM">
+        <PropertyRef Name="MA_SP" />
+      </Principal>
+      <Dependent Role="CT_HOA_DON">
+        <PropertyRef Name="MA_SP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HD_CTHD">
+    <End Role="HOA_DON" Type="Self.HOA_DON" Multiplicity="1" />
+    <End Role="CT_HOA_DON" Type="Self.CT_HOA_DON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HOA_DON">
+        <PropertyRef Name="MA_HD" />
+      </Principal>
+      <Dependent Role="CT_HOA_DON">
+        <PropertyRef Name="MA_HD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTHD_N_SP">
+    <End Role="SAN_PHAM" Type="Self.SAN_PHAM" Multiplicity="1" />
+    <End Role="CT_HOA_DON_NHAP" Type="Self.CT_HOA_DON_NHAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SAN_PHAM">
+        <PropertyRef Name="MA_SP" />
+      </Principal>
+      <Dependent Role="CT_HOA_DON_NHAP">
+        <PropertyRef Name="MA_SP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HDN_CTHD">
+    <End Role="HOA_DON_NHAP" Type="Self.HOA_DON_NHAP" Multiplicity="1" />
+    <End Role="CT_HOA_DON_NHAP" Type="Self.CT_HOA_DON_NHAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HOA_DON_NHAP">
+        <PropertyRef Name="MA_HD_NHAP" />
+      </Principal>
+      <Dependent Role="CT_HOA_DON_NHAP">
+        <PropertyRef Name="MA_HD_NHAP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SP_DM">
+    <End Role="DANH_MUC" Type="Self.DANH_MUC" Multiplicity="1" />
+    <End Role="SAN_PHAM" Type="Self.SAN_PHAM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DANH_MUC">
+        <PropertyRef Name="Ma_DM" />
+      </Principal>
+      <Dependent Role="SAN_PHAM">
+        <PropertyRef Name="MA_DM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HD_KH">
+    <End Role="KHACH_HANG" Type="Self.KHACH_HANG" Multiplicity="0..1" />
+    <End Role="HOA_DON" Type="Self.HOA_DON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KHACH_HANG">
+        <PropertyRef Name="MA_KH" />
+      </Principal>
+      <Dependent Role="HOA_DON">
+        <PropertyRef Name="MA_KH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HD_NV">
+    <End Role="NHAN_VIEN" Type="Self.NHAN_VIEN" Multiplicity="1" />
+    <End Role="HOA_DON" Type="Self.HOA_DON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NHAN_VIEN">
+        <PropertyRef Name="MA_NV" />
+      </Principal>
+      <Dependent Role="HOA_DON">
+        <PropertyRef Name="MA_NV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HDN_NV">
+    <End Role="NHAN_VIEN" Type="Self.NHAN_VIEN" Multiplicity="1" />
+    <End Role="HOA_DON_NHAP" Type="Self.HOA_DON_NHAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NHAN_VIEN">
+        <PropertyRef Name="MA_NV" />
+      </Principal>
+      <Dependent Role="HOA_DON_NHAP">
+        <PropertyRef Name="MA_NV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QL_BAN_HANG" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CT_HOA_DON" EntityType="Self.CT_HOA_DON" />
+    <EntitySet Name="CT_HOA_DON_NHAP" EntityType="Self.CT_HOA_DON_NHAP" />
+    <EntitySet Name="DANH_MUC" EntityType="Self.DANH_MUC" />
+    <EntitySet Name="HOA_DON" EntityType="Self.HOA_DON" />
+    <EntitySet Name="HOA_DON_NHAP" EntityType="Self.HOA_DON_NHAP" />
+    <EntitySet Name="KHACH_HANG" EntityType="Self.KHACH_HANG" />
+    <EntitySet Name="NHAN_VIEN" EntityType="Self.NHAN_VIEN" />
+    <EntitySet Name="SAN_PHAM" EntityType="Self.SAN_PHAM" />
+    <AssociationSet Name="FK_CTHD_SP" Association="Self.FK_CTHD_SP">
+      <End Role="SAN_PHAM" EntitySet="SAN_PHAM" />
+      <End Role="CT_HOA_DON" EntitySet="CT_HOA_DON" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HD_CTHD" Association="Self.FK_HD_CTHD">
+      <End Role="HOA_DON" EntitySet="HOA_DON" />
+      <End Role="CT_HOA_DON" EntitySet="CT_HOA_DON" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTHD_N_SP" Association="Self.FK_CTHD_N_SP">
+      <End Role="SAN_PHAM" EntitySet="SAN_PHAM" />
+      <End Role="CT_HOA_DON_NHAP" EntitySet="CT_HOA_DON_NHAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HDN_CTHD" Association="Self.FK_HDN_CTHD">
+      <End Role="HOA_DON_NHAP" EntitySet="HOA_DON_NHAP" />
+      <End Role="CT_HOA_DON_NHAP" EntitySet="CT_HOA_DON_NHAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SP_DM" Association="Self.FK_SP_DM">
+      <End Role="DANH_MUC" EntitySet="DANH_MUC" />
+      <End Role="SAN_PHAM" EntitySet="SAN_PHAM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HD_KH" Association="Self.FK_HD_KH">
+      <End Role="KHACH_HANG" EntitySet="KHACH_HANG" />
+      <End Role="HOA_DON" EntitySet="HOA_DON" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HD_NV" Association="Self.FK_HD_NV">
+      <End Role="NHAN_VIEN" EntitySet="NHAN_VIEN" />
+      <End Role="HOA_DON" EntitySet="HOA_DON" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HDN_NV" Association="Self.FK_HDN_NV">
+      <End Role="NHAN_VIEN" EntitySet="NHAN_VIEN" />
+      <End Role="HOA_DON_NHAP" EntitySet="HOA_DON_NHAP" />
+    </AssociationSet>
+    <FunctionImport Name="CT_INSERT_HOADONNHAP">
+      <Parameter Name="MA_SP" Mode="In" Type="String" />
+      <Parameter Name="SO_LUONG" Mode="In" Type="Int32" />
+      <Parameter Name="GIA_NHAP" Mode="In" Type="Double" />
+      <Parameter Name="THANH_TIEN" Mode="In" Type="Double" />
+      <Parameter Name="GIAM_GIA" Mode="In" Type="Double" />
+      <Parameter Name="MA_HD" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GET_ALL_DANH_MUC" ReturnType="Collection(QL_BAN_HANGModel.GET_ALL_DANH_MUC_Result)" />
+    <FunctionImport Name="GET_ALL_KHACHHANG" ReturnType="Collection(QL_BAN_HANGModel.GET_ALL_KHACHHANG_Result)" />
+    <FunctionImport Name="GET_ALL_SAN_PHAM" ReturnType="Collection(QL_BAN_HANGModel.GET_ALL_SAN_PHAM_Result)" />
+    <FunctionImport Name="GETALLHOADON" ReturnType="Collection(QL_BAN_HANGModel.GETALLHOADON_Result)">
+      <Parameter Name="nv" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GETALLHOADONNHAP" ReturnType="Collection(QL_BAN_HANGModel.GETALLHOADONNHAP_Result)">
+      <Parameter Name="manv" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="LOC_HOA_DON" ReturnType="Collection(QL_BAN_HANGModel.LOC_HOA_DON_Result)">
+      <Parameter Name="manv" Mode="In" Type="String" />
+      <Parameter Name="START" Mode="In" Type="DateTime" />
+      <Parameter Name="END" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="LOC_HOA_DON_NHAP" ReturnType="Collection(QL_BAN_HANGModel.LOC_HOA_DON_NHAP_Result)">
+      <Parameter Name="MANV" Mode="In" Type="String" />
+      <Parameter Name="START" Mode="In" Type="DateTime" />
+      <Parameter Name="END" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="PRD_INSERT_CTHD">
+      <Parameter Name="MA_SP" Mode="In" Type="String" />
+      <Parameter Name="SO_LUONG" Mode="In" Type="Int32" />
+      <Parameter Name="GIA_BAN" Mode="In" Type="Double" />
+      <Parameter Name="THANH_TIEN" Mode="In" Type="Double" />
+      <Parameter Name="GIAM_GIA" Mode="In" Type="Double" />
+      <Parameter Name="MA_HD" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SEARCH_KHACH_HANG" ReturnType="Collection(QL_BAN_HANGModel.SEARCH_KHACH_HANG_Result)">
+      <Parameter Name="MA_KH" Mode="In" Type="String" />
+      <Parameter Name="TEN_KH" Mode="In" Type="String" />
+      <Parameter Name="SDT" Mode="In" Type="String" />
+      <Parameter Name="DIA_CHI" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GETALLCTHD_BAN" ReturnType="Collection(QL_BAN_HANGModel.GETALLCTHD_BAN_Result)">
+      <Parameter Name="ma_hd" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DELETE_HOA_DON">
+      <Parameter Name="MA_HD" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GET_ALL_NHAN_VIEN" ReturnType="Collection(QL_BAN_HANGModel.GET_ALL_NHAN_VIEN_Result)" />
+    <FunctionImport Name="GETALLCTHD_NHAP" ReturnType="Collection(QL_BAN_HANGModel.GETALLCTHD_NHAP_Result)">
+      <Parameter Name="ma_hd" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SEARCH_NHAN_VIEN" ReturnType="Collection(QL_BAN_HANGModel.SEARCH_NHAN_VIEN_Result)">
+      <Parameter Name="MA_NV" Mode="In" Type="String" />
+      <Parameter Name="TEN_NV" Mode="In" Type="String" />
+      <Parameter Name="SDT" Mode="In" Type="String" />
+      <Parameter Name="NGAY_VL" Mode="In" Type="String" />
+      <Parameter Name="DIA_CHI" Mode="In" Type="String" />
+      <Parameter Name="GIOI_TINH" Mode="In" Type="String" />
+      <Parameter Name="EMAIL" Mode="In" Type="String" />
+      <Parameter Name="TAI_KHOAN" Mode="In" Type="String" />
+      <Parameter Name="CHUC_VU" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="GET_ALL_DANH_MUC_Result">
+    <Property Type="String" Name="Ma_DM" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="TEN_DM" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="MO_TA" Nullable="true" MaxLength="200" />
+  </ComplexType>
+  <ComplexType Name="GET_ALL_KHACHHANG_Result">
+    <Property Type="Int32" Name="MA_KH" Nullable="false" />
+    <Property Type="String" Name="TEN_KH" Nullable="false" MaxLength="55" />
+    <Property Type="String" Name="SDT" Nullable="false" MaxLength="12" />
+    <Property Type="String" Name="Gioi_Tinh" Nullable="true" MaxLength="3" />
+    <Property Type="String" Name="DIA_CHI" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="NGAY_SINH" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GET_ALL_SAN_PHAM_Result">
+    <Property Type="String" Name="MA_SP" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="TEN_SP" Nullable="false" MaxLength="200" />
+    <Property Type="Int32" Name="SO_LUONG" Nullable="true" />
+    <Property Type="Double" Name="GIA_NHAP" Nullable="false" />
+    <Property Type="Double" Name="GIA_BAN" Nullable="false" />
+    <Property Type="Int32" Name="GIAM_GIA" Nullable="true" />
+    <Property Type="String" Name="GHI_CHU" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="MA_DM" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="TEN_DM" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GETALLHOADON_Result">
+    <Property Type="Int32" Name="MA_HD" Nullable="false" />
+    <Property Type="Int32" Name="MA_KH" Nullable="true" />
+    <Property Type="String" Name="TEN_KH" Nullable="false" MaxLength="55" />
+    <Property Type="DateTime" Name="NGAY_BAN" Nullable="false" Precision="23" />
+    <Property Type="Double" Name="TONG_TIEN" Nullable="false" />
+    <Property Type="String" Name="MA_NV" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="GETALLHOADONNHAP_Result">
+    <Property Type="Int32" Name="MA_HD_NHAP" Nullable="false" />
+    <Property Type="DateTime" Name="NGAY_NHAP" Nullable="false" Precision="23" />
+    <Property Type="Double" Name="TONG_TIEN" Nullable="false" />
+    <Property Type="String" Name="MA_NV" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="TEN_NV" Nullable="false" MaxLength="55" />
+  </ComplexType>
+  <ComplexType Name="LOC_HOA_DON_Result">
+    <Property Type="Int32" Name="MA_HD" Nullable="false" />
+    <Property Type="Int32" Name="MA_KH" Nullable="true" />
+    <Property Type="String" Name="TEN_KH" Nullable="false" MaxLength="55" />
+    <Property Type="DateTime" Name="NGAY_BAN" Nullable="false" Precision="23" />
+    <Property Type="Double" Name="TONG_TIEN" Nullable="false" />
+    <Property Type="String" Name="MA_NV" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="LOC_HOA_DON_NHAP_Result">
+    <Property Type="Int32" Name="MA_HD_NHAP" Nullable="false" />
+    <Property Type="DateTime" Name="NGAY_NHAP" Nullable="false" Precision="23" />
+    <Property Type="Double" Name="TONG_TIEN" Nullable="false" />
+    <Property Type="String" Name="MA_NV" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="TEN_NV" Nullable="false" MaxLength="55" />
+  </ComplexType>
+  <ComplexType Name="SEARCH_KHACH_HANG_Result">
+    <Property Type="Int32" Name="MA_KH" Nullable="false" />
+    <Property Type="String" Name="TEN_KH" Nullable="false" MaxLength="55" />
+    <Property Type="String" Name="SDT" Nullable="false" MaxLength="12" />
+    <Property Type="String" Name="Gioi_Tinh" Nullable="true" MaxLength="3" />
+    <Property Type="String" Name="DIA_CHI" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="NGAY_SINH" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GETALLCTHD_BAN_Result">
+    <Property Type="Int32" Name="MA_CTHD" Nullable="false" />
+    <Property Type="String" Name="MA_SP" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="TEN_SP" Nullable="false" MaxLength="200" />
+    <Property Type="Int32" Name="SO_LUONG" Nullable="false" />
+    <Property Type="Double" Name="GIA_BAN" Nullable="false" />
+    <Property Type="Double" Name="GIAM_GIA" Nullable="false" />
+    <Property Type="Double" Name="THANH_TIEN" Nullable="false" />
+    <Property Type="Int32" Name="MA_HD" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GET_ALL_NHAN_VIEN_Result">
+    <Property Type="String" Name="MA_NV" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="TEN_NV" Nullable="false" MaxLength="55" />
+    <Property Type="String" Name="GIOI_TINH" Nullable="true" MaxLength="3" />
+    <Property Type="String" Name="DIA_CHI" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SDT" Nullable="false" MaxLength="12" />
+    <Property Type="String" Name="EMAIL" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="NGAY_VL" Nullable="true" Precision="23" />
+    <Property Type="String" Name="TAI_KHOAN" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="MAT_KHAU" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="CHUC_VU" Nullable="false" MaxLength="9" />
+    <Property Type="String" Name="TRANG_THAI" Nullable="false" MaxLength="9" />
+  </ComplexType>
+  <ComplexType Name="GETALLCTHD_NHAP_Result">
+    <Property Type="Int32" Name="MA_CTHD_NHAP" Nullable="false" />
+    <Property Type="String" Name="MA_SP" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="TEN_SP" Nullable="false" MaxLength="200" />
+    <Property Type="Int32" Name="SO_LUONG" Nullable="false" />
+    <Property Type="Double" Name="GIA_NHAP" Nullable="false" />
+    <Property Type="Double" Name="GIAM_GIA" Nullable="false" />
+    <Property Type="Double" Name="THANH_TIEN" Nullable="false" />
+    <Property Type="Int32" Name="MA_HD_NHAP" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="SEARCH_NHAN_VIEN_Result">
+    <Property Type="String" Name="MA_NV" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="TEN_NV" Nullable="false" MaxLength="55" />
+    <Property Type="String" Name="GIOI_TINH" Nullable="true" MaxLength="3" />
+    <Property Type="String" Name="DIA_CHI" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SDT" Nullable="false" MaxLength="12" />
+    <Property Type="String" Name="EMAIL" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="NGAY_VL" Nullable="true" Precision="23" />
+    <Property Type="String" Name="TAI_KHOAN" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="MAT_KHAU" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="CHUC_VU" Nullable="false" MaxLength="9" />
+    <Property Type="String" Name="TRANG_THAI" Nullable="false" MaxLength="11" />
+  </ComplexType>
+</Schema>

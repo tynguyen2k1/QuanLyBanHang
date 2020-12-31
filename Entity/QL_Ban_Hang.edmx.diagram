@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6831390f10904c30a51477eccc034ecb" Name="Diagram1">
+        <EntityTypeShape EntityType="QL_BAN_HANGModel.CT_HOA_DON" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BAN_HANGModel.CT_HOA_DON_NHAP" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BAN_HANGModel.DANH_MUC" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BAN_HANGModel.HOA_DON" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BAN_HANGModel.HOA_DON_NHAP" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BAN_HANGModel.KHACH_HANG" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BAN_HANGModel.NHAN_VIEN" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BAN_HANGModel.SAN_PHAM" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <AssociationConnector Association="QL_BAN_HANGModel.FK_CTHD_SP" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_BAN_HANGModel.FK_HD_CTHD" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_BAN_HANGModel.FK_CTHD_N_SP" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_BAN_HANGModel.FK_HDN_CTHD" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_BAN_HANGModel.FK_SP_DM" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_BAN_HANGModel.FK_HD_KH" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_BAN_HANGModel.FK_HD_NV" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_BAN_HANGModel.FK_HDN_NV" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

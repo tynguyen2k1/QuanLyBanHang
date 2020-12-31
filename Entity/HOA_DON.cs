@@ -21,9 +21,9 @@ namespace Entity
         }
     
         public int MA_HD { get; set; }
-        public int MA_NV { get; set; }
+        public string MA_NV { get; set; }
         public System.DateTime NGAY_BAN { get; set; }
-        public int MA_KH { get; set; }
+        public Nullable<int> MA_KH { get; set; }
         public double TONG_TIEN { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

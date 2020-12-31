@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QL_BAN_HANGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CT_HOA_DON">
+    <Key>
+      <PropertyRef Name="MA_CTHD" />
+    </Key>
+    <Property Name="MA_CTHD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MA_SP" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="GIA_BAN" Type="float" Nullable="false" />
+    <Property Name="GIAM_GIA" Type="float" Nullable="false" />
+    <Property Name="SO_LUONG" Type="int" Nullable="false" />
+    <Property Name="THANH_TIEN" Type="float" Nullable="false" />
+    <Property Name="MA_HD" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CT_HOA_DON_NHAP">
+    <Key>
+      <PropertyRef Name="MA_CTHD_NHAP" />
+    </Key>
+    <Property Name="MA_CTHD_NHAP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MA_SP" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="GIA_NHAP" Type="float" Nullable="false" />
+    <Property Name="GIAM_GIA" Type="float" Nullable="false" />
+    <Property Name="SO_LUONG" Type="int" Nullable="false" />
+    <Property Name="THANH_TIEN" Type="float" Nullable="false" />
+    <Property Name="MA_HD_NHAP" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DANH_MUC">
+    <Key>
+      <PropertyRef Name="Ma_DM" />
+    </Key>
+    <Property Name="Ma_DM" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="TEN_DM" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="MO_TA" Type="nvarchar" MaxLength="200" />
+    <Property Name="TRANG_THAI" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="HOA_DON">
+    <Key>
+      <PropertyRef Name="MA_HD" />
+    </Key>
+    <Property Name="MA_HD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MA_NV" Type="char" MaxLength="20" Nullable="false" />
+    <Property Name="NGAY_BAN" Type="datetime" Nullable="false" />
+    <Property Name="MA_KH" Type="int" />
+    <Property Name="TONG_TIEN" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HOA_DON_NHAP">
+    <Key>
+      <PropertyRef Name="MA_HD_NHAP" />
+    </Key>
+    <Property Name="MA_HD_NHAP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MA_NV" Type="char" MaxLength="20" Nullable="false" />
+    <Property Name="NGAY_NHAP" Type="datetime" Nullable="false" />
+    <Property Name="TONG_TIEN" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="KHACH_HANG">
+    <Key>
+      <PropertyRef Name="MA_KH" />
+    </Key>
+    <Property Name="MA_KH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TEN_KH" Type="nvarchar" MaxLength="55" Nullable="false" />
+    <Property Name="SDT" Type="char" MaxLength="12" Nullable="false" />
+    <Property Name="DIA_CHI" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="GIOI_TINH" Type="bit" />
+    <Property Name="NGAY_SINH" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NHAN_VIEN">
+    <Key>
+      <PropertyRef Name="MA_NV" />
+    </Key>
+    <Property Name="MA_NV" Type="char" MaxLength="20" Nullable="false" />
+    <Property Name="TEN_NV" Type="nvarchar" MaxLength="55" Nullable="false" />
+    <Property Name="SDT" Type="char" MaxLength="12" Nullable="false" />
+    <Property Name="DIA_CHI" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="GIOI_TINH" Type="bit" />
+    <Property Name="NGAY_VL" Type="datetime" />
+    <Property Name="EMAIL" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="TAI_KHOAN" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MAT_KHAU" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CHUC_VU" Type="tinyint" />
+    <Property Name="TRANG_THAI" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="SAN_PHAM">
+    <Key>
+      <PropertyRef Name="MA_SP" />
+    </Key>
+    <Property Name="MA_SP" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="TEN_SP" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="GIA_NHAP" Type="float" Nullable="false" />
+    <Property Name="GIA_BAN" Type="float" Nullable="false" />
+    <Property Name="SO_LUONG" Type="int" />
+    <Property Name="GIAM_GIA" Type="int" />
+    <Property Name="GHI_CHU" Type="nvarchar" MaxLength="255" />
+    <Property Name="MA_DM" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="TRANG_THAI" Type="tinyint" />
+  </EntityType>
+  <Association Name="FK_CTHD_N_SP">
+    <End Role="SAN_PHAM" Type="Self.SAN_PHAM" Multiplicity="1" />
+    <End Role="CT_HOA_DON_NHAP" Type="Self.CT_HOA_DON_NHAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SAN_PHAM">
+        <PropertyRef Name="MA_SP" />
+      </Principal>
+      <Dependent Role="CT_HOA_DON_NHAP">
+        <PropertyRef Name="MA_SP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTHD_SP">
+    <End Role="SAN_PHAM" Type="Self.SAN_PHAM" Multiplicity="1" />
+    <End Role="CT_HOA_DON" Type="Self.CT_HOA_DON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SAN_PHAM">
+        <PropertyRef Name="MA_SP" />
+      </Principal>
+      <Dependent Role="CT_HOA_DON">
+        <PropertyRef Name="MA_SP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HD_CTHD">
+    <End Role="HOA_DON" Type="Self.HOA_DON" Multiplicity="1" />
+    <End Role="CT_HOA_DON" Type="Self.CT_HOA_DON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HOA_DON">
+        <PropertyRef Name="MA_HD" />
+      </Principal>
+      <Dependent Role="CT_HOA_DON">
+        <PropertyRef Name="MA_HD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HD_KH">
+    <End Role="KHACH_HANG" Type="Self.KHACH_HANG" Multiplicity="0..1" />
+    <End Role="HOA_DON" Type="Self.HOA_DON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KHACH_HANG">
+        <PropertyRef Name="MA_KH" />
+      </Principal>
+      <Dependent Role="HOA_DON">
+        <PropertyRef Name="MA_KH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HD_NV">
+    <End Role="NHAN_VIEN" Type="Self.NHAN_VIEN" Multiplicity="1" />
+    <End Role="HOA_DON" Type="Self.HOA_DON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NHAN_VIEN">
+        <PropertyRef Name="MA_NV" />
+      </Principal>
+      <Dependent Role="HOA_DON">
+        <PropertyRef Name="MA_NV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HDN_CTHD">
+    <End Role="HOA_DON_NHAP" Type="Self.HOA_DON_NHAP" Multiplicity="1" />
+    <End Role="CT_HOA_DON_NHAP" Type="Self.CT_HOA_DON_NHAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HOA_DON_NHAP">
+        <PropertyRef Name="MA_HD_NHAP" />
+      </Principal>
+      <Dependent Role="CT_HOA_DON_NHAP">
+        <PropertyRef Name="MA_HD_NHAP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HDN_NV">
+    <End Role="NHAN_VIEN" Type="Self.NHAN_VIEN" Multiplicity="1" />
+    <End Role="HOA_DON_NHAP" Type="Self.HOA_DON_NHAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NHAN_VIEN">
+        <PropertyRef Name="MA_NV" />
+      </Principal>
+      <Dependent Role="HOA_DON_NHAP">
+        <PropertyRef Name="MA_NV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SP_DM">
+    <End Role="DANH_MUC" Type="Self.DANH_MUC" Multiplicity="1" />
+    <End Role="SAN_PHAM" Type="Self.SAN_PHAM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DANH_MUC">
+        <PropertyRef Name="Ma_DM" />
+      </Principal>
+      <Dependent Role="SAN_PHAM">
+        <PropertyRef Name="MA_DM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="CT_INSERT_HOADONNHAP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MA_SP" Type="char" Mode="In" />
+    <Parameter Name="SO_LUONG" Type="int" Mode="In" />
+    <Parameter Name="GIA_NHAP" Type="float" Mode="In" />
+    <Parameter Name="THANH_TIEN" Type="float" Mode="In" />
+    <Parameter Name="GIAM_GIA" Type="float" Mode="In" />
+    <Parameter Name="MA_HD" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DELETE_HOA_DON" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MA_HD" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GET_ALL_DANH_MUC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GET_ALL_KHACHHANG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GET_ALL_NHAN_VIEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GET_ALL_SAN_PHAM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GETALLCTHD_BAN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ma_hd" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GETALLCTHD_NHAP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ma_hd" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GETALLHOADON" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nv" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GETALLHOADONNHAP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="manv" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="LOC_HOA_DON" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="manv" Type="varchar" Mode="In" />
+    <Parameter Name="START" Type="date" Mode="In" />
+    <Parameter Name="END" Type="date" Mode="In" />
+  </Function>
+  <Function Name="LOC_HOA_DON_NHAP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MANV" Type="varchar" Mode="In" />
+    <Parameter Name="START" Type="date" Mode="In" />
+    <Parameter Name="END" Type="date" Mode="In" />
+  </Function>
+  <Function Name="PRD_INSERT_CTHD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MA_SP" Type="char" Mode="In" />
+    <Parameter Name="SO_LUONG" Type="int" Mode="In" />
+    <Parameter Name="GIA_BAN" Type="float" Mode="In" />
+    <Parameter Name="THANH_TIEN" Type="float" Mode="In" />
+    <Parameter Name="GIAM_GIA" Type="float" Mode="In" />
+    <Parameter Name="MA_HD" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SEARCH_KHACH_HANG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MA_KH" Type="varchar" Mode="In" />
+    <Parameter Name="TEN_KH" Type="nvarchar" Mode="In" />
+    <Parameter Name="SDT" Type="varchar" Mode="In" />
+    <Parameter Name="DIA_CHI" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="SEARCH_NHAN_VIEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MA_NV" Type="varchar" Mode="In" />
+    <Parameter Name="TEN_NV" Type="nvarchar" Mode="In" />
+    <Parameter Name="SDT" Type="varchar" Mode="In" />
+    <Parameter Name="NGAY_VL" Type="varchar" Mode="In" />
+    <Parameter Name="DIA_CHI" Type="nvarchar" Mode="In" />
+    <Parameter Name="GIOI_TINH" Type="varchar" Mode="In" />
+    <Parameter Name="EMAIL" Type="varchar" Mode="In" />
+    <Parameter Name="TAI_KHOAN" Type="nvarchar" Mode="In" />
+    <Parameter Name="CHUC_VU" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="QL_BAN_HANGModelStoreContainer">
+    <EntitySet Name="CT_HOA_DON" EntityType="Self.CT_HOA_DON" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CT_HOA_DON_NHAP" EntityType="Self.CT_HOA_DON_NHAP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DANH_MUC" EntityType="Self.DANH_MUC" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HOA_DON" EntityType="Self.HOA_DON" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HOA_DON_NHAP" EntityType="Self.HOA_DON_NHAP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KHACH_HANG" EntityType="Self.KHACH_HANG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NHAN_VIEN" EntityType="Self.NHAN_VIEN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SAN_PHAM" EntityType="Self.SAN_PHAM" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CTHD_N_SP" Association="Self.FK_CTHD_N_SP">
+      <End Role="SAN_PHAM" EntitySet="SAN_PHAM" />
+      <End Role="CT_HOA_DON_NHAP" EntitySet="CT_HOA_DON_NHAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTHD_SP" Association="Self.FK_CTHD_SP">
+      <End Role="SAN_PHAM" EntitySet="SAN_PHAM" />
+      <End Role="CT_HOA_DON" EntitySet="CT_HOA_DON" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HD_CTHD" Association="Self.FK_HD_CTHD">
+      <End Role="HOA_DON" EntitySet="HOA_DON" />
+      <End Role="CT_HOA_DON" EntitySet="CT_HOA_DON" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HD_KH" Association="Self.FK_HD_KH">
+      <End Role="KHACH_HANG" EntitySet="KHACH_HANG" />
+      <End Role="HOA_DON" EntitySet="HOA_DON" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HD_NV" Association="Self.FK_HD_NV">
+      <End Role="NHAN_VIEN" EntitySet="NHAN_VIEN" />
+      <End Role="HOA_DON" EntitySet="HOA_DON" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HDN_CTHD" Association="Self.FK_HDN_CTHD">
+      <End Role="HOA_DON_NHAP" EntitySet="HOA_DON_NHAP" />
+      <End Role="CT_HOA_DON_NHAP" EntitySet="CT_HOA_DON_NHAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HDN_NV" Association="Self.FK_HDN_NV">
+      <End Role="NHAN_VIEN" EntitySet="NHAN_VIEN" />
+      <End Role="HOA_DON_NHAP" EntitySet="HOA_DON_NHAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SP_DM" Association="Self.FK_SP_DM">
+      <End Role="DANH_MUC" EntitySet="DANH_MUC" />
+      <End Role="SAN_PHAM" EntitySet="SAN_PHAM" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

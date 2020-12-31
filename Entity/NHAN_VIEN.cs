@@ -21,7 +21,7 @@ namespace Entity
             this.HOA_DON_NHAP = new HashSet<HOA_DON_NHAP>();
         }
     
-        public int MA_NV { get; set; }
+        public string MA_NV { get; set; }
         public string TEN_NV { get; set; }
         public string SDT { get; set; }
         public string DIA_CHI { get; set; }

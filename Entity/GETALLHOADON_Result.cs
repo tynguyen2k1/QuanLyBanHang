@@ -14,10 +14,10 @@ namespace Entity
     public partial class GETALLHOADON_Result
     {
         public int MA_HD { get; set; }
-        public int MA_KH { get; set; }
+        public Nullable<int> MA_KH { get; set; }
         public string TEN_KH { get; set; }
         public System.DateTime NGAY_BAN { get; set; }
         public double TONG_TIEN { get; set; }
-        public int MA_NV { get; set; }
+        public string MA_NV { get; set; }
     }
 }

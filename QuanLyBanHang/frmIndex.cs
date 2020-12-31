@@ -18,7 +18,6 @@ namespace QuanLyBanHang
 
         NHAN_VIEN taiKhoan;
         EntityNhanVien nhanVien = new EntityNhanVien();
-
         Database_acsset database = new Database_acsset();
         DataTable dataTable;
         Doc_Tien doc_Tien = new Doc_Tien();
@@ -193,7 +192,7 @@ namespace QuanLyBanHang
 
         private void quảnLýHoáĐơnToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            frmHoaDon frmhoaDon = new frmHoaDon();
+            frmHoaDon frmhoaDon = new frmHoaDon(this.taiKhoan);
             this.Hide();
             frmhoaDon.ShowDialog();
             this.Show();

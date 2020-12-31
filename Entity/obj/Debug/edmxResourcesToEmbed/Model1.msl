@@ -88,18 +88,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="GET_ALL_KHACH_HANG" FunctionName="QL_BAN_HANGModel.Store.GET_ALL_KHACH_HANG">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="QL_BAN_HANGModel.GET_ALL_KHACH_HANG_Result">
-          <ScalarProperty Name="MA_KH" ColumnName="MA_KH" />
-          <ScalarProperty Name="TEN_KH" ColumnName="TEN_KH" />
-          <ScalarProperty Name="SDT" ColumnName="SDT" />
-          <ScalarProperty Name="GIOI_TINH" ColumnName="GIOI_TINH" />
-          <ScalarProperty Name="DIA_CHI" ColumnName="DIA_CHI" />
-          <ScalarProperty Name="NGAY_SINH" ColumnName="NGAY_SINH" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="GET_ALL_SAN_PHAM" FunctionName="QL_BAN_HANGModel.Store.GET_ALL_SAN_PHAM">
       <ResultMapping>
         <ComplexTypeMapping TypeName="QL_BAN_HANGModel.GET_ALL_SAN_PHAM_Result">
@@ -112,20 +100,6 @@
           <ScalarProperty Name="GHI_CHU" ColumnName="GHI_CHU" />
           <ScalarProperty Name="MA_DM" ColumnName="MA_DM" />
           <ScalarProperty Name="TEN_DM" ColumnName="TEN_DM" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="GET_ALL_USER" FunctionName="QL_BAN_HANGModel.Store.GET_ALL_USER">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="QL_BAN_HANGModel.GET_ALL_USER_Result">
-          <ScalarProperty Name="MA_NV" ColumnName="MA_NV" />
-          <ScalarProperty Name="TEN_NV" ColumnName="TEN_NV" />
-          <ScalarProperty Name="GIOI_TINH" ColumnName="GIOI_TINH" />
-          <ScalarProperty Name="DIA_CHI" ColumnName="DIA_CHI" />
-          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
-          <ScalarProperty Name="NGAY_VL" ColumnName="NGAY_VL" />
-          <ScalarProperty Name="TAI_KHOAN" ColumnName="TAI_KHOAN" />
-          <ScalarProperty Name="MAT_KHAU" ColumnName="MAT_KHAU" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -212,5 +186,111 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="QL_BAN_HANGModel.Store.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="QL_BAN_HANGModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="GETALLCTHD_BAN" FunctionName="QL_BAN_HANGModel.Store.GETALLCTHD_BAN">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QL_BAN_HANGModel.GETALLCTHD_BAN_Result">
+          <ScalarProperty Name="MA_CTHD" ColumnName="MA_CTHD" />
+          <ScalarProperty Name="MA_SP" ColumnName="MA_SP" />
+          <ScalarProperty Name="TEN_SP" ColumnName="TEN_SP" />
+          <ScalarProperty Name="SO_LUONG" ColumnName="SO_LUONG" />
+          <ScalarProperty Name="GIA_BAN" ColumnName="GIA_BAN" />
+          <ScalarProperty Name="GIAM_GIA" ColumnName="GIAM_GIA" />
+          <ScalarProperty Name="THANH_TIEN" ColumnName="THANH_TIEN" />
+          <ScalarProperty Name="MA_HD" ColumnName="MA_HD" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GETALLCTHD_NHAP" FunctionName="QL_BAN_HANGModel.Store.GETALLCTHD_NHAP">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QL_BAN_HANGModel.GETALLCTHD_NHAP_Result">
+          <ScalarProperty Name="MA_CTHD_NHAP" ColumnName="MA_CTHD_NHAP" />
+          <ScalarProperty Name="MA_SP" ColumnName="MA_SP" />
+          <ScalarProperty Name="TEN_SP" ColumnName="TEN_SP" />
+          <ScalarProperty Name="SO_LUONG" ColumnName="SO_LUONG" />
+          <ScalarProperty Name="GIA_NHAP" ColumnName="GIA_NHAP" />
+          <ScalarProperty Name="GIAM_GIA" ColumnName="GIAM_GIA" />
+          <ScalarProperty Name="THANH_TIEN" ColumnName="THANH_TIEN" />
+          <ScalarProperty Name="MA_HD_NHAP" ColumnName="MA_HD_NHAP" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GET_TONG_SL_NHAP" FunctionName="QL_BAN_HANGModel.Store.GET_TONG_SL_NHAP" />
+    <FunctionImportMapping FunctionImportName="GETALLHOADONNHAP" FunctionName="QL_BAN_HANGModel.Store.GETALLHOADONNHAP">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QL_BAN_HANGModel.GETALLHOADONNHAP_Result">
+          <ScalarProperty Name="MA_HD_NHAP" ColumnName="MA_HD_NHAP" />
+          <ScalarProperty Name="NGAY_NHAP" ColumnName="NGAY_NHAP" />
+          <ScalarProperty Name="TONG_TIEN" ColumnName="TONG_TIEN" />
+          <ScalarProperty Name="MA_NV" ColumnName="MA_NV" />
+          <ScalarProperty Name="TEN_NV" ColumnName="TEN_NV" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="LOC_HOA_DON_NHAP" FunctionName="QL_BAN_HANGModel.Store.LOC_HOA_DON_NHAP">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QL_BAN_HANGModel.LOC_HOA_DON_NHAP_Result">
+          <ScalarProperty Name="MA_HD_NHAP" ColumnName="MA_HD_NHAP" />
+          <ScalarProperty Name="NGAY_NHAP" ColumnName="NGAY_NHAP" />
+          <ScalarProperty Name="TONG_TIEN" ColumnName="TONG_TIEN" />
+          <ScalarProperty Name="MA_NV" ColumnName="MA_NV" />
+          <ScalarProperty Name="TEN_NV" ColumnName="TEN_NV" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="DELETE_HOA_DON1" FunctionName="QL_BAN_HANGModel.Store.DELETE_HOA_DON" />
+    <FunctionImportMapping FunctionImportName="TIM_KIEM_KHACH_HANG" FunctionName="QL_BAN_HANGModel.Store.TIM_KIEM_KHACH_HANG">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QL_BAN_HANGModel.TIM_KIEM_KHACH_HANG_Result">
+          <ScalarProperty Name="MA_KH" ColumnName="MA_KH" />
+          <ScalarProperty Name="TEN_KH" ColumnName="TEN_KH" />
+          <ScalarProperty Name="SDT" ColumnName="SDT" />
+          <ScalarProperty Name="GIOI_TINH" ColumnName="GIOI_TINH" />
+          <ScalarProperty Name="DIA_CHI" ColumnName="DIA_CHI" />
+          <ScalarProperty Name="NGAY_SINH" ColumnName="NGAY_SINH" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="TIM_KIEM_NHAN_VIEN" FunctionName="QL_BAN_HANGModel.Store.TIM_KIEM_NHAN_VIEN">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QL_BAN_HANGModel.TIM_KIEM_NHAN_VIEN_Result">
+          <ScalarProperty Name="MA_NV" ColumnName="MA_NV" />
+          <ScalarProperty Name="TEN_NV" ColumnName="TEN_NV" />
+          <ScalarProperty Name="GIOI_TINH" ColumnName="GIOI_TINH" />
+          <ScalarProperty Name="DIA_CHI" ColumnName="DIA_CHI" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="NGAY_VL" ColumnName="NGAY_VL" />
+          <ScalarProperty Name="TAI_KHOAN" ColumnName="TAI_KHOAN" />
+          <ScalarProperty Name="MAT_KHAU" ColumnName="MAT_KHAU" />
+          <ScalarProperty Name="CHUC_VU" ColumnName="CHUC_VU" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GET_ALL_KHACH_HANG1" FunctionName="QL_BAN_HANGModel.Store.GET_ALL_KHACH_HANG">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QL_BAN_HANGModel.GET_ALL_KHACH_HANG1_Result">
+          <ScalarProperty Name="MA_KH" ColumnName="MA_KH" />
+          <ScalarProperty Name="TEN_KH" ColumnName="TEN_KH" />
+          <ScalarProperty Name="SDT" ColumnName="SDT" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="DIA_CHI" ColumnName="DIA_CHI" />
+          <ScalarProperty Name="NGAY_SINH" ColumnName="NGAY_SINH" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GET_ALL_NHAN_VIEN" FunctionName="QL_BAN_HANGModel.Store.GET_ALL_NHAN_VIEN">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QL_BAN_HANGModel.GET_ALL_NHAN_VIEN_Result">
+          <ScalarProperty Name="MA_NV" ColumnName="MA_NV" />
+          <ScalarProperty Name="TEN_NV" ColumnName="TEN_NV" />
+          <ScalarProperty Name="GIOI_TINH" ColumnName="GIOI_TINH" />
+          <ScalarProperty Name="DIA_CHI" ColumnName="DIA_CHI" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="NGAY_VL" ColumnName="NGAY_VL" />
+          <ScalarProperty Name="TAI_KHOAN" ColumnName="TAI_KHOAN" />
+          <ScalarProperty Name="MAT_KHAU" ColumnName="MAT_KHAU" />
+          <ScalarProperty Name="CHUC_VU" ColumnName="CHUC_VU" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

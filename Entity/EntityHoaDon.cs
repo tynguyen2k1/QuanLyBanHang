@@ -26,12 +26,12 @@ namespace Entity
             }
         }
 
-        public List<GETALLHOADON_Result> GetDanhSachHoaDon()
+        public List<GETALLHOADON_Result> GetDanhSachHoaDon(string manv)
         {
             List<GETALLHOADON_Result> list = new List<GETALLHOADON_Result>();
             using (var db = new QL_BAN_HANG())
             {
-                var listhoadon = db.GETALLHOADON().Select(a => a);
+                var listhoadon = db.GETALLHOADON(manv).Select(a => a);
                 foreach(GETALLHOADON_Result hd in listhoadon)
                 {
                     list.Add(hd);
@@ -39,12 +39,12 @@ namespace Entity
             }
             return list;
         }
-        public List<LOC_HOA_DON_Result> getAllHoaDon_Start_End( DateTime start, DateTime end)
+        public List<LOC_HOA_DON_Result> getAllHoaDon_Start_End(string manv, DateTime start, DateTime end)
         {
             List<LOC_HOA_DON_Result> list = new List<LOC_HOA_DON_Result>();
             using (var db = new QL_BAN_HANG())
             {
-                var listhoadon = db.LOC_HOA_DON(start,end).Select(a => a);
+                var listhoadon = db.LOC_HOA_DON(manv,start, end).Select(a => a);
                 foreach (LOC_HOA_DON_Result hd in listhoadon)
                 {
                     list.Add(hd);
@@ -52,7 +52,7 @@ namespace Entity
             }
             return list;
         }
-        public HOA_DON returnHoaDon(HOA_DON hd)
+        public HOA_DON returnHoaDon(int hd)
         {
             try
             {
@@ -71,6 +71,23 @@ namespace Entity
             }
             return null;
         }
-        
+
+        public bool deleteHoaDon(int Ma_hd)
+        {
+            using (var db = new QL_BAN_HANG())
+            {
+                try 
+                {
+                    db.DELETE_HOA_DON(Ma_hd);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch(Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
+
     }
 }

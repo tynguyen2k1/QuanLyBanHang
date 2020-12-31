@@ -21,7 +21,7 @@ namespace Entity
         }
     
         public int MA_HD_NHAP { get; set; }
-        public int MA_NV { get; set; }
+        public string MA_NV { get; set; }
         public System.DateTime NGAY_NHAP { get; set; }
         public double TONG_TIEN { get; set; }
     

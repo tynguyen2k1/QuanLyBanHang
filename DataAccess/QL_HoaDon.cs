@@ -59,19 +59,56 @@ namespace DataAccess
             }
             return false;
         }
-        public void LoadDanhSachHoaDon(DataGridView data)
+        public void LoadDanhSachHoaDon(DataGridView data, string manv)
         {
-           data.DataSource =  hoadon.GetDanhSachHoaDon();
+           data.DataSource =  hoadon.GetDanhSachHoaDon(manv);
             
         }
+
         public void getALLChiTietHoaDon_MAHD(DataGridView data , int MaHD)
         {
             EntityCTHD ql_cthd = new EntityCTHD();
-            data.DataSource = ql_cthd.getALLChiTietHoaDon(MaHD);
+            data.DataSource = ql_cthd.GetAllCTHD_Ban(MaHD);
         }
-        public void getAllHoaDon_Start_End(DataGridView data , DateTime start , DateTime end)
+
+        public void getAllHoaDon_Start_End(DataGridView data , DateTime start , DateTime end , string manv)
         {
-            data.DataSource = hoadon.getAllHoaDon_Start_End(start ,end);
+            data.DataSource = hoadon.getAllHoaDon_Start_End(manv ,start ,end);
+        }
+        public HOA_DON getHoaDon_MaHD(int hd)
+        {
+            return hoadon.returnHoaDon(hd);
+        }
+        public bool deleteHoaDon(int Ma_hd)
+        {
+            if (hoadon.deleteHoaDon(Ma_hd))
+            {
+               
+                return true;
+            }
+            else
+            {
+                
+                return false;
+            }
+        }
+
+        public bool checkquyen(NHAN_VIEN nv , int ma_hd)
+        {
+            var hd = hoadon.returnHoaDon(ma_hd);
+            if (hd.MA_NV == nv.MA_NV)
+            {
+                return true;
+            }
+            else if(nv.CHUC_VU == 2)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
         }
     }
 }

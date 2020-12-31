@@ -36,5 +36,18 @@ namespace Entity
             }
             
         }
+        public List<GETALLCTHD_BAN_Result> GetAllCTHD_Ban(int mahd)
+        {
+            List<GETALLCTHD_BAN_Result> list  = new List<GETALLCTHD_BAN_Result>();
+            using (var db = new QL_BAN_HANG())
+            {
+                var list_cthd = db.GETALLCTHD_BAN(mahd).Select(a=>a);
+                foreach (var a in list_cthd)
+                {
+                    list.Add(a);
+                }
+            }
+            return list;
+        }
     }
 }
