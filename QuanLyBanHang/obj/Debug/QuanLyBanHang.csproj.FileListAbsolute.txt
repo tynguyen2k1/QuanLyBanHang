@@ -25,3 +25,9 @@ D:\C#\QuanLyBanHang\bin\Debug\Entity.dll
 D:\C#\QuanLyBanHang\bin\Debug\Entity.pdb
 D:\C#\QuanLyBanHang\bin\Debug\Entity.dll.config
 D:\C#\QuanLyBanHang\obj\Debug\QuanLyBanHang.Login.resources
+D:\C#\QuanLyBanHang\obj\Debug\QuanLyBanHang.frmHoaDonNhap.resources
+D:\C#\QuanLyBanHang\obj\Debug\QuanLyBanHang.TrangThaiNhanVien.resources
+D:\C#\QuanLyBanHang\obj\Debug\QuanLyBanHang.frmInsert_Hoa_Don_Nhap.resources
+D:\C#\QuanLyBanHang\obj\Debug\QuanLyBanHang.frm_thong_ke_san_pham_ban.resources
+D:\C#\QuanLyBanHang\obj\Debug\QuanLyBanHang.frm_thong_ke_san_pham_nhap.resources
+D:\C#\QuanLyBanHang\obj\Debug\QuanLyBanHang.frm_thong_tin_nhan_vien.resources

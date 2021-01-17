@@ -14,6 +14,49 @@ namespace QuanLyBanHang
     {
         QL_KhachHang qL_KhachHang = new QL_KhachHang();
         ValidateData validate = new ValidateData();
+
+        private List<DataAccess.Model.Model_Khach_Hang> list_khach_hang { get; set; }
+        private int page { set; get; }
+        private int loadeRecord { set; get; }
+        public void setloadeRecord()
+        {
+            this.loadeRecord = 0;
+        }
+        public void setListKhachHang()
+        {
+            this.list_khach_hang = new List<DataAccess.Model.Model_Khach_Hang>();
+            this.list_khach_hang.Clear();
+        }
+        public void HienThiPhanTrang()
+        {
+            if (this.page >= 2)
+            {
+                this.btn_Prev.Enabled = true;
+                this.btn_next.Enabled = true;
+            }
+            else
+            {
+                this.btn_Prev.Enabled = false;
+                this.btn_next.Enabled = false;
+            }
+        }
+        public void loadDanhSachKhachHang()
+        {
+            float pageNumber = (float)this.list_khach_hang.Count / 10;
+            this.page = 0;
+            this.page = (int)Math.Ceiling((double)pageNumber);
+            HienThiPhanTrang();
+            dataKhachHang.DataSource = load_sl_data(this.loadeRecord, 10);
+        }
+
+        public List<DataAccess.Model.Model_Khach_Hang> load_sl_data(int page, int sl)
+        {
+            List<DataAccess.Model.Model_Khach_Hang> list = new List<DataAccess.Model.Model_Khach_Hang>();
+            list = this.list_khach_hang.Skip(sl * page).Take(sl).ToList();
+            return list;
+        }
+
+
         public frmKhachHang()
         {
             InitializeComponent();
@@ -22,8 +65,11 @@ namespace QuanLyBanHang
 
         public void Load()
         {
-            qL_KhachHang.loadFormGridView(dataKhachHang);
-            txt_Ma_KH.Enabled = false;
+            this.setListKhachHang();
+            this.list_khach_hang = qL_KhachHang.GetListKhachHang();
+            this.loadDanhSachKhachHang();
+            /*qL_KhachHang.loadFormGridView(dataKhachHang);
+            */txt_Ma_KH.Enabled = false;
             txt_Ma_KH.Text = "";
             btnThem.Enabled = true;
             btn_Edit.Enabled = false;
@@ -37,7 +83,7 @@ namespace QuanLyBanHang
             txt_search_ten.Text = "";
             Ma_Kh_search.Value = 0;
             dtpk_ngay_sinh.Value = DateTime.Parse("1/1/2010");
-
+            
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -163,13 +209,72 @@ namespace QuanLyBanHang
 
         private void btn_Search_Click(object sender, EventArgs e)
         {
-            qL_KhachHang.GetListSearch(dataKhachHang , ((Ma_Kh_search.Value) == 0)?"" : Ma_Kh_search.Value.ToString(), txt_search_ten.Text , txt_search_sdt.Text , txt_search_dia_chi.Text);
+            this.setListKhachHang();
+            this.list_khach_hang = qL_KhachHang.GetListSearch(((Ma_Kh_search.Value) == 0)?"" : Ma_Kh_search.Value.ToString(), txt_search_ten.Text , txt_search_sdt.Text , txt_search_dia_chi.Text);
+            this.setloadeRecord();
+            this.loadDanhSachKhachHang();
             btnHuy.Text = "Huỷ tìm kiếm";
         }
 
         private void btn_quay_lai_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btn_next_Click(object sender, EventArgs e)
+        {
+            if (this.page > 0)
+            {
+                if (this.loadeRecord == this.page - 1)
+                {
+                    this.setloadeRecord();
+                    loadDanhSachKhachHang();
+                }
+                else
+                {
+                    this.loadeRecord++;
+                    loadDanhSachKhachHang();
+                }
+            }
+        }
+
+        private void btn_Prev_Click(object sender, EventArgs e)
+        {
+            if (this.page > 0)
+            {
+                if (this.loadeRecord < 0)
+                {
+                    this.setloadeRecord();
+                    loadDanhSachKhachHang();
+                }
+                else
+                {
+                    this.loadeRecord--;
+                    loadDanhSachKhachHang();
+                }
+            }
+        }
+
+        private void btn_sap_xep_Click(object sender, EventArgs e)
+        {
+            if (this.list_khach_hang.Count > 0)
+            {
+                for (int i = 0; i < this.list_khach_hang.Count - 1; i++)
+                {
+                    for (int j = i + 1; j < this.list_khach_hang.Count; j++)
+                    {
+                        if (this.list_khach_hang[i].MA_KH.CompareTo(this.list_khach_hang[j].MA_KH) < 0)
+                        {
+                            var hd = this.list_khach_hang[i];
+                            this.list_khach_hang[i] = this.list_khach_hang[j];
+                            this.list_khach_hang[j] = hd;
+                        }
+                    }
+                }
+            }
+            this.setloadeRecord();
+            this.loadDanhSachKhachHang();
+            btnHuy.Text = "Huỷ Sắp Xếp";
         }
     }
 }

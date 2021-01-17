@@ -13,21 +13,52 @@ namespace QuanLyBanHang
 {
     public partial class frmHoaDon : Form
     {
-        NHAN_VIEN nv;   
-        QL_HoaDon qL_HoaDon = new QL_HoaDon();
-        public frmHoaDon( NHAN_VIEN nv)
+        NHAN_VIEN nv;
+        QL_HoaDon qL_HoaDon;
+        List<DataAccess.Model.Model_Hoa_Don> list_hoa_don { get; set; }
+        public frmHoaDon(NHAN_VIEN nv)
         {
             this.nv = nv;
+            qL_HoaDon = new QL_HoaDon(nv.MA_NV);
+            this.list_hoa_don = new List<DataAccess.Model.Model_Hoa_Don>();
             InitializeComponent();
-            loadData();
+            LoadData();
+            
+        }
+        private List<string> arrchon;
+        private int page { set; get; }
+        private int loadeRecord { set; get; }
+        public void setloadeRecord()
+        {
+            this.loadeRecord = 0;
+        }
+        public void setArrChon(string str)
+        {
+            this.arrchon.Add(str);
+        }
+        public void LoadData()
+        {
+            this.list_hoa_don = qL_HoaDon.GetListHoaDon();
+            this.txt_ma_hd.Text = "";
+            setloadeRecord();
+            loadDanhSachHoaDon();
+
+        }
+        public void loadDanhSachHoaDon()
+        {
+            float pageNumber = (float)this.list_hoa_don.Count / 10;
+            this.page = (int)Math.Ceiling((double)pageNumber);
+            dataHoaDon.DataSource = load_sl_data(this.loadeRecord,10);
+            if (dataHoaDon.Rows.Count>0)
+            {
+                indulieuraCTHD(0);
+            }
         }
 
-        public void loadData()
-        {
-            dtpk_Start.Value = DateTime.Now;
-            dtpk_End.Value = DateTime.Now;
-            qL_HoaDon.LoadDanhSachHoaDon(dataHoaDon,nv.MA_NV);
-            indulieuraCTHD(0);
+        public List<DataAccess.Model.Model_Hoa_Don> load_sl_data(int page , int sl){
+            List<DataAccess.Model.Model_Hoa_Don> list = new List<DataAccess.Model.Model_Hoa_Don>();
+            list = this.list_hoa_don.Skip(sl*page).Take(sl).ToList();
+            return list;
         }
 
         public void indulieuraCTHD(int index)
@@ -83,29 +114,37 @@ namespace QuanLyBanHang
                 }
             }
         }
-
+        public void deleteFormCTHD()
+        {
+            dataCTHD.DataSource = null;
+            lb_ma_hoa_don.Text = "";
+            lb_TenKH.Text = "";
+            lb_TongTien.Text = "";
+            lb_Ngay_Ban.Text = "";
+            lb_Sdt_KH.Text = "";
+        }
         private void btn_Loc_Click(object sender, EventArgs e)
         {
             if (dtpk_Start.Value <= dtpk_End.Value)
             {
-                qL_HoaDon.getAllHoaDon_Start_End(dataHoaDon, dtpk_Start.Value, dtpk_End.Value, nv.MA_NV);
-                if (dataHoaDon.Rows.Count > 0)
-                {
-                    indulieuraCTHD(0);
-                }
+                this.list_hoa_don = this.qL_HoaDon.GetListHoaDonLoc(dtpk_Start.Value, dtpk_End.Value);
+                this.setloadeRecord();
+                this.loadDanhSachHoaDon();
+            }
+            else
+            {
+                MessageBox.Show("Không hợp lệ !!!");
             }
         }
 
         private void btnHuyLoc_Click(object sender, EventArgs e)
         {
-            loadData();
-            
+            LoadData();
         }
 
         private void btn_xoa_hoa_don_Click(object sender, EventArgs e)
         {
             bool check = int.TryParse(lb_ma_hoa_don.Text, out int val);
-            
             if (check)
             {
                 string message = "Bạn có chắc muốn xoá hoá đơn : "+val;
@@ -114,24 +153,28 @@ namespace QuanLyBanHang
                 DialogResult result = MessageBox.Show(message, title, buttons);
                 if (result == DialogResult.Yes)
                 {
-                    if (qL_HoaDon.checkquyen(this.nv , val))
+                    if (this.nv.CHUC_VU==0)
                     {
                         MessageBox.Show("Bạn không có quyền xoá !!!");
                     }
                     else
                     {
-                        MessageBox.Show("Xoá Thành Công Hoá Đơn");
-                        /*if (qL_HoaDon.deleteHoaDon(val))
+                        if (qL_HoaDon.deleteHoaDon(int.Parse(lb_ma_hoa_don.Text)))
                         {
-                            MessageBox.Show("Xoá Thành Công Hoá Đơn");
-                            loadData();
+                            MessageBox.Show("Xoá Thành Công Hoá Đơn"+ int.Parse(lb_ma_hoa_don.Text));
+                            LoadData();
+                     
                         }
                         else
                         {
-                            MessageBox.Show("Không Thể Xoá Hoá Đơn Này !!!");
-                        }*/
+                            MessageBox.Show("Xoá Không Thành Công Hoá Đơn"+ int.Parse(lb_ma_hoa_don.Text));
+                        }
                     }
                 }     
+            }
+            else
+            {
+                MessageBox.Show("Không tồn tại hoá đơn");
             }
         }
 
@@ -140,6 +183,194 @@ namespace QuanLyBanHang
            
             this.Close();
            
+        }
+
+        private void btnXoa_all_Click(object sender, EventArgs e)
+        {
+            if (dataHoaDon.SelectedRows.Count > 0)
+            {
+                string message = "Bạn có chắc muốn xoá  [ " + dataHoaDon.SelectedRows.Count+ " ] hoá đơn đã chọn";
+                string title = "Delete Hoá Đơn";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons);
+                if (result == DialogResult.Yes)
+                {
+                    if (this.nv.CHUC_VU == 0)
+                    {
+                        MessageBox.Show("Bạn không có quyền xoá !!!");
+                    }
+                    else
+                    {
+                        bool kiemtra = false;
+                        foreach (DataGridViewRow row in dataHoaDon.Rows)
+                        {
+                            if (row.Selected == true)
+                            {
+                                kiemtra = qL_HoaDon.deleteHoaDon(int.Parse(row.Cells["MA_HD"].Value.ToString()));
+                            }
+                        }
+                        if (kiemtra)
+                        {
+                            MessageBox.Show("Xoá thành công !!!");
+                            this.LoadData();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Không thể xoá !!!");
+                        }
+                    }
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("Bạn Cần Chọn Dòng Muốn Xoá");
+            }
+        }
+
+        private void btn_in_all_Click(object sender, EventArgs e)
+        {
+            if (dataHoaDon.SelectedRows.Count > 0)
+            {
+                string message = "Bạn có chắc muốn in  [ " + dataHoaDon.SelectedRows.Count + " ] hoá đơn đã chọn";
+                string title = "In Hoá Đơn";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons, MessageBoxIcon.Question);
+                bool kiemtra = false;
+                if (result == DialogResult.Yes)
+                {
+                    foreach (DataGridViewRow row in dataHoaDon.Rows)
+                    {
+                        if (row.Selected == true)
+                        {
+                            kiemtra = qL_HoaDon.ghifileTXT(int.Parse(row.Cells["MA_HD"].Value.ToString()));
+                        }
+                    }
+                    if (kiemtra)
+                    {
+                        MessageBox.Show("In thành công hoá đơn !!!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không thể in hoá đơn này !!!");
+                    }
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Bạn Cần Chọn Dòng Muốn In");
+            }
+        }
+
+        private void btn_huy_chon_all_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dataHoaDon.Rows)
+            {
+                row.Selected = false;
+            }
+        }
+
+        private void btn_chon_all_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dataHoaDon.Rows)
+            {
+                row.Selected = true;
+            }
+        }
+
+        private void btn_sort_tong_Click(object sender, EventArgs e)
+        {
+            if (this.list_hoa_don.Count > 0)
+            {
+                for(int i = 0 ; i < this.list_hoa_don.Count-1 ; i++)
+                {
+                    for (int j = i+1 ; j < this.list_hoa_don.Count ; j++)
+                    {
+                        if((double)this.list_hoa_don[i].TONG_TIEN < (double)this.list_hoa_don[j].TONG_TIEN)
+                        {
+                            var hd = this.list_hoa_don[i];
+                            this.list_hoa_don[i] = this.list_hoa_don[j];
+                            this.list_hoa_don[j] = hd;
+                        }
+                    }
+                }
+            }
+            this.setloadeRecord();
+            this.loadDanhSachHoaDon();
+        }
+
+        private void btn_next_Click(object sender, EventArgs e)
+        {
+            if(this.page > 0)
+            {
+                if(this.loadeRecord == this.page-1)
+                {
+                    this.setloadeRecord();
+                    loadDanhSachHoaDon();
+                }
+                else
+                {
+                    this.loadeRecord++;
+                    loadDanhSachHoaDon();
+                }
+            }
+        }
+
+        private void btn_prev_Click(object sender, EventArgs e)
+        {
+            if (this.page > 0)
+            {
+                if (this.loadeRecord < 0 )
+                {
+                    this.setloadeRecord();
+                    loadDanhSachHoaDon();
+                }
+                else
+                {
+                    this.loadeRecord--;
+                    loadDanhSachHoaDon();
+                }
+            }
+        }
+
+        private void btn_sort_ngay_Click(object sender, EventArgs e)
+        {
+            if (this.list_hoa_don.Count > 0)
+            {
+                for (int i = 0; i < this.list_hoa_don.Count - 1; i++)
+                {
+                    for (int j = i + 1; j < this.list_hoa_don.Count; j++)
+                    {
+                        if (this.list_hoa_don[i].NGAY_BAN.CompareTo(this.list_hoa_don[j].NGAY_BAN) < 0)
+                        {
+                            var hd = this.list_hoa_don[i];
+                            this.list_hoa_don[i] = this.list_hoa_don[j];
+                            this.list_hoa_don[j] = hd;
+                        }
+                    }
+                }
+            }
+            this.setloadeRecord();
+            this.loadDanhSachHoaDon();
+        }
+
+        private void btnTimKiem_Click(object sender, EventArgs e)
+        {
+            this.list_hoa_don.Clear();
+            this.list_hoa_don = qL_HoaDon.Search_Hoa_Don(txt_ma_hd.Text);
+            if (this.list_hoa_don.Count > 0)
+            {
+                MessageBox.Show("true");
+            }
+            this.setloadeRecord();
+            this.loadDanhSachHoaDon();
+            btnHuyLoc.Text = "Huỷ search";
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

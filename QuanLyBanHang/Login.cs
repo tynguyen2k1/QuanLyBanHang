@@ -33,18 +33,12 @@ namespace QuanLyBanHang
                         ]
                         => Chỉ có kế toán và quản lý được đăng nhập vào Quản Lý Bán Hàng 
                      */
-
-                    if (nv.CHUC_VU == 0)
-                    {
-                        MessageBox.Show("Bạn không có quyền đăng nhập !!!");
-                    }
-                    else
-                    {
                         frmIndex frm = new frmIndex(nv);
                         this.Hide();
                         frm.ShowDialog();
-                        this.Close();
-                    }
+                        txtMK.Text = "";
+                        this.Show();
+                    
                 }
                 else
                 {
@@ -59,7 +53,7 @@ namespace QuanLyBanHang
 
         private void btnThoat_Click(object sender, EventArgs e)
         {
-            
+            this.Close();
         }
     }
 }

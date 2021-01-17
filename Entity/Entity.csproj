@@ -55,112 +55,150 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CT_HOA_DON.cs">
-      <DependentUpon>QL_Ban_Hang.tt</DependentUpon>
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
     </Compile>
     <Compile Include="CT_HOA_DON_NHAP.cs">
-      <DependentUpon>QL_Ban_Hang.tt</DependentUpon>
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
     </Compile>
     <Compile Include="DANH_MUC.cs">
-      <DependentUpon>QL_Ban_Hang.tt</DependentUpon>
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityCTHD.cs" />
+    <Compile Include="EntityHoaDonNhap.cs" />
     <Compile Include="EntityKhachHang.cs" />
     <Compile Include="EntitySanPham.cs" />
     <Compile Include="EntityHoaDon.cs" />
     <Compile Include="EntityNhanVien.cs" />
+    <Compile Include="Entity_CTHD_NHAP.cs" />
     <Compile Include="GETALLCTHD_BAN_Result.cs">
-      <DependentUpon>QL_Ban_Hang.tt</DependentUpon>
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
     </Compile>
     <Compile Include="GETALLCTHD_NHAP_Result.cs">
-      <DependentUpon>QL_Ban_Hang.tt</DependentUpon>
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
     </Compile>
     <Compile Include="GETALLHOADONNHAP_Result.cs">
-      <DependentUpon>QL_Ban_Hang.tt</DependentUpon>
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
     </Compile>
     <Compile Include="GETALLHOADON_Result.cs">
-      <DependentUpon>QL_Ban_Hang.tt</DependentUpon>
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
     </Compile>
-    <Compile Include="GET_ALL_DANH_MUC_Result.cs">
-      <DependentUpon>QL_Ban_Hang.tt</DependentUpon>
+    <Compile Include="GET_ALL_DANH_MUC_DELETE_Result.cs">
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GET_ALL_DANH_MUC_TON_TAI_Result.cs">
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
     </Compile>
     <Compile Include="GET_ALL_KHACHHANG_Result.cs">
-      <DependentUpon>QL_Ban_Hang.tt</DependentUpon>
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
     </Compile>
     <Compile Include="GET_ALL_NHAN_VIEN_Result.cs">
-      <DependentUpon>QL_Ban_Hang.tt</DependentUpon>
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
     </Compile>
     <Compile Include="GET_ALL_SAN_PHAM_Result.cs">
-      <DependentUpon>QL_Ban_Hang.tt</DependentUpon>
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
     </Compile>
     <Compile Include="HOA_DON.cs">
-      <DependentUpon>QL_Ban_Hang.tt</DependentUpon>
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
     </Compile>
     <Compile Include="HOA_DON_NHAP.cs">
-      <DependentUpon>QL_Ban_Hang.tt</DependentUpon>
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
     </Compile>
     <Compile Include="KHACH_HANG.cs">
-      <DependentUpon>QL_Ban_Hang.tt</DependentUpon>
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
     </Compile>
     <Compile Include="LOC_HOA_DON_NHAP_Result.cs">
-      <DependentUpon>QL_Ban_Hang.tt</DependentUpon>
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
     </Compile>
     <Compile Include="LOC_HOA_DON_Result.cs">
-      <DependentUpon>QL_Ban_Hang.tt</DependentUpon>
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
     </Compile>
     <Compile Include="NHAN_VIEN.cs">
-      <DependentUpon>QL_Ban_Hang.tt</DependentUpon>
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entity_DanhMuc.cs" />
-    <Compile Include="QL_Ban_Hang.Context.cs">
+    <Compile Include="QuanLyBanHang.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>QL_Ban_Hang.Context.tt</DependentUpon>
+      <DependentUpon>QuanLyBanHang.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="QL_Ban_Hang.cs">
+    <Compile Include="QuanLyBanHang.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>QL_Ban_Hang.tt</DependentUpon>
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
     </Compile>
-    <Compile Include="QL_Ban_Hang.Designer.cs">
+    <Compile Include="QuanLyBanHang.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>QL_Ban_Hang.edmx</DependentUpon>
+      <DependentUpon>QuanLyBanHang.edmx</DependentUpon>
     </Compile>
     <Compile Include="SAN_PHAM.cs">
-      <DependentUpon>QL_Ban_Hang.tt</DependentUpon>
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEARCH_DANH_MUC_DELETE_Result.cs">
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEARCH_DANH_MUC_TON_TAI_Result.cs">
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEARCH_HOA_DON_NHAP_Result.cs">
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEARCH_HOA_DON_Result.cs">
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
     </Compile>
     <Compile Include="SEARCH_KHACH_HANG_Result.cs">
-      <DependentUpon>QL_Ban_Hang.tt</DependentUpon>
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
     </Compile>
     <Compile Include="SEARCH_NHAN_VIEN_Result.cs">
-      <DependentUpon>QL_Ban_Hang.tt</DependentUpon>
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEARCH_SAN_PHAM_Result.cs">
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="THONG_KE_SAN_PHAM_BAN_CHAY_Result.cs">
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="THONG_KE_SAN_PHAM_NHAP_Result.cs">
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="THONG_KE_SAN_PHAM_TON_Result.cs">
+      <DependentUpon>QuanLyBanHang.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <EntityDeploy Include="QL_Ban_Hang.edmx">
+    <EntityDeploy Include="QuanLyBanHang.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>QL_Ban_Hang.Designer.cs</LastGenOutput>
+      <LastGenOutput>QuanLyBanHang.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="QL_Ban_Hang.edmx.diagram">
-      <DependentUpon>QL_Ban_Hang.edmx</DependentUpon>
+    <None Include="QuanLyBanHang.edmx.diagram">
+      <DependentUpon>QuanLyBanHang.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="QL_Ban_Hang.Context.tt">
+    <Content Include="QuanLyBanHang.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>QL_Ban_Hang.edmx</DependentUpon>
-      <LastGenOutput>QL_Ban_Hang.Context.cs</LastGenOutput>
+      <DependentUpon>QuanLyBanHang.edmx</DependentUpon>
+      <LastGenOutput>QuanLyBanHang.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="QL_Ban_Hang.tt">
+    <Content Include="QuanLyBanHang.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>QL_Ban_Hang.edmx</DependentUpon>
-      <LastGenOutput>QL_Ban_Hang.cs</LastGenOutput>
+      <DependentUpon>QuanLyBanHang.edmx</DependentUpon>
+      <LastGenOutput>QuanLyBanHang.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

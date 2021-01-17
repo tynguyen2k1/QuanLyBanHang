@@ -9,11 +9,27 @@ namespace DataAccess
 {
     public class QL_KhachHang
     {
-        public void loadFormGridView(DataGridView data)
+
+
+        public List<Model.Model_Khach_Hang> GetListKhachHang()
         {
-            EntityKhachHang kh = new EntityKhachHang();
-            data.DataSource = kh.LoadData();
+            List<Model.Model_Khach_Hang> list_khach_hang = new List<Model.Model_Khach_Hang>();
+            EntityKhachHang entityKhach = new EntityKhachHang();
+            var list = entityKhach.GetListKhachHang();
+            foreach(var kh in list)
+            {
+                var khachhang = new Model.Model_Khach_Hang();
+                khachhang.MA_KH = kh.MA_KH;
+                khachhang.NGAY_SINH = kh.NGAY_SINH;
+                khachhang.SDT = kh.SDT;
+                khachhang.TEN_KH = kh.TEN_KH;
+                khachhang.Gioi_Tinh = kh.Gioi_Tinh;
+                khachhang.DIA_CHI = kh.DIA_CHI;
+                list_khach_hang.Add(khachhang);
+            }
+            return list_khach_hang;
         }
+        
         public KHACH_HANG GetSanPham(string phone)
         {
             EntityKhachHang kh = new EntityKhachHang();
@@ -113,10 +129,23 @@ namespace DataAccess
             EntityKhachHang khachhang = new EntityKhachHang();
             return khachhang.DeleteKhachHang(kh);
         }
-        public void GetListSearch(DataGridView data , string ma , string ten , string sdt ,string diachi)
+        public List<Model.Model_Khach_Hang> GetListSearch(string ma , string ten , string sdt ,string diachi)
         {
-            EntityKhachHang khachhang = new EntityKhachHang();
-            data.DataSource = khachhang.GetListSearch(ma, ten, sdt, diachi);
+            EntityKhachHang entity_khachhang = new EntityKhachHang();
+            var list_kh = new List<Model.Model_Khach_Hang>();
+            var list_kh_search = entity_khachhang.GetListSearch(ma, ten, sdt, diachi);
+            foreach (var kh in list_kh_search)
+            {
+                var khachhang = new Model.Model_Khach_Hang();
+                khachhang.MA_KH = kh.MA_KH;
+                khachhang.NGAY_SINH = kh.NGAY_SINH;
+                khachhang.SDT = kh.SDT;
+                khachhang.TEN_KH = kh.TEN_KH;
+                khachhang.Gioi_Tinh = kh.Gioi_Tinh;
+                khachhang.DIA_CHI = kh.DIA_CHI;
+                list_kh.Add(khachhang);
+            }
+            return list_kh;
         }
     }
 }

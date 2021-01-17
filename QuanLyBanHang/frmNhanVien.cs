@@ -14,6 +14,55 @@ namespace QuanLyBanHang
     {
         QL_NhanVien ql_nv;
         ValidateData validate = new ValidateData();
+
+        private List<DataAccess.Model.Model_Nhan_Vien> list_Nhan_Vien { get; set; }
+        private int page { set; get; }
+        private int loadeRecord { set; get; }
+        public void setloadeRecord()
+        {
+            this.loadeRecord = 0;
+        }
+        public void setListNhanVien()
+        {
+            this.list_Nhan_Vien.Clear();
+        }
+        public void loadDanhSachNhanVien()
+        {
+
+            float pageNumber = (float)this.list_Nhan_Vien.Count / 12;
+            this.page = (int)Math.Ceiling((double)pageNumber);
+            hienThiPhanTrang();
+            if (loadeRecord == -1)
+            {
+                lb_trang.Text = Convert.ToString(0);
+            }
+            else
+            {
+                lb_trang.Text = Convert.ToString(this.loadeRecord);
+            }
+            dataNhanVien.DataSource = load_sl_data(this.loadeRecord, 12);
+            
+        }
+        public void hienThiPhanTrang()
+        {
+            if (this.list_Nhan_Vien.Count >= 2)
+            {
+                btnPrev.Enabled = true;
+                btnNext.Enabled = true;
+            }
+            else
+            {
+                btnPrev.Enabled = false;
+                btnNext.Enabled = false;
+            }
+        }
+        public List<DataAccess.Model.Model_Nhan_Vien> load_sl_data(int page, int sl)
+        {
+            List<DataAccess.Model.Model_Nhan_Vien> list = new List<DataAccess.Model.Model_Nhan_Vien>();
+            list = this.list_Nhan_Vien.Skip(sl * page).Take(sl).ToList();
+            return list;
+        }
+
         public frmNhanVien()
         {
             InitializeComponent();
@@ -38,12 +87,15 @@ namespace QuanLyBanHang
             rd_Nu.Checked = false;
             rd_nv.Checked = false;
             txtTK.Enabled = true;
-            rd_kt.Checked = false;
             rd_ql.Checked = false;
             btnTimKiem.Enabled = true;
             btn_Them.Enabled = true;
             dtpk_nvl.Value = DateTime.Parse("1/1/1900");
-            ql_nv.GetListNhanVien(dataNhanVien);
+           
+            this.list_Nhan_Vien = ql_nv.GetListNhanVien();
+            this.loadDanhSachNhanVien();
+
+            /*ql_nv.GetListNhanVien(dataNhanVien);*/
         }
         public bool checked_radio()
         {
@@ -82,7 +134,7 @@ namespace QuanLyBanHang
             {
                 return false;
             }
-            if (rd_ql.Checked == false && rd_nv.Checked == false && rd_kt.Checked == false)
+            if (rd_ql.Checked == false && rd_nv.Checked == false )
             {
                 MessageBox.Show("Bạn chưa chọn chức vụ !!!");
                 return false;
@@ -98,19 +150,12 @@ namespace QuanLyBanHang
             }
             else
             {
-                /*0 : Nhân viên thường , 1; kế toán, 2: quản lý*/
-                byte chucvu = 0;
+                /*0 : Nhân viên thường , 1: quản lý*/
+                byte chucvu;
                 bool gt;
                 gt = (rd_Nam.Checked == true) ? true : false;
-                if (rd_kt.Checked == true)
-                {
-                    chucvu = 1;
-                }
-                if (rd_ql.Checked == true)
-                {
-                    chucvu = 2;
-                }
-                if(ql_nv.Insert_Nhan_Vien(txtMa_nv.Text, txtTenNV.Text, txtDiaChi.Text, txtEmail.Text, gt, txtSDT.Text, dtpk_nvl.Value, txtTK.Text, Txt_MK.Text, chucvu))
+                chucvu = (rd_ql.Checked == true) ? (byte)1 : (byte)0;
+                if (ql_nv.Insert_Nhan_Vien(txtMa_nv.Text, txtTenNV.Text, txtDiaChi.Text, txtEmail.Text, gt, txtSDT.Text, dtpk_nvl.Value, txtTK.Text, Txt_MK.Text, chucvu))
                 {
                     LoadData();
                 }    
@@ -140,13 +185,10 @@ namespace QuanLyBanHang
             byte chucvu = 0;
             bool gt;
             gt = (rd_Nam.Checked == true) ? true : false;
-            if (rd_kt.Checked == true)
-            {
-                chucvu = 1;
-            }
+            
             if (rd_ql.Checked == true)
             {
-                chucvu = 2;
+                chucvu = 1;
             }
             if (ql_nv.Edit_Nhan_Vien(txtMa_nv.Text, txtTenNV.Text, txtDiaChi.Text, txtEmail.Text, gt, txtSDT.Text, dtpk_nvl.Value, txtTK.Text, Txt_MK.Text, chucvu))
             {
@@ -156,7 +198,7 @@ namespace QuanLyBanHang
             
         }
 
-        private void dataNhanVien_CellClick(object sender, DataGridViewCellEventArgs e)
+        /*private void dataNhanVien_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex != -1)
             {
@@ -178,10 +220,9 @@ namespace QuanLyBanHang
                 txtTK.Text = data_row.Cells["TAI_KHOAN"].Value.ToString();
                 Txt_MK.Text = ql_nv.returnMatKhau(data_row.Cells["MA_NV"].Value.ToString());
                 if (ql_nv.return_ChucVu(data_row.Cells["MA_NV"].Value.ToString()) == 0) { rd_nv.Checked = true; }
-                else if (ql_nv.return_ChucVu(data_row.Cells["MA_NV"].Value.ToString()) == 1) { rd_kt.Checked = true; }
-                else { rd_ql.Checked = true; }
+                else if (ql_nv.return_ChucVu(data_row.Cells["MA_NV"].Value.ToString()) == 1) { rd_ql.Checked = true; }
             }
-        }
+        }*/
 
         private void btn_Xoa_Click(object sender, EventArgs e)
         {
@@ -221,18 +262,134 @@ namespace QuanLyBanHang
             string gt = "";
             if (rd_Nam.Checked) gt = "0";
             if (rd_Nu.Checked) gt = "1";
-            
             string chucvu = "";
             if (rd_nv.Checked) chucvu = "0";
-            if (rd_kt.Checked) chucvu = "1";
-            if (rd_ql.Checked) chucvu = "2";
+            if (rd_ql.Checked) chucvu = "1";
             btnHuy.Text = "Huỷ Tìm Kiếm";
-            ql_nv.Search_Nhan_Vien(dataNhanVien , txtMa_nv.Text, txtTenNV.Text, txtDiaChi.Text, txtEmail.Text, gt, txtSDT.Text, nvl, txtTK.Text, Txt_MK.Text, chucvu);
+            setListNhanVien();
+            this.list_Nhan_Vien = ql_nv.Search_Nhan_Vien(txtMa_nv.Text, txtTenNV.Text, txtDiaChi.Text, txtEmail.Text, gt, txtSDT.Text, nvl, txtTK.Text, Txt_MK.Text, chucvu);      
+            this.loadDanhSachNhanVien();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        
+
+        
+
+        private void dataNhanVien_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataNhanVien.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                TrangThaiNhanVien trangThaiNhanVien = new TrangThaiNhanVien();
+                trangThaiNhanVien.ShowDialog();
+                int trangthai = trangThaiNhanVien.getTrangThai();
+
+                if (trangthai != -1)
+                {
+                    string manv = dataNhanVien.Rows[e.RowIndex].Cells["MA_NV"].Value.ToString();
+                /*TrangThai: 0 <=> Đang làm; 1 <=> Nghỉ Việc; 2 <=> Chặn tài khoản;*/
+                    if (ql_nv.updateTrangThaiNhanVien(manv, trangthai))
+                    {
+                        MessageBox.Show("Sửa trạng thái thành công !!!");
+                        LoadData();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không thể sửa !!!");
+
+                    }
+
+                }
+            }
+        }
+
+        private void dataNhanVien_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                txtMa_nv.Enabled = false;
+                btnHuy.Text = "Huỷ Sửa";
+                btn_Them.Enabled = false;
+                btnTimKiem.Enabled = false;
+                txtTK.Enabled = false;
+                btn_Xoa.Enabled = true;
+                btnSua.Enabled = true;
+                DataGridViewRow data_row = dataNhanVien.Rows[e.RowIndex];
+                txtMa_nv.Text = data_row.Cells["MA_NV"].Value.ToString();
+                txtTenNV.Text = data_row.Cells["TEN_NV"].Value.ToString();
+                txtDiaChi.Text = data_row.Cells["DIA_CHI"].Value.ToString();
+                txtEmail.Text = data_row.Cells["EMAIL"].Value.ToString();
+                var gt = (data_row.Cells["GIOI_TINH"].Value.ToString() == "Nam") ? rd_Nam.Checked = true : rd_Nu.Checked = true;
+                txtSDT.Text = ((data_row.Cells["SDT"].Value.ToString()).Insert(4, "-")).Insert(8, "-");
+                dtpk_nvl.Value = DateTime.Parse(data_row.Cells["NGAY_VL"].Value.ToString());
+                txtTK.Text = data_row.Cells["TAI_KHOAN"].Value.ToString();
+                Txt_MK.Text = ql_nv.returnMatKhau(data_row.Cells["MA_NV"].Value.ToString());
+                if (ql_nv.return_ChucVu(data_row.Cells["MA_NV"].Value.ToString()) == 0) { rd_nv.Checked = true; }
+                else if (ql_nv.return_ChucVu(data_row.Cells["MA_NV"].Value.ToString()) == 1) { rd_ql.Checked = true; }
+            }
+        }
+
+        private void dataNhanVien_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            if (this.page > 0)
+                {
+                    if (this.loadeRecord == this.page - 1)
+                    {
+                        this.setloadeRecord();
+                        loadDanhSachNhanVien();
+                    }
+                    else
+                    {
+                        this.loadeRecord++;
+                        loadDanhSachNhanVien();
+                    }
+                }
+            
+        }
+
+        private void btnPrev_Click(object sender, EventArgs e)
+        {
+            if (this.page > 0)
+            {
+                if (this.loadeRecord < 0)
+                {
+                    this.setloadeRecord();
+                    loadDanhSachNhanVien();
+                }
+                else
+                {
+                    this.loadeRecord--;
+                    loadDanhSachNhanVien();
+                }
+            }
+        }
+
+        private void btn_SX_Click(object sender, EventArgs e)
+        {
+            for(int i = 0; i<this.list_Nhan_Vien.Count-1; i++)
+            {
+                for(int j = i; j< this.list_Nhan_Vien.Count; j++)
+                {
+                    if(String.Compare(this.list_Nhan_Vien[i].MA_NV , this.list_Nhan_Vien[j].MA_NV , false) < 0)
+                    {
+                        var nv = this.list_Nhan_Vien[i];
+                        this.list_Nhan_Vien[i] = this.list_Nhan_Vien[j];
+                        this.list_Nhan_Vien[j] = nv;
+                    }
+                }
+            }
+            btnHuy.Text = "Huỷ Sắp Xếp";
+            setloadeRecord();
+            this.loadDanhSachNhanVien();
         }
     }
 }

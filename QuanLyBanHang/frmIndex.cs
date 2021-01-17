@@ -14,8 +14,6 @@ namespace QuanLyBanHang
 {
     public partial class frmIndex : Form
     {
-        
-
         NHAN_VIEN taiKhoan;
         EntityNhanVien nhanVien = new EntityNhanVien();
         Database_acsset database = new Database_acsset();
@@ -47,17 +45,27 @@ namespace QuanLyBanHang
             deleteform();
             LoadData();
         }
+
+
+
         public frmIndex(NHAN_VIEN nv)
         {
             this.taiKhoan = nv;
             InitializeComponent();
             setcolumns_dataTable();
             deleteform();
+            
             LoadData();
         }
+
+        public void logout_admin()
+        {
+            this.taiKhoan = null;
+        }
+
         public void LoadData()
         {
-
+            
             btn_Sua_Prod_Cart.Enabled = false;
             for(int i  = 0; i < dataTable.Rows.Count; i++)
             {
@@ -82,6 +90,23 @@ namespace QuanLyBanHang
                 txt_doc_tien.Text = doc_Tien.DocTienBangChu(0 , " VND ");
             }
             txtMaSP.Focus();
+            if(taiKhoan.CHUC_VU == 0)
+            {
+                this.quảnLýHoáĐơnNhậpToolStripMenuItem.Visible = false;
+                this.thốngKêHoáĐơnNhậpToolStripMenuItem.Visible = false;
+                this.quảnLýNhânViênToolStripMenuItem.Visible = false;
+                this.thốngKêHoáĐơnNhậpToolStripMenuItem.Visible = false;
+                this.thốngKêHoáĐơnToolStripMenuItem.Visible = false;
+            }
+            else
+            {
+                this.quảnLýHoáĐơnNhậpToolStripMenuItem.Visible = true;
+                this.thốngKêHoáĐơnNhậpToolStripMenuItem.Visible = true;
+                this.quảnLýNhânViênToolStripMenuItem.Visible = true;
+                this.thốngKêHoáĐơnNhậpToolStripMenuItem.Visible = true;
+                this.thốngKêHoáĐơnToolStripMenuItem.Visible = true;
+
+            }
         }
         public void add(string Ma_SP, string ten_sp , double gia_ban , int giam_gia , int sl_mua , double tong)
         {
@@ -184,7 +209,7 @@ namespace QuanLyBanHang
 
         private void quảnLýDanhSáchSảnPhẩmToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frm_san_pham frmSanPham = new frm_san_pham();
+            frm_san_pham frmSanPham = new frm_san_pham((int)taiKhoan.CHUC_VU);
             this.Hide();
             frmSanPham.ShowDialog();
             this.Show();
@@ -402,7 +427,8 @@ namespace QuanLyBanHang
             txt_sdt_kh.Text = "";
             txt_dia_chi.Text = "";
             txt_ten_kh.Text = "";
-            dtpk_ngay_sinh.Value = DateTime.Now;
+            lbErrPhone.Text = "";
+            dtpk_ngay_sinh.Value = DateTime.Parse("2/11/2001");
             rd_Nam.Checked = true;
         }
         private void txt_sdt_kh_TextChanged(object sender, EventArgs e)
@@ -415,15 +441,21 @@ namespace QuanLyBanHang
                
                 if(qL_Khach.GetSanPham(txt_sdt_kh.Text) != null)
                 {
-                    KHACH_HANG kh = qL_Khach.GetSanPham(txt_sdt_kh.Text);
+                    var kh = qL_Khach.GetSanPham(txt_sdt_kh.Text);
                     txt_ten_kh.Text = kh.TEN_KH;
+                    txt_ten_kh.Enabled = txt_dia_chi.Enabled = rd_Nam.Enabled = rd_Nu.Enabled = dtpk_ngay_sinh.Enabled = false;
                     dtpk_ngay_sinh.Value = kh.NGAY_SINH;
                     txt_dia_chi.Text = kh.DIA_CHI;
                     var a = (kh.GIOI_TINH.Value == true) ?rd_Nam.Checked=true: rd_Nu.Checked=true;
                 }
+                else
+                {
+                    txt_ten_kh.Enabled = txt_dia_chi.Enabled = rd_Nam.Enabled = rd_Nu.Enabled = dtpk_ngay_sinh.Enabled = true;
+                }
             }
             else
             {
+                txt_ten_kh.Enabled = txt_dia_chi.Enabled = rd_Nam.Enabled = rd_Nu.Enabled = dtpk_ngay_sinh.Enabled = true;
                 lbErrPhone.Text = "Error : Số điện thoai chưa đúng đinh dạng";
             }
         }
@@ -438,43 +470,22 @@ namespace QuanLyBanHang
             }
             else
             {
-                bool kiemtra = (rd_Nam.Checked==true) ? true: false;
-                KHACH_HANG kh = new KHACH_HANG();
-                kh.TEN_KH = txt_ten_kh.Text;
-                kh.SDT = txt_sdt_kh.Text;
-                kh.DIA_CHI = txt_dia_chi.Text;
-                kh.GIOI_TINH = kiemtra;
-                kh.NGAY_SINH = dtpk_ngay_sinh.Value;
                 QL_HoaDon qL_HoaDon = new QL_HoaDon();
-                bool check = qL_HoaDon.TaoHoaDon(dataTable,kh,double.Parse(txt_tong_tien_cart.Text));
+                string TEN_KH = txt_ten_kh.Text;
+                string SDT = txt_sdt_kh.Text;
+                string DIA_CHI = txt_dia_chi.Text;
+                bool GIOI_TINH = (rd_Nam.Checked == true) ? true : false;
+                DateTime NGAY_SINH = dtpk_ngay_sinh.Value;
+                double Tong_Tien = double.Parse(txt_tong_tien_cart.Text);
+                bool check = qL_HoaDon.TaoHoaDon(dataTable,TEN_KH,SDT,DIA_CHI,GIOI_TINH,NGAY_SINH,Tong_Tien,taiKhoan.MA_NV);
                 if (check)
                 {
-                    MessageBox.Show("Tạo Thành Công !!!");
 
                     clear_dataTable();
                     LoadData();
-
-                    string message = "Tạo Thành Công Hoá Đơn";
-                    string title = "Hoá Đơn";
-                    MessageBoxButtons buttons = MessageBoxButtons.YesNoCancel;
-                    DialogResult result = MessageBox.Show(message, title, buttons, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
-                    if (result == DialogResult.Abort)
-                    {
-                        this.Close();
-                    }
-                    else if(result == DialogResult.Retry) {
-                        // Do nothing  
-                        
-                    }
-                    else
-                    {
-                        // Do something  
-                    }
+                    deleteformkhachhang();
                 }
-                else
-                {
-                    MessageBox.Show("Error : Không Thể Tạo Hoá Đơn !!! ");
-                }
+                
             }
             
         }
@@ -508,6 +519,64 @@ namespace QuanLyBanHang
             return "";
         }
 
+        private void btn_huy_hoa_don_Click(object sender, EventArgs e)
+        {
+            clear_dataTable();
+            LoadData();
+            deleteformkhachhang();
+            txtMaSP.Focus();
+        }
         
+        private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string message = "Bạn Có Muốn Đăng Xuất !!!";
+            string title = "Logout";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result = MessageBox.Show(message, title, buttons);
+            if (result == DialogResult.Yes)
+            {
+                logout_admin();
+                this.Close();
+            }
+        }
+
+        private void frmIndex_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            
+        }
+
+        private void quảnLýTàiKhoảnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string a = Convert.ToString(taiKhoan.MA_NV);
+            frm_thong_tin_nhan_vien frm = new frm_thong_tin_nhan_vien(a);
+            this.Hide();
+            frm.ShowDialog();
+            this.Show();
+        }
+
+        private void quảnLýHoáĐơnNhậpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string a = Convert.ToString(taiKhoan.MA_NV);
+            frmHoaDonNhap frm = new frmHoaDonNhap(a);
+            this.Hide();
+            frm.ShowDialog();
+            this.Show();
+        }
+
+        private void thốngKêHoáĐơnNhậpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm_thong_ke_san_pham_nhap frm = new frm_thong_ke_san_pham_nhap();
+            this.Hide();
+            frm.ShowDialog();
+            this.Show();
+        }
+
+        private void thốngKêHoáĐơnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm_thong_ke_san_pham_ban frm = new frm_thong_ke_san_pham_ban();
+            this.Hide();
+            frm.ShowDialog();
+            this.Show();
+        }
     }
 }

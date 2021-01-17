@@ -61,23 +61,25 @@
             this.kHACHHANGBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label9 = new System.Windows.Forms.Label();
             this.btn_quay_lai = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.Ma_Kh_search = new System.Windows.Forms.NumericUpDown();
-            this.btn_Search = new System.Windows.Forms.Button();
-            this.txt_search_sdt = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txt_search_dia_chi = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.txt_search_ten = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txt_search_dia_chi = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txt_search_sdt = new System.Windows.Forms.TextBox();
+            this.btn_Search = new System.Windows.Forms.Button();
+            this.Ma_Kh_search = new System.Windows.Forms.NumericUpDown();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btn_Prev = new System.Windows.Forms.Button();
+            this.btn_next = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataKhachHang)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kHACHHANGBindingSource)).BeginInit();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Ma_Kh_search)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -154,9 +156,9 @@
             // btnHuy
             // 
             this.btnHuy.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnHuy.Location = new System.Drawing.Point(575, 3);
+            this.btnHuy.Location = new System.Drawing.Point(558, 3);
             this.btnHuy.Name = "btnHuy";
-            this.btnHuy.Size = new System.Drawing.Size(118, 30);
+            this.btnHuy.Size = new System.Drawing.Size(135, 30);
             this.btnHuy.TabIndex = 11;
             this.btnHuy.Text = "Huỷ";
             this.btnHuy.UseVisualStyleBackColor = true;
@@ -165,9 +167,9 @@
             // btn_Edit
             // 
             this.btn_Edit.ForeColor = System.Drawing.Color.DarkRed;
-            this.btn_Edit.Location = new System.Drawing.Point(147, 3);
+            this.btn_Edit.Location = new System.Drawing.Point(127, 3);
             this.btn_Edit.Name = "btn_Edit";
-            this.btn_Edit.Size = new System.Drawing.Size(115, 30);
+            this.btn_Edit.Size = new System.Drawing.Size(135, 30);
             this.btn_Edit.TabIndex = 8;
             this.btn_Edit.Text = "Sửa";
             this.btn_Edit.UseVisualStyleBackColor = true;
@@ -176,9 +178,9 @@
             // btnXoa
             // 
             this.btnXoa.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnXoa.Location = new System.Drawing.Point(294, 3);
+            this.btnXoa.Location = new System.Drawing.Point(268, 4);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(113, 30);
+            this.btnXoa.Size = new System.Drawing.Size(137, 30);
             this.btnXoa.TabIndex = 9;
             this.btnXoa.Text = "Xoá";
             this.btnXoa.UseVisualStyleBackColor = true;
@@ -187,17 +189,18 @@
             // btn_sap_xep
             // 
             this.btn_sap_xep.ForeColor = System.Drawing.Color.DarkRed;
-            this.btn_sap_xep.Location = new System.Drawing.Point(437, 3);
+            this.btn_sap_xep.Location = new System.Drawing.Point(411, 3);
             this.btn_sap_xep.Name = "btn_sap_xep";
-            this.btn_sap_xep.Size = new System.Drawing.Size(108, 30);
+            this.btn_sap_xep.Size = new System.Drawing.Size(141, 30);
             this.btn_sap_xep.TabIndex = 10;
-            this.btn_sap_xep.Text = "Sắp Xếp";
+            this.btn_sap_xep.Text = "Sắp Xếp (Mã Desc)";
             this.btn_sap_xep.UseVisualStyleBackColor = true;
+            this.btn_sap_xep.Click += new System.EventHandler(this.btn_sap_xep_Click);
             // 
             // btnThem
             // 
             this.btnThem.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnThem.Location = new System.Drawing.Point(0, 3);
+            this.btnThem.Location = new System.Drawing.Point(5, 3);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(116, 30);
             this.btnThem.TabIndex = 7;
@@ -406,6 +409,78 @@
             this.btn_quay_lai.UseVisualStyleBackColor = true;
             this.btn_quay_lai.Click += new System.EventHandler(this.btn_quay_lai_Click);
             // 
+            // txt_search_ten
+            // 
+            this.txt_search_ten.Location = new System.Drawing.Point(93, 60);
+            this.txt_search_ten.Name = "txt_search_ten";
+            this.txt_search_ten.Size = new System.Drawing.Size(190, 25);
+            this.txt_search_ten.TabIndex = 13;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(25, 29);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 18);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Mã :";
+            // 
+            // txt_search_dia_chi
+            // 
+            this.txt_search_dia_chi.Location = new System.Drawing.Point(93, 129);
+            this.txt_search_dia_chi.Name = "txt_search_dia_chi";
+            this.txt_search_dia_chi.Size = new System.Drawing.Size(190, 25);
+            this.txt_search_dia_chi.TabIndex = 15;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(25, 132);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(54, 18);
+            this.label10.TabIndex = 10;
+            this.label10.Text = "Địa Chỉ";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(25, 98);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(43, 18);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "SĐT :";
+            // 
+            // txt_search_sdt
+            // 
+            this.txt_search_sdt.Location = new System.Drawing.Point(93, 95);
+            this.txt_search_sdt.Name = "txt_search_sdt";
+            this.txt_search_sdt.Size = new System.Drawing.Size(190, 25);
+            this.txt_search_sdt.TabIndex = 14;
+            // 
+            // btn_Search
+            // 
+            this.btn_Search.BackColor = System.Drawing.Color.YellowGreen;
+            this.btn_Search.ForeColor = System.Drawing.Color.DarkRed;
+            this.btn_Search.Location = new System.Drawing.Point(28, 163);
+            this.btn_Search.Name = "btn_Search";
+            this.btn_Search.Size = new System.Drawing.Size(255, 30);
+            this.btn_Search.TabIndex = 16;
+            this.btn_Search.Text = "Tìm Kiếm";
+            this.btn_Search.UseVisualStyleBackColor = false;
+            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
+            // 
+            // Ma_Kh_search
+            // 
+            this.Ma_Kh_search.Location = new System.Drawing.Point(93, 27);
+            this.Ma_Kh_search.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.Ma_Kh_search.Name = "Ma_Kh_search";
+            this.Ma_Kh_search.Size = new System.Drawing.Size(190, 25);
+            this.Ma_Kh_search.TabIndex = 17;
+            // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -425,71 +500,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Tìm Kiếm Thông Tin";
             // 
-            // Ma_Kh_search
-            // 
-            this.Ma_Kh_search.Location = new System.Drawing.Point(93, 27);
-            this.Ma_Kh_search.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.Ma_Kh_search.Name = "Ma_Kh_search";
-            this.Ma_Kh_search.Size = new System.Drawing.Size(190, 25);
-            this.Ma_Kh_search.TabIndex = 17;
-            // 
-            // btn_Search
-            // 
-            this.btn_Search.BackColor = System.Drawing.Color.YellowGreen;
-            this.btn_Search.ForeColor = System.Drawing.Color.DarkRed;
-            this.btn_Search.Location = new System.Drawing.Point(28, 163);
-            this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(255, 30);
-            this.btn_Search.TabIndex = 16;
-            this.btn_Search.Text = "Tìm Kiếm";
-            this.btn_Search.UseVisualStyleBackColor = false;
-            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
-            // 
-            // txt_search_sdt
-            // 
-            this.txt_search_sdt.Location = new System.Drawing.Point(93, 95);
-            this.txt_search_sdt.Name = "txt_search_sdt";
-            this.txt_search_sdt.Size = new System.Drawing.Size(190, 25);
-            this.txt_search_sdt.TabIndex = 14;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(25, 98);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(43, 18);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "SĐT :";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(25, 132);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(54, 18);
-            this.label10.TabIndex = 10;
-            this.label10.Text = "Địa Chỉ";
-            // 
-            // txt_search_dia_chi
-            // 
-            this.txt_search_dia_chi.Location = new System.Drawing.Point(93, 129);
-            this.txt_search_dia_chi.Name = "txt_search_dia_chi";
-            this.txt_search_dia_chi.Size = new System.Drawing.Size(190, 25);
-            this.txt_search_dia_chi.TabIndex = 15;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 29);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 18);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Mã :";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -499,17 +509,36 @@
             this.label6.TabIndex = 6;
             this.label6.Text = "Tên :";
             // 
-            // txt_search_ten
+            // btn_Prev
             // 
-            this.txt_search_ten.Location = new System.Drawing.Point(93, 60);
-            this.txt_search_ten.Name = "txt_search_ten";
-            this.txt_search_ten.Size = new System.Drawing.Size(190, 25);
-            this.txt_search_ten.TabIndex = 13;
+            this.btn_Prev.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_Prev.ForeColor = System.Drawing.Color.DarkRed;
+            this.btn_Prev.Location = new System.Drawing.Point(28, 615);
+            this.btn_Prev.Name = "btn_Prev";
+            this.btn_Prev.Size = new System.Drawing.Size(116, 30);
+            this.btn_Prev.TabIndex = 8;
+            this.btn_Prev.Text = "Prev";
+            this.btn_Prev.UseVisualStyleBackColor = true;
+            this.btn_Prev.Click += new System.EventHandler(this.btn_Prev_Click);
+            // 
+            // btn_next
+            // 
+            this.btn_next.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_next.ForeColor = System.Drawing.Color.DarkRed;
+            this.btn_next.Location = new System.Drawing.Point(995, 615);
+            this.btn_next.Name = "btn_next";
+            this.btn_next.Size = new System.Drawing.Size(116, 30);
+            this.btn_next.TabIndex = 9;
+            this.btn_next.Text = "Next";
+            this.btn_next.UseVisualStyleBackColor = true;
+            this.btn_next.Click += new System.EventHandler(this.btn_next_Click);
             // 
             // frmKhachHang
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1144, 651);
+            this.Controls.Add(this.btn_next);
+            this.Controls.Add(this.btn_Prev);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btn_quay_lai);
             this.Controls.Add(this.label9);
@@ -529,9 +558,9 @@
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataKhachHang)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kHACHHANGBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Ma_Kh_search)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Ma_Kh_search)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -559,15 +588,6 @@
         private System.Windows.Forms.Button btn_sap_xep;
         private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.BindingSource kHACHHANGBindingSource;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button btn_Search;
-        private System.Windows.Forms.TextBox txt_search_sdt;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label10;
-        public System.Windows.Forms.TextBox txt_search_dia_chi;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label6;
-        public System.Windows.Forms.TextBox txt_search_ten;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.DateTimePicker dtpk_ngay_sinh;
         private System.Windows.Forms.Label label3;
@@ -579,6 +599,17 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Gioi_Tinh;
         private System.Windows.Forms.Label label12;
         public System.Windows.Forms.TextBox txt_Ma_KH;
+        public System.Windows.Forms.TextBox txt_search_ten;
+        private System.Windows.Forms.Label label4;
+        public System.Windows.Forms.TextBox txt_search_dia_chi;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txt_search_sdt;
+        private System.Windows.Forms.Button btn_Search;
         private System.Windows.Forms.NumericUpDown Ma_Kh_search;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btn_Prev;
+        private System.Windows.Forms.Button btn_next;
     }
 }

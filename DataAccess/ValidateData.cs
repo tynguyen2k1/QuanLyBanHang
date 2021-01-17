@@ -11,7 +11,6 @@ namespace DataAccess
 {
     public class ValidateData
     {
-        QL_BAN_HANG validate_data = new QL_BAN_HANG();
         public string validate_danh_muc_ma_sp(string str)
         {
             Entity_DanhMuc entity = new Entity_DanhMuc();

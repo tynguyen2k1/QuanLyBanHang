@@ -11,11 +11,38 @@ namespace DataAccess
     {
         ValidateData validate = new ValidateData();
         Entity_DanhMuc dm = new Entity_DanhMuc();
-        public void Hien_Thi( DataGridView dataGridView)
+       
+        public List<Model.Model_Danh_Muc> Get_List_Danh_Muc_Ton_Tai()
         {
-            dataGridView.DataSource = dm.GetListDanhMuc();
+            var list_dm =new List<Model.Model_Danh_Muc>();
+            var list = dm.GetListDanhMucTonTai();
+            foreach(var danhmuc in list)
+            {
+                var val = new Model.Model_Danh_Muc();
+                val.Ma_DM = danhmuc.Ma_DM;
+                val.TEN_DM = danhmuc.TEN_DM;
+                val.MO_TA = danhmuc.MO_TA;
+                val.TRANG_THAI = danhmuc.TRANG_THAI;
+                list_dm.Add(val);
+            }
+            return list_dm;
         }
-
+        public List<Model.Model_Danh_Muc> Get_List_Danh_Muc_Da_Xoa()
+        {
+            var list_dm = new List<Model.Model_Danh_Muc>();
+            var list = dm.GetListDanhMucXoa();
+            foreach (var danhmuc in list)
+            {
+                var val = new Model.Model_Danh_Muc();
+                val.Ma_DM = danhmuc.Ma_DM;
+                val.TEN_DM = danhmuc.TEN_DM;
+                val.MO_TA = danhmuc.MO_TA;
+                val.TRANG_THAI = danhmuc.TRANG_THAI;
+                list_dm.Add(val);
+            }
+            return list_dm;
+        }
+        
         public string InsertData(string a,string b, string c)
         {
             string error_1 = validate.validate_danh_muc_ma_sp(a);
@@ -58,13 +85,39 @@ namespace DataAccess
             return dm.DeleteDanhMuc(Ma_Dm);
         }
 
-        public void TimKiemMaDM(string str , DataGridView gridView)
+        public List<Model.Model_Danh_Muc> Search_Danh_Muc_Ton_Tai(string a,string b,string c)
         {
-            gridView.DataSource = dm.SearchMaDM(str);
+            var list_dm = new List<Model.Model_Danh_Muc>();
+            var list = dm.GetListSearchDanhTonTai(a,b,c);
+            foreach (var danhmuc in list)
+            {
+                var val = new Model.Model_Danh_Muc();
+                val.Ma_DM = danhmuc.Ma_DM;
+                val.TEN_DM = danhmuc.TEN_DM;
+                val.MO_TA = danhmuc.MO_TA;
+                val.TRANG_THAI = danhmuc.TRANG_THAI;
+                list_dm.Add(val);
+            }
+            return list_dm;
         }
-        public void TimKiemTenDM(string str, DataGridView gridView)
+        public List<Model.Model_Danh_Muc> Search_Danh_Muc_Da_Xoa(string a, string b, string c)
         {
-            gridView.DataSource = dm.SearchTen(str);
+            var list_dm = new List<Model.Model_Danh_Muc>();
+            var list = dm.GetListSearchDanhDaXoa(a, b, c);
+            foreach (var danhmuc in list)
+            {
+                var val = new Model.Model_Danh_Muc();
+                val.Ma_DM = danhmuc.Ma_DM;
+                val.TEN_DM = danhmuc.TEN_DM;
+                val.MO_TA = danhmuc.MO_TA;
+                val.TRANG_THAI = danhmuc.TRANG_THAI;
+                list_dm.Add(val);
+            }
+            return list_dm;
+        }
+        public bool updateTrangThai(string ma, int val)
+        {
+            return dm.updateTrangThai(ma, (byte)val);
         }
     }
 }

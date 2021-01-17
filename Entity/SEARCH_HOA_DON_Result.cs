@@ -11,10 +11,13 @@ namespace Entity
 {
     using System;
     
-    public partial class GET_ALL_DANH_MUC_Result
+    public partial class SEARCH_HOA_DON_Result
     {
-        public string Ma_DM { get; set; }
-        public string TEN_DM { get; set; }
-        public string MO_TA { get; set; }
+        public int MA_HD { get; set; }
+        public Nullable<int> MA_KH { get; set; }
+        public string TEN_KH { get; set; }
+        public System.DateTime NGAY_BAN { get; set; }
+        public double TONG_TIEN { get; set; }
+        public string MA_NV { get; set; }
     }
 }

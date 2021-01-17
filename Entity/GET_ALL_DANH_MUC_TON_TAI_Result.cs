@@ -11,13 +11,11 @@ namespace Entity
 {
     using System;
     
-    public partial class GET_ALL_KHACH_HANG_Result
+    public partial class GET_ALL_DANH_MUC_TON_TAI_Result
     {
-        public int MA_KH { get; set; }
-        public string TEN_KH { get; set; }
-        public string SDT { get; set; }
-        public Nullable<bool> GIOI_TINH { get; set; }
-        public string DIA_CHI { get; set; }
-        public System.DateTime NGAY_SINH { get; set; }
+        public string Ma_DM { get; set; }
+        public string TEN_DM { get; set; }
+        public string MO_TA { get; set; }
+        public string TRANG_THAI { get; set; }
     }
 }

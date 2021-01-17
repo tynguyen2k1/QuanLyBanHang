@@ -93,30 +93,16 @@
     <Property Name="MA_DM" Type="char" MaxLength="10" Nullable="false" />
     <Property Name="TRANG_THAI" Type="tinyint" />
   </EntityType>
-  <Association Name="FK_CTHD_N_SP">
-    <End Role="SAN_PHAM" Type="Self.SAN_PHAM" Multiplicity="1" />
-    <End Role="CT_HOA_DON_NHAP" Type="Self.CT_HOA_DON_NHAP" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SAN_PHAM">
-        <PropertyRef Name="MA_SP" />
-      </Principal>
-      <Dependent Role="CT_HOA_DON_NHAP">
-        <PropertyRef Name="MA_SP" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CTHD_SP">
-    <End Role="SAN_PHAM" Type="Self.SAN_PHAM" Multiplicity="1" />
-    <End Role="CT_HOA_DON" Type="Self.CT_HOA_DON" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SAN_PHAM">
-        <PropertyRef Name="MA_SP" />
-      </Principal>
-      <Dependent Role="CT_HOA_DON">
-        <PropertyRef Name="MA_SP" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
   <Association Name="FK_HD_CTHD">
     <End Role="HOA_DON" Type="Self.HOA_DON" Multiplicity="1" />
     <End Role="CT_HOA_DON" Type="Self.CT_HOA_DON" Multiplicity="*" />
@@ -200,7 +186,15 @@
   <Function Name="DELETE_HOA_DON" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MA_HD" Type="int" Mode="In" />
   </Function>
-  <Function Name="GET_ALL_DANH_MUC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="DELETE_HOA_DON_NHAP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MA_HD" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DELETE_NHAN_VIEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MANV" Type="char" Mode="In" />
+  </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="GET_ALL_DANH_MUC_DELETE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GET_ALL_DANH_MUC_TON_TAI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="GET_ALL_KHACHHANG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="GET_ALL_NHAN_VIEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="GET_ALL_SAN_PHAM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -234,6 +228,24 @@
     <Parameter Name="GIAM_GIA" Type="float" Mode="In" />
     <Parameter Name="MA_HD" Type="int" Mode="In" />
   </Function>
+  <Function Name="SEARCH_DANH_MUC_DELETE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MA_DM" Type="varchar" Mode="In" />
+    <Parameter Name="TEN_DM" Type="varchar" Mode="In" />
+    <Parameter Name="MO_TA" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SEARCH_DANH_MUC_TON_TAI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MA_DM" Type="varchar" Mode="In" />
+    <Parameter Name="TEN_DM" Type="varchar" Mode="In" />
+    <Parameter Name="MO_TA" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SEARCH_HOA_DON" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MA_NV" Type="varchar" Mode="In" />
+    <Parameter Name="MA_HD" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SEARCH_HOA_DON_NHAP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ma_hd" Type="varchar" Mode="In" />
+    <Parameter Name="manv" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="SEARCH_KHACH_HANG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MA_KH" Type="varchar" Mode="In" />
     <Parameter Name="TEN_KH" Type="nvarchar" Mode="In" />
@@ -251,6 +263,63 @@
     <Parameter Name="TAI_KHOAN" Type="nvarchar" Mode="In" />
     <Parameter Name="CHUC_VU" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="SEARCH_SAN_PHAM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MA_SP" Type="varchar" Mode="In" />
+    <Parameter Name="TEN_SP" Type="nvarchar" Mode="In" />
+    <Parameter Name="GIA_NHAP" Type="varchar" Mode="In" />
+    <Parameter Name="GIA_BAN" Type="varchar" Mode="In" />
+    <Parameter Name="SO_LUONG" Type="varchar" Mode="In" />
+    <Parameter Name="GIAM_GIA" Type="varchar" Mode="In" />
+    <Parameter Name="GHI_CHU" Type="nvarchar" Mode="In" />
+    <Parameter Name="MA_DM" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="THONG_KE_SAN_PHAM_BAN_CHAY" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NGAY" Type="varchar" Mode="In" />
+    <Parameter Name="THANG" Type="varchar" Mode="In" />
+    <Parameter Name="NAM" Type="varchar" Mode="In" />
+    <Parameter Name="MA_SP" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="THONG_KE_SAN_PHAM_NHAP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NGAY" Type="varchar" Mode="In" />
+    <Parameter Name="THANG" Type="varchar" Mode="In" />
+    <Parameter Name="NAM" Type="varchar" Mode="In" />
+    <Parameter Name="MA_SP" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="THONG_KE_SAN_PHAM_TON" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="UPDATE_SO_LUONG_SAN_PHAM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MASP" Type="varchar" Mode="In" />
+    <Parameter Name="SL" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="QL_BAN_HANGModelStoreContainer">
     <EntitySet Name="CT_HOA_DON" EntityType="Self.CT_HOA_DON" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CT_HOA_DON_NHAP" EntityType="Self.CT_HOA_DON_NHAP" Schema="dbo" store:Type="Tables" />
@@ -260,14 +329,7 @@
     <EntitySet Name="KHACH_HANG" EntityType="Self.KHACH_HANG" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NHAN_VIEN" EntityType="Self.NHAN_VIEN" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SAN_PHAM" EntityType="Self.SAN_PHAM" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_CTHD_N_SP" Association="Self.FK_CTHD_N_SP">
-      <End Role="SAN_PHAM" EntitySet="SAN_PHAM" />
-      <End Role="CT_HOA_DON_NHAP" EntitySet="CT_HOA_DON_NHAP" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CTHD_SP" Association="Self.FK_CTHD_SP">
-      <End Role="SAN_PHAM" EntitySet="SAN_PHAM" />
-      <End Role="CT_HOA_DON" EntitySet="CT_HOA_DON" />
-    </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_HD_CTHD" Association="Self.FK_HD_CTHD">
       <End Role="HOA_DON" EntitySet="HOA_DON" />
       <End Role="CT_HOA_DON" EntitySet="CT_HOA_DON" />

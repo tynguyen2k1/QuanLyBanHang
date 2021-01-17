@@ -57,11 +57,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database-acsset.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="frmInsert_Hoa_Don_Nhap.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="frmInsert_Hoa_Don_Nhap.Designer.cs">
+      <DependentUpon>frmInsert_Hoa_Don_Nhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_thong_ke_san_pham_ban.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_thong_ke_san_pham_ban.Designer.cs">
+      <DependentUpon>frm_thong_ke_san_pham_ban.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_thong_ke_san_pham_nhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_thong_ke_san_pham_nhap.Designer.cs">
+      <DependentUpon>frm_thong_ke_san_pham_nhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_thong_tin_nhan_vien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_thong_tin_nhan_vien.Designer.cs">
+      <DependentUpon>frm_thong_tin_nhan_vien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TrangThaiNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrangThaiNhanVien.Designer.cs">
+      <DependentUpon>TrangThaiNhanVien.cs</DependentUpon>
     </Compile>
     <Compile Include="frmDanhMuc.cs">
       <SubType>Form</SubType>
@@ -74,6 +98,12 @@
     </Compile>
     <Compile Include="frmHoaDon.Designer.cs">
       <DependentUpon>frmHoaDon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmHoaDonNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHoaDonNhap.Designer.cs">
+      <DependentUpon>frmHoaDonNhap.cs</DependentUpon>
     </Compile>
     <Compile Include="frmIndex.cs">
       <SubType>Form</SubType>
@@ -108,11 +138,29 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validate_data\validate_DanhMuc.cs" />
+    <EmbeddedResource Include="frmInsert_Hoa_Don_Nhap.resx">
+      <DependentUpon>frmInsert_Hoa_Don_Nhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_thong_ke_san_pham_ban.resx">
+      <DependentUpon>frm_thong_ke_san_pham_ban.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_thong_ke_san_pham_nhap.resx">
+      <DependentUpon>frm_thong_ke_san_pham_nhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_thong_tin_nhan_vien.resx">
+      <DependentUpon>frm_thong_tin_nhan_vien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrangThaiNhanVien.resx">
+      <DependentUpon>TrangThaiNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDanhMuc.resx">
       <DependentUpon>frmDanhMuc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmHoaDon.resx">
       <DependentUpon>frmHoaDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHoaDonNhap.resx">
+      <DependentUpon>frmHoaDonNhap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmIndex.resx">
       <DependentUpon>frmIndex.cs</DependentUpon>

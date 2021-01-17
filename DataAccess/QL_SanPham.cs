@@ -12,16 +12,42 @@ namespace DataAccess
         QL_DanhMuc DM = new QL_DanhMuc();
         EntitySanPham QL_SP;
         ValidateData Validate = new ValidateData();
-        public void HienThi (DataGridView view)
+        public  QL_SanPham()
         {
             QL_SP = new EntitySanPham();
-            
-            view.DataSource = QL_SP.GetListSanPham();
         }
+        public List<Model.Model_San_Pham> GetListNhanVien()
+        {
+            
+            List<Model.Model_San_Pham> list_nv = new List<Model.Model_San_Pham>();
+            var list = QL_SP.GetListSanPham();
+            foreach (var i in list)
+            {
+                var nv =new Model.Model_San_Pham();
+                nv.MA_SP = i.MA_SP;
+                nv.TEN_DM = i.TEN_DM;
+                nv.SO_LUONG = i.SO_LUONG;
+                nv.MA_DM = i.MA_DM;
+                nv.GIA_NHAP = i.GIA_NHAP;
+                nv.GIA_BAN = i.GIA_BAN;
+                nv.GIAM_GIA = i.GIAM_GIA;
+                nv.GHI_CHU = i.GHI_CHU;
+                nv.TEN_SP = i.TEN_SP;
+                list_nv.Add(nv);
+            }
+            return list_nv;
+        }
+       
         public void LoadComboboxMa_DM(ComboBox cb)
         {
-            QL_SP = new EntitySanPham();
-            cb.DataSource = QL_SP.getDanhMuc();
+           
+            var list = QL_SP.getDanhMuc();
+            DANH_MUC dm = new DANH_MUC();
+            dm.TEN_DM = "";
+            dm.TEN_DM = "";
+            dm.MO_TA = "";
+            list.Insert(0, dm);
+            cb.DataSource = list;
             cb.DisplayMember = "TEN_DM";
             cb.ValueMember = "Ma_DM";
         }
@@ -135,6 +161,75 @@ namespace DataAccess
                 return true;
             }
             return false;
+        }
+
+        public List<Model.Model_San_Pham> Search_List_San_Pham(string ma , string ten , string dm, string ghichu, string sl , string giaban , string gianhap , string giamgia)
+        {
+            QL_SP = new EntitySanPham();
+            List<Model.Model_San_Pham> list_nv = new List<Model.Model_San_Pham>();
+            var list = QL_SP.Search_List_San_Pham(ma, ten, dm, ghichu, sl, giaban, gianhap, giamgia);
+            foreach (var i in list)
+            {
+                var nv = new Model.Model_San_Pham();
+                nv.MA_SP = i.MA_SP;
+                nv.TEN_DM = i.TEN_DM;
+                nv.SO_LUONG = i.SO_LUONG;
+                nv.MA_DM = i.MA_DM;
+                nv.GIA_NHAP = i.GIA_NHAP;
+                nv.GIA_BAN = i.GIA_BAN;
+                nv.GIAM_GIA = i.GIAM_GIA;
+                nv.GHI_CHU = i.GHI_CHU;
+                nv.TEN_SP = i.TEN_SP;
+                list_nv.Add(nv);
+            }
+            return list_nv;
+        }
+
+
+        public List<Model.Model_thong_ke_san_pham_ban> Thong_Ke_San_Pham_Ban_Chay(string  ma,string ngay , string thang , string nam)
+        {
+            var list_sp =new List<Model.Model_thong_ke_san_pham_ban>();
+            var list = QL_SP.ThongKeSanPhamBanChay(ma,ngay, thang, nam);
+            foreach(var a in list)
+            {
+                var sp = new Model.Model_thong_ke_san_pham_ban();
+                sp.MA_SP = a.MA_SP;
+                sp.SL_CON = a.SL_CON;
+                sp.TEN_SP = a.TEN_SP;
+                sp.TONG_SL_BAN = a.TONG_SL_BAN;
+                list_sp.Add(sp);
+            }
+            return list_sp;
+        }
+        public List<Model.Model_thong_ke_san_pham_ban> Thong_Ke_San_Pham_Ton()
+        {
+            var list_sp = new List<Model.Model_thong_ke_san_pham_ban>();
+            var list = QL_SP.ThongKeSanPhamBanTon();
+            foreach (var a in list)
+            {
+                var sp = new Model.Model_thong_ke_san_pham_ban();
+                sp.MA_SP = a.MA_SP;
+                sp.SL_CON = a.SL_CON;
+                sp.TEN_SP = a.TEN_SP;
+                sp.TONG_SL_BAN = a.TONG_SL_BAN;
+                list_sp.Add(sp);
+            }
+            return list_sp;
+        }
+        public List<Model.Model_thong_ke_san_pham_nhap> Thong_Ke_San_Pham_Nhap(string ma, string ngay, string thang, string nam)
+        {
+            var list_sp = new List<Model.Model_thong_ke_san_pham_nhap>();
+            var list = QL_SP.ThongKeSanPhamNhap(ma, ngay, thang, nam);
+            foreach (var a in list)
+            {
+                var sp = new Model.Model_thong_ke_san_pham_nhap();
+                sp.MA_SP = a.MA_SP;
+                sp.SL_CON = a.SL_CON;
+                sp.TEN_SP = a.TEN_SP;
+                sp.TONG_SL_NHAP = a.TONG_SL_NHAP;
+                list_sp.Add(sp);
+            }
+            return list_sp;
         }
     }
 }

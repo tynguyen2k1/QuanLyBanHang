@@ -12,50 +12,20 @@ namespace Entity
         public List<GET_ALL_SAN_PHAM_Result> GetListSanPham()
         {
             List<GET_ALL_SAN_PHAM_Result> list_sp = new List<GET_ALL_SAN_PHAM_Result>();
-            QL_BAN_HANG db = new QL_BAN_HANG();
-            /*var dt = from a in db.SAN_PHAM select new {
-                Ma_SP = a.MA_SP,
-                Ten_Sp = a.TEN_SP,
-                So_Luong = a.SO_LUONG,
-                Gia_Nhap = a.GIA_NHAP,
-                Gia_Ban = a.GIA_BAN,
-                Ghi_Chu = a.GHI_CHU,
-                Giam_Gia = a.GIAM_GIA,
-                Anh = a.ANH,
-                Ma_DM = a.MA_DM
-            };*/
-            var dt = db.GET_ALL_SAN_PHAM().Select(a=> new
-            {
-                Ma_SP = a.MA_SP,
-                Ten_Sp = a.TEN_SP,
-                So_Luong = a.SO_LUONG,
-                Gia_Nhap = a.GIA_NHAP,
-                Gia_Ban = a.GIA_BAN,
-                Ghi_Chu = a.GHI_CHU,
-                Giam_Gia = a.GIAM_GIA,
-                Ma_DM = a.MA_DM,
-                Ten_DM = a.TEN_DM
-            });
+            QL_BAN_HANGEntities db = new QL_BAN_HANGEntities();
+ 
+            var dt = db.GET_ALL_SAN_PHAM().Select(a=> a);
             foreach (var i in dt)
             {
-                var sp = new GET_ALL_SAN_PHAM_Result();
-                sp.MA_SP  =  i.Ma_SP;
-                sp.TEN_SP = i.Ten_Sp;
-                sp.GIAM_GIA = i.Giam_Gia;
-                sp.GIA_NHAP = i.Gia_Nhap;
-                sp.GIA_BAN = i.Gia_Ban;
-                sp.GHI_CHU = i.Ghi_Chu;
-                sp.SO_LUONG = i.So_Luong;
-                sp.MA_DM = i.Ma_DM;
-                sp.TEN_DM = i.Ten_DM;
-                list_sp.Add(sp);
+                list_sp.Add(i);
             }
             return list_sp;
         }
+
         public bool checkIssetTenSPUpdate(string str ,string masp)
         {
 
-            using (var db = new QL_BAN_HANG())
+            using (var db = new QL_BAN_HANGEntities())
             {
 
                 string sql = "select * from SAN_PHAM  where SAN_PHAM.TEN_SP = N'" + str + "' and SAN_PHAM.MA_SP != '" + masp + "'";
@@ -70,7 +40,7 @@ namespace Entity
         public bool checkIssetTenSPInsert(string str)
         {
 
-            using (var db = new QL_BAN_HANG())
+            using (var db = new QL_BAN_HANGEntities())
             {
 
                 string sql = "select * from SAN_PHAM  where SAN_PHAM.TEN_SP = N'" + str + "'";
@@ -85,7 +55,7 @@ namespace Entity
 
         public bool checkIssetMa_SP(string str)
         {
-            using (var db = new QL_BAN_HANG())
+            using (var db = new QL_BAN_HANGEntities())
             {
                 SAN_PHAM dm = db.SAN_PHAM.FirstOrDefault(c => c.MA_SP == str);
                 if (dm != null)
@@ -97,7 +67,7 @@ namespace Entity
         }
         public SAN_PHAM ReturnSP_MaSP(string str)
         {
-            using (var db = new QL_BAN_HANG())
+            using (var db = new QL_BAN_HANGEntities())
             {
                 SAN_PHAM dm = db.SAN_PHAM.FirstOrDefault(c => c.MA_SP == str);
                 if (dm != null)
@@ -111,7 +81,7 @@ namespace Entity
         {
             try
             {
-                using (var db = new QL_BAN_HANG())
+                using (var db = new QL_BAN_HANGEntities())
                 {
                     db.SAN_PHAM.Add(sp);
                     db.SaveChanges();
@@ -128,7 +98,7 @@ namespace Entity
 
             try
             {
-                using (var db = new QL_BAN_HANG())
+                using (var db = new QL_BAN_HANGEntities())
                 {
                     SAN_PHAM s = db.SAN_PHAM.FirstOrDefault(c => c.MA_SP == sp.MA_SP);
                     s.TEN_SP = sp.TEN_SP;
@@ -150,7 +120,7 @@ namespace Entity
         public List<DANH_MUC> getDanhMuc()
         {
             List<DANH_MUC> list = new List<DANH_MUC>();
-            using (var db = new QL_BAN_HANG())
+            using (var db = new QL_BAN_HANGEntities())
             {
                 var dm = db.DANH_MUC.Select(c=>c);
                 foreach (DANH_MUC d in dm)
@@ -167,7 +137,7 @@ namespace Entity
         {
             try
             {
-                using (var db = new QL_BAN_HANG())
+                using (var db = new QL_BAN_HANGEntities())
                 {
                     SAN_PHAM sp = db.SAN_PHAM.FirstOrDefault(c => c.MA_SP == SP);
                     db.SAN_PHAM.Remove(sp);
@@ -179,6 +149,74 @@ namespace Entity
                 return false;
             }
             return true;
+        }
+        public List<SEARCH_SAN_PHAM_Result> Search_List_San_Pham(string ma, string ten, string dm, string ghichu, string sl, string giaban, string gianhap, string giamgia)
+        {
+            var list_sp =new List<SEARCH_SAN_PHAM_Result>();
+            using (var db = new QL_BAN_HANGEntities())
+            {
+                var list = db.SEARCH_SAN_PHAM( ma,ten , gianhap,giaban,sl,giamgia,ghichu,dm).Select(c => c);
+                foreach (var sp in list)
+                {
+                    list_sp.Add(sp);
+                }
+            }
+            return list_sp;
+        }
+
+        public List<THONG_KE_SAN_PHAM_BAN_CHAY_Result> ThongKeSanPhamBanChay(string ma_sp ,string ngay, string thang , string nam)
+        {
+            var list_sp = new List<THONG_KE_SAN_PHAM_BAN_CHAY_Result>();
+            using (var db = new QL_BAN_HANGEntities())
+            {
+                var list = db.THONG_KE_SAN_PHAM_BAN_CHAY(ngay,thang ,nam , ma_sp).Select(c => c);
+                foreach (var sp in list)
+                {
+                    list_sp.Add(sp);
+                }
+            }
+            return list_sp;
+        }
+        public List<THONG_KE_SAN_PHAM_TON_Result> ThongKeSanPhamBanTon()
+        {
+            var list_sp = new List<THONG_KE_SAN_PHAM_TON_Result>();
+            using (var db = new QL_BAN_HANGEntities())
+            {
+                var list = db.THONG_KE_SAN_PHAM_TON().Select(c => c);
+                foreach (var sp in list)
+                {
+                    list_sp.Add(sp);
+                }
+            }
+            return list_sp;
+        }
+        public List<THONG_KE_SAN_PHAM_NHAP_Result> ThongKeSanPhamNhap(string ma_sp, string ngay, string thang, string nam)
+        {
+            var list_sp = new List<THONG_KE_SAN_PHAM_NHAP_Result>();
+            using (var db = new QL_BAN_HANGEntities())
+            {
+                var list = db.THONG_KE_SAN_PHAM_NHAP(ngay, thang, nam, ma_sp).Select(c => c);
+                foreach (var sp in list)
+                {
+                    list_sp.Add(sp);
+                }
+            }
+            return list_sp;
+        }
+        public void Update_Sl_sp(string ma_sp,  int sl )
+        {
+            try
+            {
+                using (var db = new QL_BAN_HANGEntities())
+                {
+                    db.UPDATE_SO_LUONG_SAN_PHAM(ma_sp,sl);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
         }
     }
 }

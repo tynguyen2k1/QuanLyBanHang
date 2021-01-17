@@ -14,13 +14,6 @@ namespace Entity
     
     public partial class SAN_PHAM
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SAN_PHAM()
-        {
-            this.CT_HOA_DON = new HashSet<CT_HOA_DON>();
-            this.CT_HOA_DON_NHAP = new HashSet<CT_HOA_DON_NHAP>();
-        }
-    
         public string MA_SP { get; set; }
         public string TEN_SP { get; set; }
         public double GIA_NHAP { get; set; }
@@ -31,10 +24,6 @@ namespace Entity
         public string MA_DM { get; set; }
         public Nullable<byte> TRANG_THAI { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CT_HOA_DON> CT_HOA_DON { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CT_HOA_DON_NHAP> CT_HOA_DON_NHAP { get; set; }
         public virtual DANH_MUC DANH_MUC { get; set; }
     }
 }

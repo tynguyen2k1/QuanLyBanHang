@@ -22,7 +22,6 @@ namespace Entity
         public double THANH_TIEN { get; set; }
         public int MA_HD { get; set; }
     
-        public virtual SAN_PHAM SAN_PHAM { get; set; }
         public virtual HOA_DON HOA_DON { get; set; }
     }
 }

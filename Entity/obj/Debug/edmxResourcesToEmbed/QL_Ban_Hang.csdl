@@ -109,6 +109,16 @@
     <NavigationProperty Name="CT_HOA_DON_NHAP" Relationship="Self.FK_CTHD_N_SP" FromRole="SAN_PHAM" ToRole="CT_HOA_DON_NHAP" />
     <NavigationProperty Name="DANH_MUC" Relationship="Self.FK_SP_DM" FromRole="SAN_PHAM" ToRole="DANH_MUC" />
   </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
   <Association Name="FK_CTHD_SP">
     <End Role="SAN_PHAM" Type="Self.SAN_PHAM" Multiplicity="1" />
     <End Role="CT_HOA_DON" Type="Self.CT_HOA_DON" Multiplicity="*" />
@@ -205,7 +215,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="QL_BAN_HANG" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="QL_BAN_HANGEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="CT_HOA_DON" EntityType="Self.CT_HOA_DON" />
     <EntitySet Name="CT_HOA_DON_NHAP" EntityType="Self.CT_HOA_DON_NHAP" />
     <EntitySet Name="DANH_MUC" EntityType="Self.DANH_MUC" />
@@ -214,6 +224,7 @@
     <EntitySet Name="KHACH_HANG" EntityType="Self.KHACH_HANG" />
     <EntitySet Name="NHAN_VIEN" EntityType="Self.NHAN_VIEN" />
     <EntitySet Name="SAN_PHAM" EntityType="Self.SAN_PHAM" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <AssociationSet Name="FK_CTHD_SP" Association="Self.FK_CTHD_SP">
       <End Role="SAN_PHAM" EntitySet="SAN_PHAM" />
       <End Role="CT_HOA_DON" EntitySet="CT_HOA_DON" />
@@ -254,9 +265,22 @@
       <Parameter Name="GIAM_GIA" Mode="In" Type="Double" />
       <Parameter Name="MA_HD" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="DELETE_HOA_DON">
+      <Parameter Name="MA_HD" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DELETE_HOA_DON_NHAP">
+      <Parameter Name="MA_HD" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="GET_ALL_DANH_MUC" ReturnType="Collection(QL_BAN_HANGModel.GET_ALL_DANH_MUC_Result)" />
     <FunctionImport Name="GET_ALL_KHACHHANG" ReturnType="Collection(QL_BAN_HANGModel.GET_ALL_KHACHHANG_Result)" />
+    <FunctionImport Name="GET_ALL_NHAN_VIEN" ReturnType="Collection(QL_BAN_HANGModel.GET_ALL_NHAN_VIEN_Result)" />
     <FunctionImport Name="GET_ALL_SAN_PHAM" ReturnType="Collection(QL_BAN_HANGModel.GET_ALL_SAN_PHAM_Result)" />
+    <FunctionImport Name="GETALLCTHD_BAN" ReturnType="Collection(QL_BAN_HANGModel.GETALLCTHD_BAN_Result)">
+      <Parameter Name="ma_hd" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GETALLCTHD_NHAP" ReturnType="Collection(QL_BAN_HANGModel.GETALLCTHD_NHAP_Result)">
+      <Parameter Name="ma_hd" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="GETALLHOADON" ReturnType="Collection(QL_BAN_HANGModel.GETALLHOADON_Result)">
       <Parameter Name="nv" Mode="In" Type="String" />
     </FunctionImport>
@@ -281,21 +305,19 @@
       <Parameter Name="GIAM_GIA" Mode="In" Type="Double" />
       <Parameter Name="MA_HD" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="SEARCH_HOA_DON" ReturnType="Collection(QL_BAN_HANGModel.SEARCH_HOA_DON_Result)">
+      <Parameter Name="MA_NV" Mode="In" Type="String" />
+      <Parameter Name="MA_HD" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SEARCH_HOA_DON_NHAP" ReturnType="Collection(QL_BAN_HANGModel.SEARCH_HOA_DON_NHAP_Result)">
+      <Parameter Name="ma_hd" Mode="In" Type="String" />
+      <Parameter Name="manv" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="SEARCH_KHACH_HANG" ReturnType="Collection(QL_BAN_HANGModel.SEARCH_KHACH_HANG_Result)">
       <Parameter Name="MA_KH" Mode="In" Type="String" />
       <Parameter Name="TEN_KH" Mode="In" Type="String" />
       <Parameter Name="SDT" Mode="In" Type="String" />
       <Parameter Name="DIA_CHI" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="GETALLCTHD_BAN" ReturnType="Collection(QL_BAN_HANGModel.GETALLCTHD_BAN_Result)">
-      <Parameter Name="ma_hd" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="DELETE_HOA_DON">
-      <Parameter Name="MA_HD" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="GET_ALL_NHAN_VIEN" ReturnType="Collection(QL_BAN_HANGModel.GET_ALL_NHAN_VIEN_Result)" />
-    <FunctionImport Name="GETALLCTHD_NHAP" ReturnType="Collection(QL_BAN_HANGModel.GETALLCTHD_NHAP_Result)">
-      <Parameter Name="ma_hd" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="SEARCH_NHAN_VIEN" ReturnType="Collection(QL_BAN_HANGModel.SEARCH_NHAN_VIEN_Result)">
       <Parameter Name="MA_NV" Mode="In" Type="String" />
@@ -307,6 +329,83 @@
       <Parameter Name="EMAIL" Mode="In" Type="String" />
       <Parameter Name="TAI_KHOAN" Mode="In" Type="String" />
       <Parameter Name="CHUC_VU" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(QL_BAN_HANGModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(QL_BAN_HANGModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="DELETE_NHAN_VIEN">
+      <Parameter Name="MANV" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SEARCH_DANH_MUC" ReturnType="Collection(QL_BAN_HANGModel.SEARCH_DANH_MUC_Result)">
+      <Parameter Name="MA_DM" Mode="In" Type="String" />
+      <Parameter Name="TEN_DM" Mode="In" Type="String" />
+      <Parameter Name="MO_TA" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GET_ALL_DANH_MUC_DELETE" ReturnType="Collection(QL_BAN_HANGModel.GET_ALL_DANH_MUC_DELETE_Result)" />
+    <FunctionImport Name="GET_ALL_DANH_MUC_TON_TAI" ReturnType="Collection(QL_BAN_HANGModel.GET_ALL_DANH_MUC_TON_TAI_Result)" />
+    <FunctionImport Name="SEARCH_DANH_MUC_DELETE" ReturnType="Collection(QL_BAN_HANGModel.SEARCH_DANH_MUC_DELETE_Result)">
+      <Parameter Name="MA_DM" Mode="In" Type="String" />
+      <Parameter Name="TEN_DM" Mode="In" Type="String" />
+      <Parameter Name="MO_TA" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SEARCH_DANH_MUC_TON_TAI" ReturnType="Collection(QL_BAN_HANGModel.SEARCH_DANH_MUC_TON_TAI_Result)">
+      <Parameter Name="MA_DM" Mode="In" Type="String" />
+      <Parameter Name="TEN_DM" Mode="In" Type="String" />
+      <Parameter Name="MO_TA" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SEARCH_SAN_PHAM" ReturnType="Collection(QL_BAN_HANGModel.SEARCH_SAN_PHAM_Result)">
+      <Parameter Name="MA_SP" Mode="In" Type="String" />
+      <Parameter Name="TEN_SP" Mode="In" Type="String" />
+      <Parameter Name="GIA_NHAP" Mode="In" Type="String" />
+      <Parameter Name="GIA_BAN" Mode="In" Type="String" />
+      <Parameter Name="SO_LUONG" Mode="In" Type="String" />
+      <Parameter Name="GIAM_GIA" Mode="In" Type="String" />
+      <Parameter Name="GHI_CHU" Mode="In" Type="String" />
+      <Parameter Name="MA_DM" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="THONG_KE_SAN_PHAM_BAN_CHAY" ReturnType="Collection(QL_BAN_HANGModel.THONG_KE_SAN_PHAM_BAN_CHAY_Result)">
+      <Parameter Name="NGAY" Mode="In" Type="String" />
+      <Parameter Name="THANG" Mode="In" Type="String" />
+      <Parameter Name="NAM" Mode="In" Type="String" />
+      <Parameter Name="MA_SP" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="THONG_KE_SAN_PHAM_TON" ReturnType="Collection(QL_BAN_HANGModel.THONG_KE_SAN_PHAM_TON_Result)" />
+    <FunctionImport Name="UPDATE_SO_LUONG_SAN_PHAM">
+      <Parameter Name="MASP" Mode="In" Type="String" />
+      <Parameter Name="SL" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="THONG_KE_SAN_PHAM_NHAP" ReturnType="Collection(QL_BAN_HANGModel.THONG_KE_SAN_PHAM_NHAP_Result)">
+      <Parameter Name="NGAY" Mode="In" Type="String" />
+      <Parameter Name="THANG" Mode="In" Type="String" />
+      <Parameter Name="NAM" Mode="In" Type="String" />
+      <Parameter Name="MA_SP" Mode="In" Type="String" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GET_ALL_DANH_MUC_Result">
@@ -322,6 +421,19 @@
     <Property Type="String" Name="DIA_CHI" Nullable="false" MaxLength="100" />
     <Property Type="DateTime" Name="NGAY_SINH" Nullable="false" />
   </ComplexType>
+  <ComplexType Name="GET_ALL_NHAN_VIEN_Result">
+    <Property Type="String" Name="MA_NV" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="TEN_NV" Nullable="false" MaxLength="55" />
+    <Property Type="String" Name="GIOI_TINH" Nullable="true" MaxLength="3" />
+    <Property Type="String" Name="DIA_CHI" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SDT" Nullable="false" MaxLength="12" />
+    <Property Type="String" Name="EMAIL" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="NGAY_VL" Nullable="true" Precision="23" />
+    <Property Type="String" Name="TAI_KHOAN" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="MAT_KHAU" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="CHUC_VU" Nullable="false" MaxLength="9" />
+    <Property Type="String" Name="TRANG_THAI" Nullable="false" MaxLength="11" />
+  </ComplexType>
   <ComplexType Name="GET_ALL_SAN_PHAM_Result">
     <Property Type="String" Name="MA_SP" Nullable="false" MaxLength="10" />
     <Property Type="String" Name="TEN_SP" Nullable="false" MaxLength="200" />
@@ -332,6 +444,26 @@
     <Property Type="String" Name="GHI_CHU" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="MA_DM" Nullable="false" MaxLength="10" />
     <Property Type="String" Name="TEN_DM" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GETALLCTHD_BAN_Result">
+    <Property Type="Int32" Name="MA_CTHD" Nullable="false" />
+    <Property Type="String" Name="MA_SP" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="TEN_SP" Nullable="false" MaxLength="200" />
+    <Property Type="Int32" Name="SO_LUONG" Nullable="false" />
+    <Property Type="Double" Name="GIA_BAN" Nullable="false" />
+    <Property Type="Double" Name="GIAM_GIA" Nullable="false" />
+    <Property Type="Double" Name="THANH_TIEN" Nullable="false" />
+    <Property Type="Int32" Name="MA_HD" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GETALLCTHD_NHAP_Result">
+    <Property Type="Int32" Name="MA_CTHD_NHAP" Nullable="false" />
+    <Property Type="String" Name="MA_SP" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="TEN_SP" Nullable="false" MaxLength="200" />
+    <Property Type="Int32" Name="SO_LUONG" Nullable="false" />
+    <Property Type="Double" Name="GIA_NHAP" Nullable="false" />
+    <Property Type="Double" Name="GIAM_GIA" Nullable="false" />
+    <Property Type="Double" Name="THANH_TIEN" Nullable="false" />
+    <Property Type="Int32" Name="MA_HD_NHAP" Nullable="false" />
   </ComplexType>
   <ComplexType Name="GETALLHOADON_Result">
     <Property Type="Int32" Name="MA_HD" Nullable="false" />
@@ -363,6 +495,21 @@
     <Property Type="String" Name="MA_NV" Nullable="false" MaxLength="20" />
     <Property Type="String" Name="TEN_NV" Nullable="false" MaxLength="55" />
   </ComplexType>
+  <ComplexType Name="SEARCH_HOA_DON_Result">
+    <Property Type="Int32" Name="MA_HD" Nullable="false" />
+    <Property Type="Int32" Name="MA_KH" Nullable="true" />
+    <Property Type="String" Name="TEN_KH" Nullable="false" MaxLength="55" />
+    <Property Type="DateTime" Name="NGAY_BAN" Nullable="false" Precision="23" />
+    <Property Type="Double" Name="TONG_TIEN" Nullable="false" />
+    <Property Type="String" Name="MA_NV" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="SEARCH_HOA_DON_NHAP_Result">
+    <Property Type="Int32" Name="MA_HD_NHAP" Nullable="false" />
+    <Property Type="DateTime" Name="NGAY_NHAP" Nullable="false" Precision="23" />
+    <Property Type="Double" Name="TONG_TIEN" Nullable="false" />
+    <Property Type="String" Name="MA_NV" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="TEN_NV" Nullable="false" MaxLength="55" />
+  </ComplexType>
   <ComplexType Name="SEARCH_KHACH_HANG_Result">
     <Property Type="Int32" Name="MA_KH" Nullable="false" />
     <Property Type="String" Name="TEN_KH" Nullable="false" MaxLength="55" />
@@ -370,39 +517,6 @@
     <Property Type="String" Name="Gioi_Tinh" Nullable="true" MaxLength="3" />
     <Property Type="String" Name="DIA_CHI" Nullable="false" MaxLength="100" />
     <Property Type="DateTime" Name="NGAY_SINH" Nullable="false" />
-  </ComplexType>
-  <ComplexType Name="GETALLCTHD_BAN_Result">
-    <Property Type="Int32" Name="MA_CTHD" Nullable="false" />
-    <Property Type="String" Name="MA_SP" Nullable="false" MaxLength="10" />
-    <Property Type="String" Name="TEN_SP" Nullable="false" MaxLength="200" />
-    <Property Type="Int32" Name="SO_LUONG" Nullable="false" />
-    <Property Type="Double" Name="GIA_BAN" Nullable="false" />
-    <Property Type="Double" Name="GIAM_GIA" Nullable="false" />
-    <Property Type="Double" Name="THANH_TIEN" Nullable="false" />
-    <Property Type="Int32" Name="MA_HD" Nullable="false" />
-  </ComplexType>
-  <ComplexType Name="GET_ALL_NHAN_VIEN_Result">
-    <Property Type="String" Name="MA_NV" Nullable="false" MaxLength="20" />
-    <Property Type="String" Name="TEN_NV" Nullable="false" MaxLength="55" />
-    <Property Type="String" Name="GIOI_TINH" Nullable="true" MaxLength="3" />
-    <Property Type="String" Name="DIA_CHI" Nullable="false" MaxLength="100" />
-    <Property Type="String" Name="SDT" Nullable="false" MaxLength="12" />
-    <Property Type="String" Name="EMAIL" Nullable="false" MaxLength="100" />
-    <Property Type="DateTime" Name="NGAY_VL" Nullable="true" Precision="23" />
-    <Property Type="String" Name="TAI_KHOAN" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="MAT_KHAU" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="CHUC_VU" Nullable="false" MaxLength="9" />
-    <Property Type="String" Name="TRANG_THAI" Nullable="false" MaxLength="9" />
-  </ComplexType>
-  <ComplexType Name="GETALLCTHD_NHAP_Result">
-    <Property Type="Int32" Name="MA_CTHD_NHAP" Nullable="false" />
-    <Property Type="String" Name="MA_SP" Nullable="false" MaxLength="10" />
-    <Property Type="String" Name="TEN_SP" Nullable="false" MaxLength="200" />
-    <Property Type="Int32" Name="SO_LUONG" Nullable="false" />
-    <Property Type="Double" Name="GIA_NHAP" Nullable="false" />
-    <Property Type="Double" Name="GIAM_GIA" Nullable="false" />
-    <Property Type="Double" Name="THANH_TIEN" Nullable="false" />
-    <Property Type="Int32" Name="MA_HD_NHAP" Nullable="false" />
   </ComplexType>
   <ComplexType Name="SEARCH_NHAN_VIEN_Result">
     <Property Type="String" Name="MA_NV" Nullable="false" MaxLength="20" />
@@ -416,5 +530,75 @@
     <Property Type="String" Name="MAT_KHAU" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="CHUC_VU" Nullable="false" MaxLength="9" />
     <Property Type="String" Name="TRANG_THAI" Nullable="false" MaxLength="11" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="SEARCH_DANH_MUC_Result">
+    <Property Type="String" Name="Ma_DM" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="TEN_DM" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="MO_TA" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="TRANG_THAI" Nullable="false" MaxLength="7" />
+  </ComplexType>
+  <ComplexType Name="GET_ALL_DANH_MUC_DELETE_Result">
+    <Property Type="String" Name="Ma_DM" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="TEN_DM" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="MO_TA" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="TRANG_THAI" Nullable="false" MaxLength="7" />
+  </ComplexType>
+  <ComplexType Name="GET_ALL_DANH_MUC_TON_TAI_Result">
+    <Property Type="String" Name="Ma_DM" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="TEN_DM" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="MO_TA" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="TRANG_THAI" Nullable="false" MaxLength="7" />
+  </ComplexType>
+  <ComplexType Name="SEARCH_DANH_MUC_DELETE_Result">
+    <Property Type="String" Name="Ma_DM" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="TEN_DM" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="MO_TA" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="TRANG_THAI" Nullable="false" MaxLength="7" />
+  </ComplexType>
+  <ComplexType Name="SEARCH_DANH_MUC_TON_TAI_Result">
+    <Property Type="String" Name="Ma_DM" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="TEN_DM" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="MO_TA" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="TRANG_THAI" Nullable="false" MaxLength="7" />
+  </ComplexType>
+  <ComplexType Name="SEARCH_SAN_PHAM_Result">
+    <Property Type="String" Name="MA_SP" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="TEN_SP" Nullable="false" MaxLength="200" />
+    <Property Type="Int32" Name="SO_LUONG" Nullable="true" />
+    <Property Type="Double" Name="GIA_NHAP" Nullable="false" />
+    <Property Type="Double" Name="GIA_BAN" Nullable="false" />
+    <Property Type="Int32" Name="GIAM_GIA" Nullable="true" />
+    <Property Type="String" Name="GHI_CHU" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="MA_DM" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="TEN_DM" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="THONG_KE_SAN_PHAM_BAN_CHAY_Result">
+    <Property Type="String" Name="MA_SP" Nullable="false" MaxLength="10" />
+    <Property Type="Int32" Name="TONG_SL_BAN" Nullable="true" />
+    <Property Type="String" Name="TEN_SP" Nullable="false" MaxLength="200" />
+    <Property Type="Int32" Name="SL_CON" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="THONG_KE_SAN_PHAM_TON_Result">
+    <Property Type="String" Name="MA_SP" Nullable="false" MaxLength="10" />
+    <Property Type="Int32" Name="TONG_SL_BAN" Nullable="false" />
+    <Property Type="String" Name="TEN_SP" Nullable="false" MaxLength="200" />
+    <Property Type="Int32" Name="SL_CON" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="THONG_KE_SAN_PHAM_NHAP_Result">
+    <Property Type="String" Name="MA_SP" Nullable="false" MaxLength="10" />
+    <Property Type="Int32" Name="TONG_SL_NHAP" Nullable="true" />
+    <Property Type="String" Name="TEN_SP" Nullable="false" MaxLength="200" />
+    <Property Type="Int32" Name="SL_CON" Nullable="true" />
   </ComplexType>
 </Schema>

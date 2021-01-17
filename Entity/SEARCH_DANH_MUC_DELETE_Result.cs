@@ -11,15 +11,11 @@ namespace Entity
 {
     using System;
     
-    public partial class GET_ALL_USER_Result
+    public partial class SEARCH_DANH_MUC_DELETE_Result
     {
-        public int MA_NV { get; set; }
-        public string TEN_NV { get; set; }
-        public Nullable<bool> GIOI_TINH { get; set; }
-        public string DIA_CHI { get; set; }
-        public string EMAIL { get; set; }
-        public Nullable<System.DateTime> NGAY_VL { get; set; }
-        public string TAI_KHOAN { get; set; }
-        public string MAT_KHAU { get; set; }
+        public string Ma_DM { get; set; }
+        public string TEN_DM { get; set; }
+        public string MO_TA { get; set; }
+        public string TRANG_THAI { get; set; }
     }
 }
